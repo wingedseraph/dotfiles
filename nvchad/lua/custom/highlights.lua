@@ -11,12 +11,14 @@ M.override = {
 	},
 	-- Visual = { bg = "#231942", fg = "white" },
 	Visual = { bg = "#4c3743" }, -- from everforest colorscheme
-
+	MoreMsg = { fg = "pink" },
 	-- MatchWord = { bg = "none" },
 	-- MatchParen = { bg = "none" },
+	VisualNOS = { fg = "sun" },
 	IncSearch = { fg = "black", bg = "pink" },
 	Search = { fg = "black", bg = "pink" },
 	-- Cursor = { bg = "pink", fg = "black" },
+	--
 	-- CursorLine = { bg = "#2f2e3e" },
 }
 

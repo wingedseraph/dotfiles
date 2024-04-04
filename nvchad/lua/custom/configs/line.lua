@@ -47,21 +47,26 @@ if ok then
 
 			local items = {
 				{ mode, required = true },
+				{ " " },
+				{ sections.maximum_width(builtin.file_relative, 0.60), required = true },
+				{ sections.collapse_builtin({ { " " }, { builtin.modified_flag } }) },
+				{ " " },
+
 				{ git_branch },
 				{ " " },
 				{ sections.split, required = true },
-				{ git_icon },
-				{ sections.maximum_width(builtin.file_relative, 0.60), required = true },
-				{ sections.collapse_builtin({ { " " }, { builtin.modified_flag } }) },
+				-- { git_icon },
 				{ sections.split, required = true },
-				{ diagnostic_display },
-				{ show_current_func },
-				{ git_changes },
-				{ "[" },
-				{ builtin.line_with_width(3) },
-				{ ":" },
-				{ builtin.column_with_width(2) },
-				{ "]" },
+				-- { diagnostic_display },
+				-- { show_current_func },
+				-- { git_changes },
+				{ " " },
+
+				-- { "[" },
+				-- { builtin.line_with_width(3) },
+				-- { ":" },
+				-- { builtin.column_with_width(2) },
+				-- { "]" },
 				{
 					sections.collapse_builtin({
 						"[",

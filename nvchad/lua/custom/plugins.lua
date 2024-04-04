@@ -24,7 +24,7 @@ local plugins = {
 		config = function()
 			-- require("wlsample.bubble")
 			-- require("wlsample.bubble2")
-			require("wlsample.evil_line")
+			-- require("wlsample.evil_line")
 			-- require("wlsample.airline")
 			-- require("wlsample.vscode")
 			-- require("wlsample.basic")
@@ -39,13 +39,11 @@ local plugins = {
 		enabled = false,
 		event = "VeryLazy",
 		config = function()
-			-- local opts = require("custom.configs.line")
-			-- require("el").setup(opts)
+			vim.o.showmode = false
 			require("custom.configs.line")
 		end,
 	},
 	{
-		-- NOTE: test this format plug is better of null-ls or not???
 		enabled = true,
 		"stevearc/conform.nvim",
 		event = "VeryLazy",
@@ -84,9 +82,9 @@ local plugins = {
 			"kevinhwang91/promise-async",
 		},
 		-- event = "BufRead",
-		-- event = "VeryLazy",
+		event = "VeryLazy",
 		-- cmd = "UfoEnable",
-		event = "UIEnter",
+		-- event = "UIEnter",
 		-- event = { "BufReadPost", "BufNewFile" },
 		keys = {
 			{
@@ -441,6 +439,34 @@ local plugins = {
 	},
 	-- always have a nice view over your split windows : very useful
 	{
+		{
+			"ibhagwan/fzf-lua",
+			event = "VeryLazy",
+			-- optional for icon support
+			dependencies = { "nvim-tree/nvim-web-devicons" },
+			config = function()
+				-- Map keybindings
+				vim.api.nvim_set_keymap("n", "<leader>ff", ":FzfLua files<CR>", { noremap = true, silent = true })
+				vim.api.nvim_set_keymap("n", "<M-d>", ":FzfLua files<CR>", { noremap = true, silent = true })
+				vim.api.nvim_set_keymap("n", "<leader>fw", ":FzfLua live_grep<CR>", { noremap = true, silent = true })
+				vim.api.nvim_set_keymap("n", "<leader>b", ":FzfLua buffers<CR>", { noremap = true, silent = true })
+				vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua blines<CR>", { noremap = true, silent = true })
+				vim.api.nvim_set_keymap("n", "<leader>L", ":FzfLua lines<CR>", { noremap = true, silent = true })
+				vim.api.nvim_set_keymap("n", "<leader>'", ":FzfLua marks<CR>", { noremap = true, silent = true })
+				vim.api.nvim_set_keymap("n", "<leader>H", ":FzfLua help_tags<CR>", { noremap = true, silent = true })
+				vim.api.nvim_set_keymap("n", "<leader>k", ":FzfLua keymaps<CR>", { noremap = true, silent = true })
+				-- calling `setup` is optional for customization
+				require("fzf-lua").setup({
+					winopts = {
+						width = 1,
+						height = 1,
+						border = "none",
+					},
+				})
+			end,
+		},
+	},
+	{
 		"nvim-focus/focus.nvim",
 		version = "*",
 		cmd = "FocusEnable",
@@ -508,9 +534,40 @@ local plugins = {
 	-- fzf search
 	{
 		"junegunn/fzf.vim",
+		enabled = false,
 		lazy = false,
 		-- event = "VeryLazy",
 		dependencies = "junegunn/fzf",
+		config = function()
+			vim.cmd([[
+      command! -bang -nargs=* BLines
+      \ call fzf#vim#grep(
+      \   'rg --with-filename --column --line-number --no-heading --smart-case . '.fnameescape(expand('%:p')), 1,
+      \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --with-nth=4.. --delimiter=":"'}, 'right:50%', 'ctrl-l'))     " \   fzf#vim#with_preview({'options': '--layout reverse  --with-nth=-1.. --delimiter="/"'}, 'right:50%'))
+    ]])
+			-- Map keybindings
+			vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<M-d>", ":Files<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>fw", ":RG<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>b", ":Buffers<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>o", ":History<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>/", ":BLines<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>L", ":Lines<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>'", ":Marks<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>a", ":AgRaw<space>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>H", ":Helptags!<CR>", { noremap = true, silent = true })
+			-- vim.api.nvim_set_keymap("n", "<leader>c", ":Commands<CR>", { noremap = true, silent = true })
+			-- vim.api.nvim_set_keymap("n", "<leader>:", ":History:<CR>", { noremap = true, silent = true })
+			-- vim.api.nvim_set_keymap("n", "<leader>/", ":History/<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>k", ":Maps<CR>", { noremap = true, silent = true })
+			-- vim.api.nvim_set_keymap("n", "<leader>s", ":Filetypes<CR>", { noremap = true, silent = true })
+
+			-- Search hidden
+			vim.cmd([[
+  command! -bang -nargs=? -complete=dir AllFiles call fzf#run(fzf#wrap('allfiles', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --no-ignore' }), <bang>0))
+]])
+			vim.api.nvim_set_keymap("n", "<leader>F", ":AllFiles <CR>", { noremap = true, silent = true })
+		end,
 	},
 
 	-- creates missing directories on saving a file : very useful
@@ -536,8 +593,9 @@ local plugins = {
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
-	{ "deathbeam/lspecho.nvim", enabled = false, event = "VeryLazy", opts = {} },
+	{ "deathbeam/lspecho.nvim", enabled = true, event = "VeryLazy", opts = {} },
 	-- better remove buffer : very useful
+	-- Lua
 
 	{
 		"echasnovski/mini.bufremove",
@@ -566,6 +624,7 @@ local plugins = {
 		},
 	},
 	-- note plugin to be like orgmode in emacs : useful
+
 	{
 		"nvim-neorg/neorg",
 		-- enabled = false,

@@ -128,7 +128,7 @@ function EnableAfterDelay()
 	end
 	vim.cmd("silent Neorg")
 	vim.cmd("silent CmpStatus")
-	vim.cmd("silent TSContextEnable")
+	-- vim.cmd("silent TSContextEnable")
 	vim.cmd("command! GarbageDayLsp lua require('garbage-day.utils').start_lsp()")
 	vim.cmd("silent GarbageDayLsp")
 	vim.cmd("silent FocusEnable")
@@ -176,29 +176,6 @@ local fzf_default_opts = vim.env.FZF_DEFAULT_OPTS or ""
 local additional_opts =
 	"--bind=Tab:down --color=fg:#d0d0d0,fg+:#d0d0d0,bg:-1,bg+:-1 --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00 --color=prompt:#d7005f,spinner:-1,pointer:-1,header:#87afaf --color=border:-1,label:#aeaeae,query:#d9d9d9"
 vim.env.FZF_DEFAULT_OPTS = fzf_default_opts .. " " .. additional_opts
-
--- Map keybindings
-vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<M-d>", ":Files<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fw", ":RG<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>b", ":Buffers<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>o", ":History<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>/", ":BLines<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>L", ":Lines<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>'", ":Marks<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>a", ":AgRaw<space>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>H", ":Helptags!<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<leader>c", ":Commands<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<leader>:", ":History:<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<leader>/", ":History/<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>k", ":Maps<CR>", { noremap = true, silent = true })
--- vim.api.nvim_set_keymap("n", "<leader>s", ":Filetypes<CR>", { noremap = true, silent = true })
-
--- Search hidden
-vim.cmd([[
-  command! -bang -nargs=? -complete=dir AllFiles call fzf#run(fzf#wrap('allfiles', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --no-ignore' }), <bang>0))
-]])
-vim.api.nvim_set_keymap("n", "<leader>F", ":AllFiles <CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", {
 	expr = true,
