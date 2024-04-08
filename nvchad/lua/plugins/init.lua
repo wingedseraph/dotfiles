@@ -83,7 +83,7 @@ local default_plugins = {
 		init = function()
 			require("core.utils").lazy_load("nvim-treesitter")
 		end,
-		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+		cmd = { "TSInstall", "TSEnable", "TSBufDisable", "TSModuleInfo" },
 		build = ":TSUpdate",
 		opts = function()
 			return require("plugins.configs.treesitter")

@@ -5,7 +5,10 @@ local M = {}
 local highlights = require("custom.highlights")
 
 M.ui = {
-	theme = "solarized_dark",
+	-- new themes:
+	-- jabuti, flexoki,  mito-laser, chadracula-evondev, nano-light, flexoki-light, material-darker, material-lighter
+	-- rosepine-dawn, solarized_osaka,
+	theme = "vscode_dark",
 	theme_toggle = { "solarized_dark", "solarized_dark" },
 
 	hl_override = highlights.override,

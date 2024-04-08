@@ -17,6 +17,8 @@ M.override = {
 	VisualNOS = { fg = "sun" },
 	IncSearch = { fg = "black", bg = "pink" },
 	Search = { fg = "black", bg = "pink" },
+	NormalFloat = { fg = "none", bg = "none" },
+	FloatBorder = { fg = "none", bg = "none" },
 	-- Cursor = { bg = "pink", fg = "black" },
 	--
 	-- CursorLine = { bg = "#2f2e3e" },

@@ -439,15 +439,57 @@ local plugins = {
 	},
 	-- always have a nice view over your split windows : very useful
 	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("noice").setup({
+				lsp = {
+					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+					progress = {
+						enabled = false,
+					},
+					hover = {
+						enabled = false,
+					},
+					signature = {
+						enabled = false,
+					},
+					message = {
+						enabled = false,
+					},
+					documentation = {
+						enabled = false,
+					},
+				},
+				-- you can enable a preset for easier configuration
+				presets = {
+					bottom_search = true, -- use a classic bottom cmdline for search
+					command_palette = true, -- position the cmdline and popupmenu together
+					long_message_to_split = true, -- long messages will be sent to a split
+					inc_rename = false, -- enables an input dialog for inc-rename.nvim
+					lsp_doc_border = false, -- add a border to hover docs and signature help
+				},
+			})
+		end,
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+		},
+	},
+	{
 		{
 			"ibhagwan/fzf-lua",
 			event = "VeryLazy",
+			enabled = false,
 			-- optional for icon support
 			dependencies = { "nvim-tree/nvim-web-devicons" },
+			-- cmd = "FzfLua",
 			config = function()
 				-- Map keybindings
-				vim.api.nvim_set_keymap("n", "<leader>ff", ":FzfLua files<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<M-d>", ":FzfLua files<CR>", { noremap = true, silent = true })
+				vim.api.nvim_set_keymap("n", "<M-o>", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
+
+				vim.api.nvim_set_keymap("n", "<leader>o", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
+				vim.api.nvim_set_keymap("n", "<leader>ff", ":FzfLua files<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<leader>fw", ":FzfLua live_grep<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<leader>b", ":FzfLua buffers<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua blines<CR>", { noremap = true, silent = true })
@@ -456,13 +498,13 @@ local plugins = {
 				vim.api.nvim_set_keymap("n", "<leader>H", ":FzfLua help_tags<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<leader>k", ":FzfLua keymaps<CR>", { noremap = true, silent = true })
 				-- calling `setup` is optional for customization
-				require("fzf-lua").setup({
-					winopts = {
-						width = 1,
-						height = 1,
-						border = "none",
-					},
-				})
+				-- require("fzf-lua").setup({
+				-- 	winopts = {
+				-- 		width = 1,
+				-- 		height = 1,
+				-- 		border = "none",
+				-- 	},
+				-- })
 			end,
 		},
 	},
@@ -534,7 +576,7 @@ local plugins = {
 	-- fzf search
 	{
 		"junegunn/fzf.vim",
-		enabled = false,
+		enabled = true,
 		lazy = false,
 		-- event = "VeryLazy",
 		dependencies = "junegunn/fzf",
@@ -546,8 +588,10 @@ local plugins = {
       \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --with-nth=4.. --delimiter=":"'}, 'right:50%', 'ctrl-l'))     " \   fzf#vim#with_preview({'options': '--layout reverse  --with-nth=-1.. --delimiter="/"'}, 'right:50%'))
     ]])
 			-- Map keybindings
-			vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<M-d>", ":Files<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<M-o>", ":History<CR>", { noremap = true, silent = true })
+
+			vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<leader>fw", ":RG<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<leader>b", ":Buffers<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<leader>o", ":History<CR>", { noremap = true, silent = true })
@@ -593,7 +637,7 @@ local plugins = {
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
-	{ "deathbeam/lspecho.nvim", enabled = true, event = "VeryLazy", opts = {} },
+	{ "deathbeam/lspecho.nvim", enabled = false, event = "VeryLazy", opts = {} },
 	-- better remove buffer : very useful
 	-- Lua
 

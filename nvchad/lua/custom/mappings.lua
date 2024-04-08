@@ -93,11 +93,6 @@ end
 M.general = {
 	n = {
 		-- ["p"] = { "P", "paste without copy to register", opts = { nowait = true } },
-		["<M-o>"] = {
-			"<cmd>History<cr>",
-			"old files",
-			opts = { nowait = true },
-		},
 		["<M-n>"] = {
 			"<cmd>Yazi<cr>",
 			-- "<cmd>Lf<cr>",

@@ -121,6 +121,7 @@ end
 -----------------------
 -- EnableAfterDelay --
 -----------------------
+
 function EnableAfterDelay()
 	if vim.bo.filetype ~= "markdown" then
 		vim.highlight.priorities.semantic_tokens = 95
@@ -128,9 +129,15 @@ function EnableAfterDelay()
 	end
 	vim.cmd("silent Neorg")
 	vim.cmd("silent CmpStatus")
+	-- require("fzf-lua").setup({
+	-- 	winopts = {
+	-- 		width = 1,
+	-- 		height = 1,
+	-- 		border = "none",
+	-- 	},
+	-- })
 	-- vim.cmd("silent TSContextEnable")
-	vim.cmd("command! GarbageDayLsp lua require('garbage-day.utils').start_lsp()")
-	vim.cmd("silent GarbageDayLsp")
+	require("garbage-day.utils").start_lsp()
 	vim.cmd("silent FocusEnable")
 	vim.cmd("silent IlluminateResume")
 end
@@ -140,7 +147,7 @@ local file_size = vim.fn.getfsize(vim.fn.expand("%"))
 if file_size < 100 * 1024 then
 	vim.api.nvim_exec(
 		[[
-            autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 153)
+             autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 153)
         ]],
 		false
 	)
@@ -188,14 +195,16 @@ vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", {
 -- remove a.out after leaving *.c file buffer
 vim.cmd([[autocmd VimLeave *.c silent! !rm -f a.out]])
 
-function Transparency()
-	if not vim.g.neovide then
-		vim.cmd("TransparentEnable")
-	end
-end
-vim.api.nvim_exec(
-	[[
-        autocmd UIEnter * lua Transparency()
-    ]],
-	false
-)
+-- function Transparency()
+-- if not vim.g.neovide then
+-- vim.cmd("TransparentEnable")
+-- require("base46").toggle_transparency()
+-- end
+-- end
+
+-- vim.api.nvim_exec(
+-- 	[[
+--         autocmd UIEnter * lua Transparency()
+--     ]],
+-- 	false
+-- )
