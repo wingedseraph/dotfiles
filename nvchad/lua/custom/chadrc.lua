@@ -8,7 +8,7 @@ M.ui = {
 	-- new themes:
 	-- jabuti, flexoki,  mito-laser, chadracula-evondev, nano-light, flexoki-light, material-darker, material-lighter
 	-- rosepine-dawn, solarized_osaka,
-	theme = "vscode_dark",
+	theme = "kanagawa",
 	theme_toggle = { "solarized_dark", "solarized_dark" },
 
 	hl_override = highlights.override,

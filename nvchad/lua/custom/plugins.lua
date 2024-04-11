@@ -440,6 +440,7 @@ local plugins = {
 	-- always have a nice view over your split windows : very useful
 	{
 		"folke/noice.nvim",
+		enabled = true,
 		event = "VeryLazy",
 		config = function()
 			require("noice").setup({
@@ -467,13 +468,23 @@ local plugins = {
 					command_palette = true, -- position the cmdline and popupmenu together
 					long_message_to_split = true, -- long messages will be sent to a split
 					inc_rename = false, -- enables an input dialog for inc-rename.nvim
-					lsp_doc_border = false, -- add a border to hover docs and signature help
+					lsp_doc_border = true, -- add a border to hover docs and signature help
 				},
 			})
 		end,
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 		},
+	},
+	{
+		"echasnovski/mini.statusline",
+		version = "*",
+		lazy = false,
+		config = function()
+			require("mini.statusline").setup({
+				use_icons = false,
+			})
+		end,
 	},
 	{
 		{
