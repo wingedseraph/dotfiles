@@ -78,6 +78,7 @@ local plugins = {
 	-- better fold : very useful
 	{
 		"kevinhwang91/nvim-ufo",
+		-- enabled = false,
 		dependencies = {
 			"kevinhwang91/promise-async",
 		},
@@ -156,7 +157,7 @@ local plugins = {
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
 	-- track your time in neovim : useful
-	{ "wakatime/vim-wakatime", event = "VeryLazy" },
+	{ "wakatime/vim-wakatime", event = "VeryLazy", enabled = false },
 	-- more useful word motions for vim
 	-- camelcase, acronyms, uppercase, lowercase, hexcode and other
 	{ "chaoren/vim-wordmotion", event = "VeryLazy" },
@@ -165,6 +166,7 @@ local plugins = {
 	-- better quickfix window : little used
 	{
 		"folke/trouble.nvim",
+		enabled = true,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			auto_fold = true,
@@ -254,6 +256,7 @@ local plugins = {
 	-- telescope project manager : useful
 	{
 		"ahmedkhalf/project.nvim",
+		enabled = false,
 		event = "BufEnter",
 		-- event = "UIEnter",
 		config = function()
@@ -441,9 +444,30 @@ local plugins = {
 	{
 		"folke/noice.nvim",
 		enabled = true,
-		event = "VeryLazy",
+		-- lazy = false,
+		event = "BufEnter",
 		config = function()
+			vim.opt.showmode = false
+
 			require("noice").setup({
+				routes = {
+					{
+						view = "notify",
+						filter = { event = "msg_showmode" },
+					},
+				},
+				views = {
+					cmdline_popup = {
+						border = {
+							style = "single",
+							padding = { 0, 0 },
+						},
+						filter_options = {},
+						win_options = {
+							winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+						},
+					},
+				},
 				lsp = {
 					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 					progress = {
@@ -556,6 +580,7 @@ local plugins = {
 	-- press jj in insert mode to exit : very useful
 	{
 		"max397574/better-escape.nvim",
+		enabled = false,
 		event = { "CursorHold", "CursorHoldI" },
 		opts = {
 			mapping = { "jj" }, -- a table with mappings to use
@@ -650,7 +675,6 @@ local plugins = {
 	},
 	{ "deathbeam/lspecho.nvim", enabled = false, event = "VeryLazy", opts = {} },
 	-- better remove buffer : very useful
-	-- Lua
 
 	{
 		"echasnovski/mini.bufremove",
@@ -674,8 +698,14 @@ local plugins = {
 				end,
 				desc = "Delete Buffer",
 			},
-    -- stylua: ignore
-    { "<leader>X", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+			-- stylua: configs.noicenore
+			{
+				"<leader>X",
+				function()
+					require("mini.bufremove").delete(0, true)
+				end,
+				desc = "Delete Buffer (Force)",
+			},
 		},
 	},
 	-- note plugin to be like orgmode in emacs : useful

@@ -13,7 +13,7 @@ local servers = {
 	-- "denols",
 	"clangd",
 	"gopls",
-	"lua_ls",
+	-- "lua_ls",
 }
 local border = {
 	{ "", "FloatBorder" },

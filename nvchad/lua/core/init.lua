@@ -14,7 +14,7 @@ opt.laststatus = 2 -- global statusline
 opt.showmode = true
 
 opt.clipboard = "unnamedplus"
-opt.cursorline = true
+opt.cursorline = false
 
 -- Indenting
 opt.expandtab = true

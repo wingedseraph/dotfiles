@@ -32,6 +32,7 @@ local default_plugins = {
 
 	{
 		"NvChad/nvim-colorizer.lua",
+		enabled = false,
 		init = function()
 			require("core.utils").lazy_load("nvim-colorizer.lua")
 		end,
@@ -48,6 +49,7 @@ local default_plugins = {
 	{
 		"nvim-tree/nvim-web-devicons",
 		-- enabled=false,
+		event = "VeryLazy",
 		opts = function()
 			return { override = require("nvchad.icons.devicons") }
 		end,
@@ -78,7 +80,7 @@ local default_plugins = {
 		"nvim-treesitter/nvim-treesitter",
 		-- event = "BufReadPre",
 		-- event = "BufRead",
-		-- event = "VeryLazy",
+		-- event = "InsertEnter",
 		-- event = "UIEnter",
 		init = function()
 			require("core.utils").lazy_load("nvim-treesitter")

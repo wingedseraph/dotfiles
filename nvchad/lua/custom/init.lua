@@ -127,6 +127,8 @@ function EnableAfterDelay()
 		vim.highlight.priorities.semantic_tokens = 95
 		vim.cmd("silent TSEnable highlight")
 	end
+	require("null-ls").setup()
+
 	vim.cmd("silent Neorg")
 	vim.cmd("silent CmpStatus")
 	-- require("fzf-lua").setup({
@@ -147,7 +149,7 @@ local file_size = vim.fn.getfsize(vim.fn.expand("%"))
 if file_size < 100 * 1024 then
 	vim.api.nvim_exec(
 		[[
-             autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 153)
+             autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 253)
         ]],
 		false
 	)
@@ -208,3 +210,4 @@ vim.cmd([[autocmd VimLeave *.c silent! !rm -f a.out]])
 --     ]],
 -- 	false
 -- )
+--
