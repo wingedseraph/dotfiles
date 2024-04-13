@@ -123,12 +123,15 @@ end
 -----------------------
 
 function EnableAfterDelay()
+	require("null-ls").setup()
 	if vim.bo.filetype ~= "markdown" then
 		vim.highlight.priorities.semantic_tokens = 95
 		vim.cmd("silent TSEnable highlight")
 	end
-	require("null-ls").setup()
-
+	-- require("mini.statusline").setup({
+	-- 	use_icons = false,
+	-- 	set_vim_settings = false,
+	-- })
 	vim.cmd("silent Neorg")
 	vim.cmd("silent CmpStatus")
 	-- require("fzf-lua").setup({
@@ -210,4 +213,4 @@ vim.cmd([[autocmd VimLeave *.c silent! !rm -f a.out]])
 --     ]],
 -- 	false
 -- )
---
+vim.wo.statusline = "%!v:lua.MiniStatusline.active()"

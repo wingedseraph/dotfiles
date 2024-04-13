@@ -1,7 +1,7 @@
 return {
 	defaults = { lazy = true },
 	install = { colorscheme = { "nvchad" } },
-change_detection = {
+	change_detection = {
 		notify = false,
 	},
 	ui = {
@@ -14,6 +14,9 @@ change_detection = {
 	},
 
 	performance = {
+		cache = {
+			enabled = true,
+		},
 		rtp = {
 			disabled_plugins = {
 				"2html_plugin",

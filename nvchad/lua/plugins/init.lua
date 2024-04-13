@@ -32,7 +32,6 @@ local default_plugins = {
 
 	{
 		"NvChad/nvim-colorizer.lua",
-		enabled = false,
 		init = function()
 			require("core.utils").lazy_load("nvim-colorizer.lua")
 		end,
@@ -81,7 +80,7 @@ local default_plugins = {
 		-- event = "BufReadPre",
 		-- event = "BufRead",
 		-- event = "InsertEnter",
-		-- event = "UIEnter",
+		event = "UIEnter",
 		init = function()
 			require("core.utils").lazy_load("nvim-treesitter")
 		end,

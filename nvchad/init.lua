@@ -22,6 +22,7 @@ end
 
 dofile(vim.g.base46_cache .. "defaults")
 vim.opt.rtp:prepend(lazypath)
+-- require("start.ministatus")
 -- require("plugins")
 -- require("null-ls").setup()
 -- vim.api.nvim_command("colorscheme habamax")
