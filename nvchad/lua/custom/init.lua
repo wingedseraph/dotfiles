@@ -32,7 +32,6 @@ vim.api.nvim_exec(
 	false
 )
 
--- treesitter highlight works only without TSEnable function
 -- vim.highlight.priorities.semantic_tokens = 95
 -- Set transparency for the status line
 -- vim.cmd([[ hi StatusLine   guibg=NONE ctermbg=NONE ]])
@@ -126,7 +125,7 @@ function EnableAfterDelay()
 	require("null-ls").setup()
 	if vim.bo.filetype ~= "markdown" then
 		vim.highlight.priorities.semantic_tokens = 95
-		vim.cmd("silent TSEnable highlight")
+		-- vim.cmd("silent TSEnable highlight")
 	end
 	-- require("mini.statusline").setup({
 	-- 	use_icons = false,
@@ -213,4 +212,5 @@ vim.cmd([[autocmd VimLeave *.c silent! !rm -f a.out]])
 --     ]],
 -- 	false
 -- )
-vim.wo.statusline = "%!v:lua.MiniStatusline.active()"
+
+-- vim.wo.statusline = "%!v:lua.MiniStatusline.active()"

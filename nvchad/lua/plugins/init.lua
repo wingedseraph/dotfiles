@@ -16,6 +16,10 @@ local default_plugins = {
 		"NvChad/ui",
 		branch = "v2.0",
 		lazy = false,
+		config = function()
+			require("noice")
+			vim.wo.statusline = "%!v:lua.MiniStatusline.active()"
+		end,
 	},
 
 	{
@@ -32,9 +36,10 @@ local default_plugins = {
 
 	{
 		"NvChad/nvim-colorizer.lua",
-		init = function()
-			require("core.utils").lazy_load("nvim-colorizer.lua")
-		end,
+		cmd = "ColorizerToggle",
+		-- init = function()
+		-- 	require("core.utils").lazy_load("nvim-colorizer.lua")
+		-- end,
 		config = function(_, opts)
 			require("colorizer").setup(opts)
 

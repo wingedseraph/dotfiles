@@ -12,9 +12,9 @@
 # end
 
 function fish_greeting
-    if test -e $HOME/todotoday.md
+    if test -e $HOME/notes/markdown/todotoday.md
         set -l todos 9 # number of todo's displayed
-        set -l todo_items (awk '!/<!--/ && !/-->/ && !/\[x\]/ && !/^[[:space:]]*$/' $HOME/todotoday.md | head -n $todos)
+        set -l todo_items (awk '!/<!--/ && !/-->/ && !/\[x\]/ && !/^[[:space:]]*$/' $HOME/notes/markdown/todotoday.md | head -n $todos)
 
         echo -e "\e[32mTODO $(date '+%d-%b-%Y'):\e[0m"
         for todo_item in $todo_items
@@ -35,7 +35,7 @@ end
 
 function preview_nvim
  # find . -maxdepth 3 -type f | grep -v '/\.' | fzf -i --cycle --preview="cat {}" --bind 'enter:become(nvim {})' 
- fzf -i --reverse  --cycle --preview-window noborder  --prompt="> " --marker=">" --pointer="◆" --scrollbar="" --layout="reverse" --preview="bat --color=always --style snip {}" --bind 'enter:become(nvim {})'
+ fdfind --type f | fzf -i --reverse  --cycle --preview-window noborder  --prompt="> " --marker=">" --pointer="◆" --scrollbar="" --layout="reverse" --preview="bat --paging never --decorations never --wrap character --color always  {}" --bind 'enter:become(nvim {})'
  # find . -maxdepth 3 -type f -not -path '*/\.*' | fzf -i --cycle --preview="bat --color=always {}" --bind 'enter:execute(nvim {})'
 
 end
@@ -51,9 +51,9 @@ function ee
     execute "buffer #"
 end
 # Bind alt+d to the function and alt+0
-bind \eo 'nvim +"Telescope oldfiles theme=ivy"'
+bind \eo 'nvim -c "lua setupHistory()"'
 bind \ed 'preview_nvim'
-bind \en 'lfcd'
+bind \en 'yazi'
 # bind \el 'vide .'
 
 # ==== ALIAS ====
@@ -62,12 +62,14 @@ bind \en 'lfcd'
 
 
 # alias nvr='py /home/genie/.local/lib/python3.11/site-packages/nvr/nvr.py'
-alias o='nvim +"Telescope oldfiles theme=ivy"'
+alias o='nvim -c "lua setupHistory()"'
+alias man='tldr'
 alias ra='lf'
+alias pw='powershell.exe'
 alias gi='git clone'
 alias v='vide'
 alias telescope_file_browser='glow --width 90 /home/genie/telescope_file_browser.md'
-alias _n='nvim +"Telescope oldfiles theme=ivy"'
+alias _n='nvim +"History"'
 alias open="firefox.exe"
 alias pr="python3 $HOME/private.py"
 alias gcc-11="gcc"
@@ -99,8 +101,10 @@ end
 
 # ===PATH===
    set -x PATH "$HOME/bin/win-bash-xclip-xsel" $PATH
-   set -gx PATH "/home/genie/nvim-linux64/bin" $PATH
+   set -gx PATH "/home/genie/.local/bin/nvim-linux64/bin" $PATH
    set -gx PATH "/home/genie/go/bin" $PATH
+   set -gx PATH "/home/genie/.local/bin" $PATH
+   set -gx PATH "/home/genie/tmp/yazi-x86_64-unknown-linux-gnu/yazi-x86_64-unknown-linux-gnu/" $PATH
    # set -gx PATH "/home/genie/.local/lib/python3.11/site-packages/nvr" $PATH
    set -gx PATH "/home/genie/.local/share/nvim/mason/bin" $PATH
    set -x PATH "/home/genie" $PATH 
@@ -155,8 +159,29 @@ function lfcd --wraps="lf" --description="lf - Terminal file manager (changing d
     # Quotes will cause `cd` to not change directory if `lf` prints nothing to stdout due to an error.
     cd "$(command lf -print-last-dir $argv)"
 end
-set -x FZF_DEFAULT_OPTS "--bind=Tab:down --color=fg:#d0d0d0,fg+:#d0d0d0,bg:-1,bg+:-1
+set -x FZF_DEFAULT_OPTS "--bind=Tab:down --color=fg:-1,fg+:#d0d0d0,bg:-1,bg+:-1
   --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00
   --color=prompt:#d7005f,spinner:-1,pointer:-1,header:#87afaf
   --color=border:-1,label:#aeaeae,query:#d9d9d9"
 
+
+function miner
+  z miner
+  python3 -m venv myven
+    source myvenv/bin/activate.fish
+  python3 run.py
+end
+
+function se 
+  echo "Enter the date (e.g., Mar 18, Apr  1):"
+  read date
+  echo "Files modified on $date:"
+find /mnt/c/SteamLibrary/steamapps/workshop/content/108600 -type d -name .git -prune -o -type f -exec ls -lt {} + | grep $date
+  echo "Do you want to open these files in Neovim? (y/n)"
+    read open_files
+      if test "$open_files" = "y"
+          find /mnt/c/SteamLibrary/steamapps/workshop/content/108600 -type d -name .git -prune -o -type f -exec ls -lt {} + | grep $date | awk '{print $NF}' | xargs -d '\n' nvim
+      else
+          echo "Files not opened."
+      end
+end

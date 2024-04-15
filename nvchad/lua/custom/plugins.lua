@@ -18,32 +18,6 @@ local plugins = {
 		end, -- Override to setup mason-lspconfig
 	},
 	{
-		"windwp/windline.nvim",
-		event = "VeryLazy",
-		enabled = false,
-		config = function()
-			-- require("wlsample.bubble")
-			-- require("wlsample.bubble2")
-			-- require("wlsample.evil_line")
-			-- require("wlsample.airline")
-			-- require("wlsample.vscode")
-			-- require("wlsample.basic")
-			-- require("wlsample.wind")
-			-- require("wlsample.airline_luffy")
-			vim.o.showmode = false
-		end,
-	},
-	{
-		"tjdevries/express_line.nvim",
-		-- lazy=false,
-		enabled = false,
-		event = "VeryLazy",
-		config = function()
-			vim.o.showmode = false
-			require("custom.configs.line")
-		end,
-	},
-	{
 		enabled = true,
 		"stevearc/conform.nvim",
 		event = "VeryLazy",
@@ -392,54 +366,6 @@ local plugins = {
     -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
 	},
-	-- open documents for any language : useful but for some reason i've been using it very rarely lately
-	{
-		"luckasRanarison/nvim-devdocs",
-		-- event = "VeryLazy",
-		cmd = "DevdocsOpenFloat",
-		keys = {
-			{
-				"<leader>dd",
-				mode = { "n", "o", "x" },
-				function()
-					vim.cmd("set conceallevel=2")
-					vim.cmd("DevdocsOpen")
-				end,
-				desc = "devdocs open",
-			},
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		opts = {
-			filetypes = {
-				-- extends the filetype to docs mappings used by the `DevdocsOpenCurrent` command, the version doesn't have to be specified
-				-- scss = "sass",
-				javascript = { "node", "javascript" },
-			},
-			float_win = { -- passed to nvim_open_win(), see :h api-floatwin
-				relative = "editor",
-				height = 55,
-				width = 150,
-				border = "none",
-				-- • "none": No border (default).
-				-- • "single": A single line box.
-				-- • "double": A double line box.
-				-- • "rounded": Like "single", but with rounded corners ("╭"
-				--   etc.).
-				-- • "solid": Adds padding by a single whitespace cell.
-				-- • "shadow": A drop shadow effect by blending with the
-				--   background.
-			},
-			wrap = true, -- text wrap, only applies to floating window
-			-- previewer_cmd = "glow", -- for example: "glow"
-			-- cmd_args = { "-s", "dark", "-w", "80" },
-			-- picker_cmd = true, -- use cmd previewer in picker preview
-			-- picker_cmd_args = { "-s", "dark", "-w", "50" },
-		},
-	},
 	-- always have a nice view over your split windows : very useful
 	{
 		"folke/noice.nvim",
@@ -448,8 +374,15 @@ local plugins = {
 		event = "BufEnter",
 		config = function()
 			vim.opt.showmode = false
-
 			require("noice").setup({
+				cmdline = {
+					enabled = true, -- enables the Noice cmdline UI
+					format = {
+						cmdline = { pattern = "^:", icon = "", lang = "vim" },
+						search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
+						search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+					},
+				},
 				routes = {
 					{
 						view = "notify",
@@ -459,8 +392,8 @@ local plugins = {
 				views = {
 					cmdline_popup = {
 						border = {
-							style = "single",
-							padding = { 0, 0 },
+							style = "none",
+							padding = { 2, 2 },
 						},
 						filter_options = {},
 						win_options = {
@@ -505,6 +438,7 @@ local plugins = {
 		version = "*",
 		lazy = false,
 		config = function()
+			vim.opt.showmode = false
 			require("mini.statusline").setup({
 				use_icons = false,
 			})
@@ -669,10 +603,7 @@ local plugins = {
 	-- show code context in first line of buffer : very useful
 	{ "nvim-treesitter/nvim-treesitter-context", cmd = "TSContextEnable", opts = { mode = "cursor", max_lines = 3 } },
 	-- some other implementation of fzf in neovim with telescope : not really useful
-	{
-		"nvim-telescope/telescope-fzf-native.nvim",
-		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-	},
+
 	{ "deathbeam/lspecho.nvim", enabled = false, event = "VeryLazy", opts = {} },
 	-- better remove buffer : very useful
 
