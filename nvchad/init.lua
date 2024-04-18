@@ -1,6 +1,9 @@
-if vim.loader then
+-- if vim.loader then
+-- 	vim.loader.enable()
+-- end
+pcall(function()
 	vim.loader.enable()
-end
+end)
 
 -- Disable some default plugins that we have
 vim.g.loaded_gzip = false
@@ -33,10 +36,10 @@ end
 
 dofile(vim.g.base46_cache .. "defaults")
 vim.opt.rtp:prepend(lazypath)
--- require("start.ministatus")
 -- require("plugins")
 -- require("null-ls").setup()
--- vim.api.nvim_command("colorscheme habamax")
+-- bootstrap plugins!
+
 vim.api.nvim_exec(
 	[[
 		autocmd VimEnter * silent lua require("plugins")
@@ -47,6 +50,9 @@ vim.api.nvim_exec(
 function setupHistory()
 	-- Define an autocommand to execute History command on BufEnter event after a delay
 	vim.defer_fn(function()
-		vim.cmd("History")
-	end, 0)
+		-- vim.cmd("History") -- fzf.vim
+		vim.cmd("FzfLua oldfiles") -- fzf.lua
+	end, 10)
 end
+print("remove ui default plugin to use mini statusline and hue color")
+-- require("misc")

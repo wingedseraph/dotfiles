@@ -52,14 +52,17 @@ local options = {
 
 	window = {
 		completion = {
-			side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
-			winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
+			-- side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
+			-- winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
+			winblend = 10,
 			scrollbar = false,
 		},
 		documentation = {
 			-- border = border("CmpDocBorder"),
 			border = "none",
-			winhighlight = "Normal:CmpDoc",
+			winblend = 10,
+
+			-- winhighlight = "Normal:CmpDoc",
 		},
 	},
 	snippet = {
@@ -109,18 +112,20 @@ local options = {
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
-		{
-			name = "buffer",
-			option = {
-				indexing_interval = 1000,
-				get_bufnrs = function()
-					return vim.api.nvim_list_bufs()
-				end,
-			},
-		},
+		-- {
+		-- 	name = "buffer",
+		-- 	option = {
+		-- 		indexing_interval = 1000,
+		-- 		get_bufnrs = function()
+		-- 			return vim.api.nvim_list_bufs()
+		-- 		end,
+		-- 	},
+		-- },
 		{ name = "nvim_lua" },
 		{ name = "path" },
-		{ name = "codeium" },
+		-- { name = "codeium" },
+		{ name = "rg" },
+		{ name = "nvim_lsp_signature_help" },
 	},
 }
 

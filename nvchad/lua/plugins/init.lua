@@ -17,8 +17,13 @@ local default_plugins = {
 		branch = "v2.0",
 		lazy = false,
 		config = function()
-			require("noice")
+			-- require("noice")
 			vim.wo.statusline = "%!v:lua.MiniStatusline.active()"
+			require("mini.tabline").setup()
+			require("mini.hues").setup({
+				background = "#10262c",
+				foreground = "#c0c8cb",
+			})
 		end,
 	},
 
@@ -200,6 +205,9 @@ local default_plugins = {
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-buffer",
 				"hrsh7th/cmp-path",
+				"lukas-reineke/cmp-rg",
+				"hrsh7th/cmp-cmdline",
+				"hrsh7th/cmp-nvim-lsp-signature-help",
 				-- "Exafunction/codeium.nvim",
 				-- "capaj/vscode-standardjs-snippets",
 			},

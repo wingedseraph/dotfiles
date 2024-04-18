@@ -368,8 +368,44 @@ local plugins = {
 	},
 	-- always have a nice view over your split windows : very useful
 	{
+		"echasnovski/mini.hues",
+	},
+	{
+		"kevinhwang91/nvim-hlslens",
+		event = "VeryLazy",
+		opts = {
+			calm_down = true,
+			nearest_only = true,
+			nearest_float_when = "never",
+		},
+		confug = function()
+			require("hlslens").setup()
+
+			local kopts = { noremap = true, silent = true }
+
+			vim.api.nvim_set_keymap(
+				"n",
+				"n",
+				[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+				kopts
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"N",
+				[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+				kopts
+			)
+			vim.api.nvim_set_keymap("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+			vim.api.nvim_set_keymap("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+			vim.api.nvim_set_keymap("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+			vim.api.nvim_set_keymap("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+			vim.api.nvim_set_keymap("n", "<Leader>l", "<Cmd>noh<CR>", kopts)
+		end,
+	},
+	{
 		"folke/noice.nvim",
-		enabled = true,
+		enabled = false,
 		-- lazy = false,
 		event = "BufEnter",
 		config = function()
@@ -378,9 +414,9 @@ local plugins = {
 				cmdline = {
 					enabled = true, -- enables the Noice cmdline UI
 					format = {
-						cmdline = { pattern = "^:", icon = "", lang = "vim" },
-						search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-						search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
+						cmdline = { pattern = "^:", icon = "未来太阳", lang = "vim" },
+						search_down = { kind = "search", pattern = "^/", icon = " 检索", lang = "regex" },
+						search_up = { kind = "search", pattern = "^%?", icon = " 检索", lang = "regex" },
 					},
 				},
 				routes = {
@@ -393,7 +429,7 @@ local plugins = {
 					cmdline_popup = {
 						border = {
 							style = "none",
-							padding = { 2, 2 },
+							padding = { 3, 2 },
 						},
 						filter_options = {},
 						win_options = {
@@ -434,21 +470,61 @@ local plugins = {
 		},
 	},
 	{
+		"echasnovski/mini.tabline",
+		version = "*",
+		opts = {},
+	},
+	{
 		"echasnovski/mini.statusline",
 		version = "*",
 		lazy = false,
 		config = function()
 			vim.opt.showmode = false
-			require("mini.statusline").setup({
-				use_icons = false,
-			})
+			local statusline = require("mini.statusline")
+  --stylua: ignore
+  local active = function()
+    local mode, mode_hl = statusline.section_mode({ trunc_width = 120 })
+    -- Try out 'mini.git'
+    local git_summary  = vim.b.minigit_summary or {}
+    local git_head = git_summary.head_name or ''
+    if git_head ~= '' then
+      git_head = ' ' .. (git_head == 'HEAD' and git_summary.head:sub(1, 7) or git_head)
+    end
+    local git_status = git_summary.status or ''
+    if git_status ~= '' then
+      git_status = git_status == '  ' and '' or string.format('(%s)', git_status)
+    end
+    -- Try out 'mini.diff'
+    local diff_summary  = vim.b.minidiff_summary_string
+    local diff          = diff_summary ~= nil and string.format(' %s', diff_summary == '' and '-' or diff_summary) or ''
+    local diagnostics   = statusline.section_diagnostics({ trunc_width = 75 })
+    local filename      = statusline.section_filename({ trunc_width = 140 })
+    local fileinfo      = statusline.section_fileinfo({ trunc_width = 120 })
+    local location      = statusline.section_location({ trunc_width = 75 })
+    local search        = statusline.section_searchcount({ trunc_width = 75 })
+
+    return statusline.combine_groups({
+      { hl = mode_hl,                  strings = { mode } },
+      { hl = 'MiniStatuslineDevinfo',  strings = { git_head, diff, diagnostics } },
+      '%<', -- Mark general truncate point
+      { hl = 'MiniStatuslineFilename', strings = { filename } },
+      '%=', -- End left alignment
+      { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+      { hl = mode_hl,                  strings = { search, location } },
+    })
+  end
+			statusline.setup({ content = { active = active } })
+
+			-- require("mini.statusline").setup({
+			-- 	use_icons = false,
+			-- })
 		end,
 	},
 	{
 		{
 			"ibhagwan/fzf-lua",
 			event = "VeryLazy",
-			enabled = false,
+			enabled = true,
 			-- optional for icon support
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 			-- cmd = "FzfLua",
@@ -467,13 +543,13 @@ local plugins = {
 				vim.api.nvim_set_keymap("n", "<leader>H", ":FzfLua help_tags<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<leader>k", ":FzfLua keymaps<CR>", { noremap = true, silent = true })
 				-- calling `setup` is optional for customization
-				-- require("fzf-lua").setup({
-				-- 	winopts = {
-				-- 		width = 1,
-				-- 		height = 1,
-				-- 		border = "none",
-				-- 	},
-				-- })
+				require("fzf-lua").setup({
+					winopts = {
+						width = 1,
+						height = 1,
+						border = "none",
+					},
+				})
 			end,
 		},
 	},
@@ -483,8 +559,12 @@ local plugins = {
 		cmd = "FocusEnable",
 		-- event = "VeryLazy",
 		opts = {
+			ui = {
+				number = false, -- Display line numbers in the focussed window only
+				cursorline = false, -- Display a cursorline in the focussed window only
+			},
 			split = {
-				-- bufnew = false, -- Create blank buffer for new split windows
+				-- bufnew = true, -- Create blank buffer for new split windows
 				-- tmux = true, -- Create tmux splits instead of neovim splits
 			},
 		},
@@ -546,7 +626,7 @@ local plugins = {
 	-- fzf search
 	{
 		"junegunn/fzf.vim",
-		enabled = true,
+		enabled = false,
 		lazy = false,
 		-- event = "VeryLazy",
 		dependencies = "junegunn/fzf",
@@ -629,7 +709,6 @@ local plugins = {
 				end,
 				desc = "Delete Buffer",
 			},
-			-- stylua: configs.noicenore
 			{
 				"<leader>X",
 				function()

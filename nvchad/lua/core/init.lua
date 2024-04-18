@@ -45,8 +45,45 @@ opt.swapfile = false
 opt.backup = false
 opt.relativenumber = false
 opt.number = false
-opt.langmap =
-	"ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
+-- opt.langmap =
+-- "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
+local langmap_keys = {
+	"ёЁ;`~",
+	"№;#",
+	"йЙ;qQ",
+	"цЦ;wW",
+	"уУ;eE",
+	"кК;rR",
+	"еЕ;tT",
+	"нН;yY",
+	"гГ;uU",
+	"шШ;iI",
+	"щЩ;oO",
+	"зЗ;pP",
+	"хХ;[{",
+	"ъЪ;]}",
+	"фФ;aA",
+	"ыЫ;sS",
+	"вВ;dD",
+	"аА;fF",
+	"пП;gG",
+	"рР;hH",
+	"оО;jJ",
+	"лЛ;kK",
+	"дД;lL",
+	[[жЖ;\;:]],
+	[[эЭ;'\"]],
+	"яЯ;zZ",
+	"чЧ;xX",
+	"сС;cC",
+	"мМ;vV",
+	"иИ;bB",
+	"тТ;nN",
+	"ьЬ;mM",
+	[[бБ;\,<]],
+	"юЮ;.>",
+}
+vim.o.langmap = table.concat(langmap_keys, ",")
 opt.fillchars = { eob = " " }
 opt.ignorecase = true
 opt.smartcase = true
@@ -121,16 +158,24 @@ autocmd("BufWritePost", {
 		-- require("plenary.reload").reload_module("nvchad.statusline." .. config.ui.statusline.theme)
 		-- vim.opt.statusline = "%!v:lua.require('nvchad.statusline." .. config.ui.statusline.theme .. "').run()"
 
-		-- tabufline
-		if config.ui.tabufline.enabled then
-			require("plenary.reload").reload_module("nvchad.tabufline.modules")
-			vim.opt.tabline = "%!v:lua.require('nvchad.tabufline.modules').run()"
-		end
+		-- -- tabufline
+		-- if config.ui.tabufline.enabled then
+		-- 	require("plenary.reload").reload_module("nvchad.tabufline.modules")
+		-- 	vim.opt.tabline = "%!v:lua.require('nvchad.tabufline.modules').run()"
+		-- end
 
 		require("base46").load_all_highlights()
 		-- vim.cmd("redraw!")
 	end,
 })
+
+-- Spelling ===================================================================
+-- vim.o.spelllang = "en,ru,uk" -- Define spelling dictionaries
+-- vim.o.spelloptions = "camel" -- Treat parts of camelCase words as seprate words
+-- vim.opt.complete:append("kspell") -- Add spellcheck options for autocomplete
+-- vim.opt.complete:remove("t") -- Don't use tags for completion
+--
+-- vim.o.dictionary = vim.fn.stdpath("config") .. "lua/misc/dict/english.txt" -- Use specific dictionaries
 
 -------------------------------------- commands ------------------------------------------
 local new_cmd = vim.api.nvim_create_user_command

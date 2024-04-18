@@ -83,28 +83,31 @@ M.general = {
 }
 
 M.tabufline = {
-	plugin = true,
+	plugin = false,
 
 	n = {
 		-- cycle through buffers
 		["gt"] = {
 			-- ["<tab>"] = {
 			function()
-				require("nvchad.tabufline").tabuflineNext()
+				-- require("nvchad.tabufline").tabuflineNext()
+				vim.cmd("bnext")
 			end,
 			"Goto next buffer",
 		},
 		["<tab>"] = {
 			-- ["<tab>"] = {
 			function()
-				require("nvchad.tabufline").tabuflineNext()
+				-- require("nvchad.tabufline").tabuflineNext()
+				vim.cmd("bnext")
 			end,
 			"Goto next buffer",
 		},
 
 		["<S-tab>"] = {
 			function()
-				require("nvchad.tabufline").tabuflinePrev()
+				-- require("nvchad.tabufline").tabuflinePrev()
+				vim.cmd("bprevious")
 			end,
 			"Goto prev buffer",
 		},

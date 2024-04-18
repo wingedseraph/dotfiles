@@ -100,6 +100,27 @@ M.general = {
 			opts = { nowait = true },
 		},
 
+		["<tab>"] = {
+			"<cmd>bnext<cr>",
+			"next buffer",
+			opts = { nowait = true },
+		},
+		["<S-tab>"] = {
+			"<cmd>bprevious<cr>",
+			"previous buffer",
+			opts = { nowait = true },
+		},
+
+		["N"] = {
+			"nzz",
+			"Bring search results to midscreen",
+			opts = { nowait = true },
+		},
+		["n"] = {
+			"nzz",
+			"Bring search results to midscreen",
+			opts = { nowait = true },
+		},
 		["<leader>T"] = {
 			"<cmd>ToggleTerm<cr>",
 			"toggle terminal",
