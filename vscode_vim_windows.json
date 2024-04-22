@@ -5,7 +5,7 @@
   "editor.renderLineHighlight": "none", // removes line highlight
   "editor.overviewRulerBorder": false, // removes border from overview ruler (located on the right, same position as the scrollbar)
   "editor.hideCursorInOverviewRuler": true, // removes the folding feature
-  "editor.occurrencesHighlight": false, // removes highlights occurrences (still works when you select a word)
+  "editor.occurrencesHighlight": "off", // removes highlights occurrences (still works when you select a word)
   //"editor.matchBrackets": false, // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
   "editor.glyphMargin": false, // removes the space used mainly for debugging indicators
   //"workbench.colorTheme": "Gruvbox Dark Soft",
@@ -59,7 +59,7 @@
   "codeium.enableCodeLens": false,
   "terminal.integrated.fontFamily": "IosevkaTerm Nerd Font",
   "terminal.integrated.enableImages": false,
-  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.fontWeightBold": "normal",
   "window.titleBarStyle": "native",
   "javascript.format.semicolons": "insert",
@@ -77,19 +77,19 @@
   "window.commandCenter": false,
   "apc.electron": {
     "titleBarStyle": "hidden",
-    "frame": false,
+    "frame": false
   },
   "apc.parts.font.family": {
     "extension-editor": "Helvetica", // Required: Expected font installation on machine and Application restart
-    "tabs": "iosevkaterm nerd font",
+    "tabs": "iosevkaterm nerd font"
   },
   "workbench.editor.enablePreview": false,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyleInactive": "block",
-  "apc.header": {
-    "height": 30,
-    "fontSize": 14
-  },
+  // "apc.header": {
+  //   "height": 30,
+  //   "fontSize": 14
+  // },
   "workbench.editor.scrollToSwitchTabs": true,
   "workbench.editor.highlightModifiedTabs": true,
   "vscode-neovim.highlightGroups.highlights": {
@@ -127,23 +127,16 @@
     },
     "Debian (WSL)": {
       "path": "C:\\WINDOWS\\System32\\wsl.exe",
-      "args": [
-        "-d",
-        "Debian"
-      ]
+      "args": ["-d", "Debian"]
     }
   },
   "terminal.integrated.defaultProfile.windows": "Debian (WSL)",
-  "audioCues.notebookCellCompleted": "off",
-  "audioCues.taskCompleted": "off",
   "editor.tabCompletion": "on",
   "git.openRepositoryInParentFolders": "never",
   "workbench.startupEditor": "none",
   "workbench.panel.defaultLocation": "right",
   "files.trimTrailingWhitespace": true,
-  "security.allowedUNCHosts": [
-    "wsl.localhost"
-  ],
+  "security.allowedUNCHosts": ["wsl.localhost"],
   "editor.defaultFoldingRangeProvider": "ecmel.vscode-html-css",
   "editor.cursorStyle": "block",
   "editor.renderWhitespace": "none",
@@ -162,15 +155,75 @@
   "editor.smoothScrolling": true,
   "terminal.integrated.smoothScrolling": true,
   "extensions.ignoreRecommendations": true,
-  "editor.lightbulb.enabled": false,
+  "editor.lightbulb.enabled": "off",
   "editor.fontLigatures": true,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
-  "animations.Install-Method": "Apc Customize UI++",
   "apc.imports": [
     "file:///c:/Users/mi/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.1/dist/updateHandler.js"
   ],
-  "workbench.activityBar.visible": false,
   "editor.unicodeHighlight.invisibleCharacters": false,
   "apc.font.family": "JetBrainsMono Nerd Font",
+  "accessibility.signals.taskCompleted": {
+    "sound": "off"
+  },
+  "accessibility.signals.notebookCellCompleted": {
+    "sound": "off"
+  },
+  "workbench.editor.tabActionCloseVisibility": false,
+  "workbench.colorTheme": "Lunar-dark-theme",
+  // feels like iosevka
+  // "editor.letterSpacing": -1.0,
+  "terminal.integrated.scrollback": 500,
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.windowsEnableConpty": true,
+  "terminal.integrated.tabs.enableAnimation": false,
+  "terminal.integrated.cursorStyle": "block",
+  "terminal.integrated.drawBoldTextInBrightColors": true,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.tabs.enabled": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.accessibilitySupport": "off",
+  "editor.codeLens": false,
+  "editor.folding": true,
+  "editor.fontWeight": "450",
+  "editor.hover.delay": 250,
+  "editor.hover.sticky": true,
+  "editor.inlayHints.enabled": "offUnlessPressed",
+  "editor.lineNumbers": "off",
+  "editor.multiCursorPaste": "spread",
+  "editor.scrollBeyondLastLine": true,
+  "editor.semanticHighlighting.enabled": true,
+  "editor.showFoldingControls": "mouseover",
+  "editor.snippetSuggestions": "inline",
+  "editor.suggestSelection": "first",
+  "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?",
+  "editor.minimap.size": "fit",
+  "workbench.editor.labelFormat": "short",
+  "workbench.editor.showTabs": "multiple",
+  "workbench.editor.splitInGroupLayout": "horizontal",
+  "workbench.editor.splitSizing": "split",
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.editor.untitled.labelFormat": "name",
+  "workbench.iconTheme": null,
+  "workbench.settings.editor": "json",
+  "workbench.settings.enableNaturalLanguageSearch": false,
+  "workbench.settings.useSplitJSON": false,
+  "workbench.editor.wrapTabs": false,
+  "workbench.tips.enabled": false,
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.statusBar.visible": false,
+  "apc.header": {
+    "height": 30,
+    "fontSize": 11
+  },
+  "apc.sidebar.titlebar": {
+    "fontSize": 11
+  },
+  "apc.listRow": {
+    "fontSize": 11
+  },
+  "workbench.activityBar.location": "hidden"
 }
+
