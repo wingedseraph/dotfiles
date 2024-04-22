@@ -1,11 +1,36 @@
 local wezterm = require("wezterm")
+
+-- wezterm.on("user-var-changed", function(window, pane, name, value)
+-- 	local overrides = window:get_config_overrides() or {}
+-- 	if name == "ZEN_MODE" then
+-- 		local incremental = value:find("+")
+-- 		local number_value = tonumber(value)
+-- 		if incremental ~= nil then
+-- 			while number_value > 0 do
+-- 				window:perform_action(wezterm.action.IncreaseFontSize, pane)
+-- 				number_value = number_value - 1
+-- 			end
+-- 			overrides.enable_tab_bar = false
+-- 		elseif number_value < 0 then
+-- 			window:perform_action(wezterm.action.ResetFontSize, pane)
+-- 			overrides.font_size = nil
+-- 			overrides.enable_tab_bar = true
+-- 		else
+-- 			overrides.font_size = number_value
+-- 			overrides.enable_tab_bar = false
+-- 		end
+-- 	end
+-- 	window:set_config_overrides(overrides)
+-- end)
+
 -- local act = wezterm.action
 local config = {}
 config.window_decorations = "RESIZE"
 config.adjust_window_size_when_changing_font_size = false
 
--- font_rules
-
+-- =============================================================================================
+-- =========================================== FONTS ===========================================
+-- =============================================================================================
 -- config.font_rules = {
 -- 	{
 -- 		intensity = "Normal",
@@ -15,7 +40,6 @@ config.adjust_window_size_when_changing_font_size = false
 -- 		}),
 -- 	},
 -- }
-
 -- config.font = wezterm.font({ family = "Brutalist Mono" })
 -- config.font = wezterm.font({ family = "Anonymous Pro", weight = "Regular" })
 -- config.font = wezterm.font({ family = "Dank Mono", weight = "Regular" })
@@ -25,26 +49,43 @@ config.adjust_window_size_when_changing_font_size = false
 -- config.font = wezterm.font({ family = "Monaspace Argon", weight = "Regular" })
 -- config.font = wezterm.font({ family = "Monaspace Neon", weight = "Regular" })
 -- config.font = wezterm.font({ family = "Monaspace Xenon" })
--- config.font = wezterm.font({ family = "IosevkaTerm Nerd Font", weight = "Regular" })
+config.font = wezterm.font({ family = "IosevkaTerm Nerd Font" })
 -- config.font = wezterm.font({ family = "CozetteVector", weight = "Regular" })
 -- config.font = wezterm.font({ family = "Operator Mono Light", weight = "Regular" })
 config.font = wezterm.font({ family = "JetBrainsMono Nerd Font" })
 -- config.font = wezterm.font({ family = "BlexMono Nerd Font", weight = "Regular" })
 -- config.font = wezterm.font({ family = "CaskaydiaCove NF" })
--- config.window_background_opacity =  0.9
--- config.window_background_opacity =  0.9
+config.window_background_opacity = 1
+-- config.cell_width = 0.9 -- like alacritty
+config.line_height = 1.4
+config.font_size = 8
+config.dpi = 144
+config.freetype_load_flags = "DEFAULT" -- NO_HINTING or DEFAULT
+config.freetype_load_target = "Light" -- Normal, Light, Mono and HorizontalLcd
+config.freetype_render_target = "HorizontalLcd"
 
+-- =============================================================================================
+-- =========================================== COLORS ==========================================
+-- =============================================================================================
 config.audible_bell = "Disabled"
+config.colors = {
+	-- background = "#002b36", -- solarized
+	-- background = "#181818", -- sunburn
+	-- background = "#1e1e1e", -- vscode
+	-- background = "#1f1f28", -- kanagawa
+	-- background = "#a1b26", -- tokyonight
+	background = "#10262c", -- mini hue
+}
 -- COLORS_SCHEME
 -- config.color_scheme = "hardhacker"
--- config.color_scheme = "3024 (base16)"-- good black background
--- config.color_scheme = '3024 Night (Gogh)'-- good black background
+-- config.color_scheme = "3024 (base16)" -- good black background
+-- config.color_scheme = "3024 Night (Gogh)" -- good black background
 -- config.color_scheme = "Adventure" -- good black background
 -- config.color_scheme = "ayu"
 -- config.color_scheme = "Tomorrow Night Burns" -- black with red
 -- config.color_scheme = "Tomorrow Night Bright" -- bright black
 -- config.color_scheme = "tender (base16)" -- Gruvbox alt identical to colorsmech from nvim gruvbox.
--- config.color_scheme = "tokyonight"
+config.color_scheme = "tokyonight"
 -- config.color_scheme = "thwump (terminal.sexy)"
 -- config.color_scheme = "Terminix Dark (Gogh)" -- identical to color_scheme from nvim yoru
 -- config.color_scheme = "Yousai (terminal.sexy)"
@@ -55,16 +96,19 @@ config.audible_bell = "Disabled"
 -- config.color_scheme = "flexoki-dark" -- pastel black
 -- config.color_scheme = "iTerm2 Pastel Dark Background" -- deep black
 -- config.color_scheme = "iTerm2 Smoooooth" -- pastel dark
--- config.color_scheme = "Selenized Dark (Gogh)" -- solarized
 -- config.color_scheme = "Github Dark (Gogh)" -- pastel dark
 -- config.color_scheme = "Catppuccin Mocha" -- identical to colorsmech from nvim Catppuccin.
 -- config.color_scheme = "Tokyo Night"
 -- config.color_scheme = "Summerfruit Dark (base16)" -- pastel
--- config.color_scheme = "Atlas (base16)" -- solarized warm dark
 -- config.color_scheme = "Vs Code Dark+ (Gogh)"
+-- config.color_scheme = "Kanagawa (Gogh)"
 -- config.color_scheme = "vulcan (base16)"
+
+-- config.color_scheme = "Atlas (base16)" -- solarized warm dark
 -- config.color_scheme = "Solarized Dark - Patched" -- solarized dark
 -- config.color_scheme = "Solarized Dark Higher Contrast" -- solarized dark
+-- config.color_scheme = "Selenized Dark (Gogh)" -- solarized
+
 -- config.color_scheme = "Spacemacs (base16)" -- dark with red
 -- config.color_scheme = "synthwave" -- black with neon
 -- config.color_scheme = "Square" -- pastel
@@ -104,14 +148,18 @@ config.audible_bell = "Disabled"
 -- config.color_scheme = "OneDark (base16)"
 -- config.color_scheme = "Overnight Slumber" -- now enabled
 -- config.color_scheme = "Tokyo Night Moon"
-config.color_scheme = "Everforest Dark (Gogh)"
+-- config.color_scheme = "Everforest Dark (Gogh)"
 -- config.color_scheme = "Apprentice (base16)"
 -- config.color_scheme = "iceberg-dark"
 -- config.color_scheme = "lovelace"
--- COLORS_SCHEME
 
+-- =============================================================================================
+-- ===================================== ELSE ==================================================
+-- =============================================================================================
+--
 config.exit_behavior = "Close"
-config.font_size = 18
+config.cursor_thickness = "150%"
+config.underline_thickness = "250%"
 config.initial_rows = 25
 config.initial_cols = 120
 config.hide_mouse_cursor_when_typing = true
@@ -144,7 +192,8 @@ config.show_update_window = false
 config.unicode_version = 15
 config.window_close_confirmation = "NeverPrompt"
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
-config.wsl_domains = wezterm.default_wsl_domains()
+-- config.wsl_domains = wezterm.default_wsl_domains()
+config.default_domain = "WSL:Debian"
 
 -- hyperlink
 -- Use the defaults as a base
@@ -165,29 +214,7 @@ config.wsl_domains = wezterm.default_wsl_domains()
 --   regex = [[["]?([\w\d]{1}[-\w\d]+)(/){1}([-\w\d\.]+)["]?]],
 --   format = 'https://www.github.com/$1/$3',
 -- })
-wezterm.on("user-var-changed", function(window, pane, name, value)
-	local overrides = window:get_config_overrides() or {}
-	if name == "ZEN_MODE" then
-		local incremental = value:find("+")
-		local number_value = tonumber(value)
-		if incremental ~= nil then
-			while number_value > 0 do
-				window:perform_action(wezterm.action.IncreaseFontSize, pane)
-				number_value = number_value - 1
-			end
-			overrides.enable_tab_bar = false
-		elseif number_value < 0 then
-			window:perform_action(wezterm.action.ResetFontSize, pane)
-			overrides.font_size = nil
-			overrides.enable_tab_bar = true
-		else
-			overrides.font_size = number_value
-			overrides.enable_tab_bar = false
-		end
-	end
-	window:set_config_overrides(overrides)
-end)
-config.default_cursor_style = "SteadyBlock"
+config.default_cursor_style = "SteadyBlock" -- SteadyBlock, BlinkingBlock, SteadyUnderline, BlinkingUnderline, SteadyBar, and BlinkingBar
 config.mouse_bindings = {
 	-- Clicking the scroll wheel while holding CTRL resets the font size
 	{
