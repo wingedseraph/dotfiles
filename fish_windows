@@ -171,7 +171,29 @@ function miner
     source myvenv/bin/activate.fish
   python3 run.py
 end
-
+function sw
+set current_dir (pwd)
+cd /home/genie/.ssh
+     if test -f seraph
+        mv id_rsa may
+        mv id_rsa.pub may.pub
+        mv seraph id_rsa
+        mv seraph.pub id_rsa.pub
+        echo " === seraph ssh loaded === "
+    else if test -f may
+        mv id_rsa seraph
+        mv id_rsa.pub seraph.pub
+        mv may id_rsa
+        mv may.pub id_rsa.pub
+        echo " === may ssh loaded === "
+    else
+        echo "Neither seraph nor may file found."
+    end
+cd $current_dir
+sudo chmod 600 ~/.ssh/id_rsa
+sudo chmod 600 ~/.ssh/id_rsa.pub
+end
+  
 function se 
   echo "Enter the date (e.g., Mar 18, Apr  1):"
   read date
