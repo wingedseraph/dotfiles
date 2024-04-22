@@ -53,13 +53,15 @@ end
 
 M.gitsigns = {
 	signs = {
-		add = { text = "│" },
-		change = { text = "│" },
-		delete = { text = "~" },
-		topdelete = { text = "‾" },
-		changedelete = { text = "~" },
-		untracked = { text = "│" },
+		add = { text = "▒" },
+		change = { text = "▒" },
+		changedelete = { text = "▓" },
+		delete = { text = "▓" },
+		topdelete = { text = "▓" },
+		untracked = { text = "░" },
 	},
+	preview_config = { border = "double" },
+	diff_opts = { linematch = 60 },
 	on_attach = function(bufnr)
 		utils.load_mappings("gitsigns", { buffer = bufnr })
 	end,

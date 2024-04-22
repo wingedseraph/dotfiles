@@ -108,7 +108,8 @@ local default_plugins = {
 	-- git stuff
 	{
 		"lewis6991/gitsigns.nvim",
-		ft = { "gitcommit", "diff" },
+		cmd = "Gitsigns",
+		-- ft = { "gitcommit", "diff" },
 		init = function()
 			-- load gitsigns only when a git file is opened
 			vim.api.nvim_create_autocmd({ "BufRead" }, {

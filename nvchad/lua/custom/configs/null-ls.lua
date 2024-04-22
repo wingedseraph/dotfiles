@@ -9,7 +9,7 @@ local sources = {
 	-- b.formatting.cbfmt.with({ filetypes = { "markdown" } }),
 	-- b.formatting.htmlbeautifier.with({ filetypes = { "html" } }), -- for no warnings in w3 validator
 
-	b.diagnostics.eslint_d,
+	b.diagnostics.eslint_d.with({ filetype = { "javascript" } }),
 
 	-- NOTE: turn off all formatting to test conform
 

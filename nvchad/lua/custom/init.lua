@@ -9,8 +9,8 @@ vim.g.syntastic_javascript_checkers = { "eslint" }
 vim.g.syntastic_javascript_eslint_exec = "eslint_d"
 vim.o.timeoutlen = 900
 -- folding
-vim.opt.foldlevelstart = 20
-vim.opt.foldlevel = 20
+vim.opt.foldlevelstart = 10
+-- vim.opt.foldlevel = 20
 -- use wider line for folding
 vim.opt.fillchars = { fold = "⏤" }
 -- vim.opt.foldtext = "antonk52#fold#it()"
@@ -200,12 +200,11 @@ vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", {
 vim.cmd([[autocmd VimLeave *.c silent! !rm -f a.out]])
 
 -- function Transparency()
--- if not vim.g.neovide then
--- vim.cmd("TransparentEnable")
--- require("base46").toggle_transparency()
+-- 	if not vim.g.neovide then
+-- 		vim.cmd("TransparentEnable")
+-- 		require("base46").toggle_transparency()
+-- 	end
 -- end
--- end
-
 -- vim.api.nvim_exec(
 -- 	[[
 --         autocmd UIEnter * lua Transparency()
@@ -214,3 +213,34 @@ vim.cmd([[autocmd VimLeave *.c silent! !rm -f a.out]])
 -- )
 
 -- vim.wo.statusline = "%!v:lua.MiniStatusline.active()"
+-- vim.api.nvim_set_keymap("n", "<M-j>", "<cmd>bNext<cr>", {
+-- 	desc = "next buffer",
+-- })
+
+vim.api.nvim_set_keymap("n", "<M-k>", "<cmd>bnext<cr>", {
+	desc = "previous buffer",
+})
+vim.api.nvim_set_keymap("n", "<leader>rc", "<cmd>lua require('base46').load_all_highlights()<cr>", {
+	desc = "reload nvchad/base46 colorscheme",
+})
+-- vim.api.nvim_exec(
+-- 	[[
+--         autocmd BufEnter * lua require("ufo").closeAllFolds()
+--     ]],
+-- 	false
+-- )
+-- TODO: fix close all folds at buffer start and make work alt+d in alacritty terminal shell
+-- 			vim.cmd('require("ufo").closeAllFolds()')
+-- 			write vim.diagnostic.disable() and vim.diagnostic.enable() toggle
+vim.g["diagnostics_active"] = true
+function Toggle_diagnostics()
+	if vim.g.diagnostics_active then
+		vim.g.diagnostics_active = false
+		vim.diagnostic.disable()
+	else
+		vim.g.diagnostics_active = true
+		vim.diagnostic.enable()
+	end
+end
+
+vim.keymap.set("n", "<leader>]", Toggle_diagnostics, { noremap = true, silent = true, desc = "toggle diagnostic" })

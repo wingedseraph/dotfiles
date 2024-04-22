@@ -17,6 +17,7 @@ local plugins = {
 			require("custom.configs.lspconfig")
 		end, -- Override to setup mason-lspconfig
 	},
+
 	{
 		enabled = true,
 		"stevearc/conform.nvim",
@@ -27,7 +28,8 @@ local plugins = {
 					format_on_save = {
 						-- These options will be passed to conform.format()
 						timeout_ms = 50,
-						lsp_fallback = true,
+
+						-- lsp_fallback = true,
 					},
 					lua = { "stylua" },
 					-- Conform will run multiple formatters sequentially
@@ -58,6 +60,8 @@ local plugins = {
 		},
 		-- event = "BufRead",
 		event = "VeryLazy",
+		-- lazy = false,
+		-- event = "BufEnter",
 		-- cmd = "UfoEnable",
 		-- event = "UIEnter",
 		-- event = { "BufReadPost", "BufNewFile" },
@@ -84,31 +88,58 @@ local plugins = {
 				desc = "Peek folded lines under cursor",
 			},
 		},
-		opts = {
-			open_fold_hl_timeout = 0,
-			fold_virt_text_handler = function(text, lnum, endLnum, width)
-				local suffix = (" ··· %d lines ···"):format(endLnum - lnum)
-				local lines = ("[%d lines] "):format(endLnum - lnum)
-				local cur_width = 0
-				for _, section in ipairs(text) do
-					cur_width = cur_width + vim.fn.strdisplaywidth(section[1])
-				end
-				suffix = suffix .. (" "):rep(width - cur_width - vim.fn.strdisplaywidth(lines) - 3)
-				table.insert(text, { suffix, "Comment" })
-				table.insert(text, { lines, "Todo" })
-				return text
-			end,
-			provider_selector = function(_, _, _)
-				return { "treesitter" }
-			end,
-			preview = {
-				win_config = {
-					border = { "", "", "", "", "", "", "", "" },
-					winblend = 0,
-					winhighlight = "Normal:Folded",
+		config = function()
+			require("ufo").setup({
+				open_fold_hl_timeout = 0,
+				fold_virt_text_handler = function(text, lnum, endLnum, width)
+					local suffix = (" ··· %d lines ···"):format(endLnum - lnum)
+					local lines = ("[%d lines] "):format(endLnum - lnum)
+					local cur_width = 0
+					for _, section in ipairs(text) do
+						cur_width = cur_width + vim.fn.strdisplaywidth(section[1])
+					end
+					suffix = suffix .. (" "):rep(width - cur_width - vim.fn.strdisplaywidth(lines) - 3)
+					table.insert(text, { suffix, "Comment" })
+					table.insert(text, { lines, "Todo" })
+					return text
+				end,
+				provider_selector = function(_, _, _)
+					return { "treesitter" }
+				end,
+				preview = {
+					win_config = {
+						border = { "", "", "", "", "", "", "", "" },
+						winblend = 0,
+						winhighlight = "Normal:Folded",
+					},
 				},
-			},
-		},
+			})
+		end,
+		-- opts = {
+		-- 	open_fold_hl_timeout = 0,
+		-- 	fold_virt_text_handler = function(text, lnum, endLnum, width)
+		-- 		local suffix = (" ··· %d lines ···"):format(endLnum - lnum)
+		-- 		local lines = ("[%d lines] "):format(endLnum - lnum)
+		-- 		local cur_width = 0
+		-- 		for _, section in ipairs(text) do
+		-- 			cur_width = cur_width + vim.fn.strdisplaywidth(section[1])
+		-- 		end
+		-- 		suffix = suffix .. (" "):rep(width - cur_width - vim.fn.strdisplaywidth(lines) - 3)
+		-- 		table.insert(text, { suffix, "Comment" })
+		-- 		table.insert(text, { lines, "Todo" })
+		-- 		return text
+		-- 	end,
+		-- 	provider_selector = function(_, _, _)
+		-- 		return { "treesitter" }
+		-- 	end,
+		-- 	preview = {
+		-- 		win_config = {
+		-- 			border = { "", "", "", "", "", "", "", "" },
+		-- 			winblend = 0,
+		-- 			winhighlight = "Normal:Folded",
+		-- 		},
+		-- 	},
+		-- },
 	},
 	-- interactive search in file by :<linenumber> : useful
 	{
@@ -125,11 +156,7 @@ local plugins = {
 	},
 
 	-- telescope file browser variant : not useful
-	{
-		"nvim-telescope/telescope-file-browser.nvim",
-		enabled = false,
-		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-	},
+
 	-- track your time in neovim : useful
 	{ "wakatime/vim-wakatime", event = "VeryLazy", enabled = false },
 	-- more useful word motions for vim
@@ -165,12 +192,7 @@ local plugins = {
 		keys = {},
 	},
 	-- function usage as virtual text : little used
-	{
-		"Wansmer/symbol-usage.nvim",
-		event = "BufReadPre", -- need run before LspAttach if you use nvim 0.9. On 0.10 use 'LspAttach'
-		enabled = false,
-		opts = {},
-	},
+
 	-- run some code directly in neovim : useful but most of time i'm using the whole file compiler
 	{
 		"michaelb/sniprun",
@@ -228,15 +250,6 @@ local plugins = {
 		cmd = "TransparentEnable",
 	},
 	-- telescope project manager : useful
-	{
-		"ahmedkhalf/project.nvim",
-		enabled = false,
-		event = "BufEnter",
-		-- event = "UIEnter",
-		config = function()
-			require("project_nvim").setup({})
-		end,
-	},
 	-- codeium ai auto-complete : works bad in neovim somehow in vscode its work better in x100 times
 	{
 		"Exafunction/codeium.vim",
@@ -258,59 +271,12 @@ local plugins = {
 			end, { expr = true })
 		end,
 	},
-	-- codeium ai auto-complete with cmp engine somehow in vscode its work better in x100
-	{
-		"Exafunction/codeium.nvim",
-		enabled = false,
-		-- event = "VeryLazy",
-		config = function()
-			require("codeium").setup({})
-		end,
-	},
+
 	-- integration of lazygit in neovim : very useful
 	{ "kdheepak/lazygit.nvim", event = "VeryLazy" },
 
-	{
-		"folke/twilight.nvim",
-		enabled = false,
-		event = "BufRead",
-		opts = {
-			alpha = 0.95, -- amount of dimming
-			color = { "Normal", "#ffffff" },
-			term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
-			treesitter = true,
-			-- refer to the configuration section below
-		},
-	},
 	-- integration of lf file browser in neovim : very useful i like this file browser
-	{
-		{
-			"lmburns/lf.nvim",
-			dependencies = { "akinsho/toggleterm.nvim" },
-			cmd = "Lf",
-			config = function()
-				-- This feature will not work if the plugin is lazy-loaded
-				vim.g.lf_netrw = 1
-				require("lf").setup({
-					direction = "float", -- window type: float horizontal vertical
-					border = "none", -- border kind: single double shadow curved
-					width = vim.o.columns, -- maximally available columns
-					height = vim.o.lines - 1, -- maximally available lines
-					winblend = 0, -- psuedotransparency level
-					default_file_manager = true, -- make lf default file manager
-					escape_quit = true, -- map escape to the quit command (so it doesn't go into a meta normal mode)
-					mappings = true, -- whether terminal buffer mapping is enabled
-					disable_netrw_warning = true, -- don't display a message when opening a directory with `default_file_manager` as true
-					highlights = { -- highlights passed to toggleterm
-						Normal = { link = "Normal" },
-						NormalFloat = { link = "Normal" },
-					},
-				})
-				vim.keymap.set("n", "<M-o>", "<Cmd>Lf<CR>")
-			end,
-			requires = { "toggleterm.nvim" },
-		},
-	},
+
 	-- game to learn vim
 	{ "ThePrimeagen/vim-be-good", event = "VeryLazy" },
 
@@ -399,76 +365,9 @@ local plugins = {
 			vim.api.nvim_set_keymap("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
 			vim.api.nvim_set_keymap("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
 			vim.api.nvim_set_keymap("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+		end,
+	},
 
-			vim.api.nvim_set_keymap("n", "<Leader>l", "<Cmd>noh<CR>", kopts)
-		end,
-	},
-	{
-		"folke/noice.nvim",
-		enabled = false,
-		-- lazy = false,
-		event = "BufEnter",
-		config = function()
-			vim.opt.showmode = false
-			require("noice").setup({
-				cmdline = {
-					enabled = true, -- enables the Noice cmdline UI
-					format = {
-						cmdline = { pattern = "^:", icon = "未来太阳", lang = "vim" },
-						search_down = { kind = "search", pattern = "^/", icon = " 检索", lang = "regex" },
-						search_up = { kind = "search", pattern = "^%?", icon = " 检索", lang = "regex" },
-					},
-				},
-				routes = {
-					{
-						view = "notify",
-						filter = { event = "msg_showmode" },
-					},
-				},
-				views = {
-					cmdline_popup = {
-						border = {
-							style = "none",
-							padding = { 3, 2 },
-						},
-						filter_options = {},
-						win_options = {
-							winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
-						},
-					},
-				},
-				lsp = {
-					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-					progress = {
-						enabled = false,
-					},
-					hover = {
-						enabled = false,
-					},
-					signature = {
-						enabled = false,
-					},
-					message = {
-						enabled = false,
-					},
-					documentation = {
-						enabled = false,
-					},
-				},
-				-- you can enable a preset for easier configuration
-				presets = {
-					bottom_search = true, -- use a classic bottom cmdline for search
-					command_palette = true, -- position the cmdline and popupmenu together
-					long_message_to_split = true, -- long messages will be sent to a split
-					inc_rename = false, -- enables an input dialog for inc-rename.nvim
-					lsp_doc_border = true, -- add a border to hover docs and signature help
-				},
-			})
-		end,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-		},
-	},
 	{
 		"echasnovski/mini.tabline",
 		version = "*",
@@ -594,7 +493,7 @@ local plugins = {
 	-- press jj in insert mode to exit : very useful
 	{
 		"max397574/better-escape.nvim",
-		enabled = false,
+		enabled = true,
 		event = { "CursorHold", "CursorHoldI" },
 		opts = {
 			mapping = { "jj" }, -- a table with mappings to use
@@ -604,17 +503,7 @@ local plugins = {
 		},
 	},
 	-- starter window : some problem with buffer close
-	{
-		"echasnovski/mini.starter",
-		-- event = "VimEnter",
-		enabled = false,
-		lazy = false,
-		version = "*",
-		config = function()
-			local opts = require("custom.configs.starter")
-			require("mini.starter").setup(opts)
-		end,
-	},
+
 	-- Better Around/Inside textobjects
 	--
 	-- Examples:

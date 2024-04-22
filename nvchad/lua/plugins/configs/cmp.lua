@@ -46,15 +46,20 @@ local function border(hl_name)
 end
 
 local options = {
+	-- help cmp for documentation
 	completion = {
 		completeopt = "noselect,menu,menuone",
 	},
-
+	performance = {
+		-- debounce = 400,
+		-- throttle = 400,
+		max_view_entries = 8,
+	},
 	window = {
 		completion = {
 			-- side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
 			-- winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
-			winblend = 10,
+			-- winblend = 10,
 			scrollbar = false,
 		},
 		documentation = {
@@ -123,8 +128,7 @@ local options = {
 		-- },
 		{ name = "nvim_lua" },
 		{ name = "path" },
-		-- { name = "codeium" },
-		{ name = "rg" },
+		{ name = "rg", keyword_length = 3 },
 		{ name = "nvim_lsp_signature_help" },
 	},
 }

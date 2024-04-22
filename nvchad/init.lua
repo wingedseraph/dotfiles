@@ -52,7 +52,5 @@ function setupHistory()
 	vim.defer_fn(function()
 		-- vim.cmd("History") -- fzf.vim
 		vim.cmd("FzfLua oldfiles") -- fzf.lua
-	end, 10)
+	end, 1)
 end
-print("remove ui default plugin to use mini statusline and hue color")
--- require("misc")

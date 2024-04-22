@@ -136,32 +136,6 @@ M.general = {
 			"[T]elescope [K]eymaps",
 			opts = { nowait = true },
 		},
-		["<leader>dd"] = {
-			"<cmd>DevdocsOpenFloat<CR>",
-			"dev docs float",
-			opts = { nowait = true },
-		},
-
-		["<leader>pp"] = {
-			"<cmd>Telescope projects <CR>",
-			"telescope list all projects",
-			opts = { nowait = true },
-		},
-		["<leader>re"] = {
-			"<cmd>Telescope file_browser path=%:p:h select_buffer=true <CR>",
-			"file browser telescope open in current buffer",
-			opts = { nowait = true },
-		},
-		["<leader>gg"] = {
-			"<cmd>lua require ('telescope.builtin').live_grep({grep_open_files=true}) <CR>",
-			"live grep grep open files",
-			opts = { nowait = true },
-		},
-		["<leader>Old"] = {
-			"<cmd>Telescope oldfiles  <CR>",
-			"[T]elescope [O]ldfiles",
-			opts = { nowait = true },
-		},
 		["<leader>e"] = { "<cmd>:lua RunFile()<CR>", "run node or c compiler", opts = { nowait = true } },
 		["<leader>rr"] = { "<cmd>SnipClose<CR>", "[S]nip [C]lose", opts = { nowait = true } },
 		["<leader>lg"] = { "<cmd>LazyGit<CR>", "lazygit", opts = { nowait = true } },
@@ -182,8 +156,8 @@ M.general = {
 		-- ["<C-v>"] = { "P", "PASTE", opts = { nowait = true } },
 		["<C-z>"] = { "u", "[U]ndo", opts = { nowait = true } },
 		["<C-a>"] = { "gg<S-v>G", "[S]elect [A]ll", opts = { nowait = true } },
-		["<F1>"] = { "<cmd> Telescope find_files <CR>", "Live grep" },
-		["<F2>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
+		-- ["<F1>"] = { "<cmd> Telescope find_files <CR>", "Live grep" },
+		-- ["<F2>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
 		["NN"] = { "<cmd>tabnew $MYVIMRC<CR>", "Open init.lua", opts = { nowait = true } },
 		[";"] = { ":", "enter command mode", opts = { nowait = true } },
 		["1"] = { "$", "go to end of line", opts = { nowait = true } },
