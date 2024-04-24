@@ -244,3 +244,43 @@ function Toggle_diagnostics()
 end
 
 vim.keymap.set("n", "<leader>]", Toggle_diagnostics, { noremap = true, silent = true, desc = "toggle diagnostic" })
+
+-- local win_height = vim.fn.winheight(0)
+-- vim.opt.scrolloff = math.floor((win_height - 1) / 2)
+-- vim.opt.sidescrolloff = math.floor((win_height - 1) / 2)
+-- require("custom.discipline")
+function cowboy()
+	---@type table?
+	local id
+	local ok = true
+	for _, key in ipairs({ "h", "j", "k", "l", "+", "-" }) do
+		local count = 0
+		local timer = assert(vim.loop.new_timer())
+		local map = key
+		vim.keymap.set("n", key, function()
+			if vim.v.count > 0 then
+				count = 0
+			end
+			if count >= 10 then
+				ok, id = pcall(vim.notify, "Hold it Cowboy!", vim.log.levels.WARN, {
+					icon = "🤠",
+					replace = id,
+					keep = function()
+						return count >= 10
+					end,
+				})
+				if not ok then
+					id = nil
+					return map
+				end
+			else
+				count = count + 1
+				timer:start(2000, 0, function()
+					count = 0
+				end)
+				return map
+			end
+		end, { expr = true, silent = true })
+	end
+end
+vim.cmd("lua cowboy()")

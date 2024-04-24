@@ -35,9 +35,9 @@ local plugins = {
 					-- Conform will run multiple formatters sequentially
 					python = { "autopep8" },
 					-- Use a sub-list to run only the first available formatter
-					javascript = { { "prettierd" } },
-					html = { { "prettierd" } },
-					css = { { "prettierd" } },
+					html = { { "prettierd", "prettier" } },
+					css = { { "prettierd", "prettier" } },
+					javascript = { { "prettierd", "prettier" } },
 					c = { { "clang_format" } },
 
 					vim.api.nvim_create_autocmd("BufWritePre", {
@@ -50,7 +50,37 @@ local plugins = {
 			})
 		end,
 	},
-
+	{
+		"karb94/neoscroll.nvim",
+		main = "neoscroll",
+		opts = {
+			mappings = {},
+			hide_cursor = true,
+			stop_eof = true,
+			respect_scrolloff = false,
+			cursor_scrolls_alone = true,
+			easing_function = "sine",
+			pre_hook = nil,
+			post_hook = nil,
+			performance_mode = false,
+		},
+		keys = {
+			{
+				"<C-u>",
+				function()
+					require("neoscroll").scroll(-vim.wo.scroll, true, 250)
+				end,
+				desc = "scroll up",
+			},
+			{
+				"<C-d>",
+				function()
+					require("neoscroll").scroll(vim.wo.scroll, true, 250)
+				end,
+				desc = "scroll down",
+			},
+		},
+	},
 	-- better fold : very useful
 	{
 		"kevinhwang91/nvim-ufo",
@@ -431,12 +461,11 @@ local plugins = {
 				-- Map keybindings
 				vim.api.nvim_set_keymap("n", "<M-d>", ":FzfLua files<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<M-o>", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
-
 				vim.api.nvim_set_keymap("n", "<leader>o", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<leader>ff", ":FzfLua files<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<leader>fw", ":FzfLua live_grep<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<leader>b", ":FzfLua buffers<CR>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua blines<CR>", { noremap = true, silent = true })
+				vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua lgrep_curbuf<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<leader>L", ":FzfLua lines<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<leader>'", ":FzfLua marks<CR>", { noremap = true, silent = true })
 				vim.api.nvim_set_keymap("n", "<leader>H", ":FzfLua help_tags<CR>", { noremap = true, silent = true })

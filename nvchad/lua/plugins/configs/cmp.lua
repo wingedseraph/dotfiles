@@ -128,7 +128,7 @@ local options = {
 		-- },
 		{ name = "nvim_lua" },
 		{ name = "path" },
-		{ name = "rg", keyword_length = 3 },
+		{ name = "rg", keyword_length = 2 },
 		{ name = "nvim_lsp_signature_help" },
 	},
 }
