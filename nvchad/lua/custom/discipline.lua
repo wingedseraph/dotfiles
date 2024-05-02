@@ -34,5 +34,5 @@ function M.cowboy()
 		end, { expr = true, silent = true })
 	end
 end
-
+M.cowboy()
 return M

@@ -8,12 +8,6 @@
 vim.g.syntastic_javascript_checkers = { "eslint" }
 vim.g.syntastic_javascript_eslint_exec = "eslint_d"
 vim.o.timeoutlen = 900
--- folding
-vim.opt.foldlevelstart = 10
--- vim.opt.foldlevel = 20
--- use wider line for folding
-vim.opt.fillchars = { fold = "⏤" }
--- vim.opt.foldtext = "antonk52#fold#it()"
 -- Automatically add 'use strict' to the first line of new JavaScript files
 vim.cmd([[
   augroup add_use_strict
@@ -121,37 +115,13 @@ end
 -- EnableAfterDelay --
 -----------------------
 
-function EnableAfterDelay()
-	require("null-ls").setup()
-	if vim.bo.filetype ~= "markdown" then
-		vim.highlight.priorities.semantic_tokens = 95
-		-- vim.cmd("silent TSEnable highlight")
-	end
-	-- require("mini.statusline").setup({
-	-- 	use_icons = false,
-	-- 	set_vim_settings = false,
-	-- })
-	vim.cmd("silent Neorg")
-	vim.cmd("silent CmpStatus")
-	-- require("fzf-lua").setup({
-	-- 	winopts = {
-	-- 		width = 1,
-	-- 		height = 1,
-	-- 		border = "none",
-	-- 	},
-	-- })
-	-- vim.cmd("silent TSContextEnable")
-	require("garbage-day.utils").start_lsp()
-	vim.cmd("silent FocusEnable")
-	vim.cmd("silent IlluminateResume")
-end
 -- execute the autocmd only if the file size is less than 100KB
 local file_size = vim.fn.getfsize(vim.fn.expand("%"))
 
 if file_size < 100 * 1024 then
 	vim.api.nvim_exec(
 		[[
-             autocmd UIEnter * silent lua vim.defer_fn(function() EnableAfterDelay() end, 253)
+             autocmd UIEnter * silent lua vim.defer_fn(function() require('misc.enable_after_delay') end, 253)
         ]],
 		false
 	)
@@ -245,42 +215,15 @@ end
 
 vim.keymap.set("n", "<leader>]", Toggle_diagnostics, { noremap = true, silent = true, desc = "toggle diagnostic" })
 
--- local win_height = vim.fn.winheight(0)
--- vim.opt.scrolloff = math.floor((win_height - 1) / 2)
--- vim.opt.sidescrolloff = math.floor((win_height - 1) / 2)
 -- require("custom.discipline")
-function cowboy()
-	---@type table?
-	local id
-	local ok = true
-	for _, key in ipairs({ "h", "j", "k", "l", "+", "-" }) do
-		local count = 0
-		local timer = assert(vim.loop.new_timer())
-		local map = key
-		vim.keymap.set("n", key, function()
-			if vim.v.count > 0 then
-				count = 0
-			end
-			if count >= 10 then
-				ok, id = pcall(vim.notify, "Hold it Cowboy!", vim.log.levels.WARN, {
-					icon = "🤠",
-					replace = id,
-					keep = function()
-						return count >= 10
-					end,
-				})
-				if not ok then
-					id = nil
-					return map
-				end
-			else
-				count = count + 1
-				timer:start(2000, 0, function()
-					count = 0
-				end)
-				return map
-			end
-		end, { expr = true, silent = true })
-	end
+
+-- Folds ======================================================================
+vim.o.foldmethod = "indent" -- Set 'indent' folding method
+vim.o.foldlevel = 1 -- Display all folds except top ones
+vim.o.foldnestmax = 10 -- Create folds only for some number of nested levels
+vim.g.markdown_folding = 1 -- Use folding by heading in markdown files
+vim.opt.fillchars = { fold = " " }
+
+if vim.fn.has("nvim-0.10") == 1 then
+	vim.o.foldtext = "" -- Use underlying text with its highlighting
 end
-vim.cmd("lua cowboy()")

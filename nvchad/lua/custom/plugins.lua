@@ -84,7 +84,7 @@ local plugins = {
 	-- better fold : very useful
 	{
 		"kevinhwang91/nvim-ufo",
-		-- enabled = false,
+		enabled = false,
 		dependencies = {
 			"kevinhwang91/promise-async",
 		},
@@ -484,8 +484,6 @@ local plugins = {
 	{
 		"nvim-focus/focus.nvim",
 		version = "*",
-		cmd = "FocusEnable",
-		-- event = "VeryLazy",
 		opts = {
 			ui = {
 				number = false, -- Display line numbers in the focussed window only
