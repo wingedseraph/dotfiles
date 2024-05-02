@@ -19,16 +19,19 @@ local plugins = {
 	},
 
 	{
-		enabled = true,
 		"stevearc/conform.nvim",
+		enabled = true,
 		event = "VeryLazy",
 		config = function()
 			require("conform").setup({
 				formatters_by_ft = {
 					format_on_save = {
 						-- These options will be passed to conform.format()
-						timeout_ms = 50,
-
+						-- timeout_ms = 50,
+						timeout_ms = 3000,
+						async = false, -- not recommended to change
+						quiet = false, -- not recommended to change
+						lsp_fallback = true, -- not recommended to change
 						-- lsp_fallback = true,
 					},
 					lua = { "stylua" },
@@ -152,7 +155,52 @@ local plugins = {
 			centered_peeking = true, -- Peeked line will be centered relative to window
 		},
 	},
-	{ "echasnovski/mini.indentscope", version = "*", ft = "python" },
+	{
+		"echasnovski/mini.indentscope",
+		version = "*",
+		ft = "python",
+		opts = {
+			options = { try_as_border = true },
+		},
+	},
+	{
+		"SmiteshP/nvim-navbuddy",
+		event = "VeryLazy",
+		opts = {
+			lsp = { auto_attach = true },
+			source_buffer = {
+				follow_node = true, -- Keep the current node in focus on the source buffer
+				highlight = true, -- Highlight the currently focused node
+			},
+			border = "none",
+			size = { 60, 60 }, -- Or table format example: { height = "40%", width = "100%"}
+			sections = {
+				left = {
+					size = "20%",
+					border = "none", -- You can set border style for each section individually as well.
+				},
+				mid = {
+					size = "60%",
+					border = "none",
+				},
+				right = {
+					-- No size option for right most section. It fills to
+					-- remaining area.
+					border = "none",
+					preview = "leaf", -- Right section can show previews too.
+					-- Options: "leaf", "always" or "never"
+				},
+			},
+			node_markers = {
+				enabled = false,
+			},
+		},
+
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"MunifTanjim/nui.nvim",
+		},
+	},
 	{ "andersevenrud/nvim_context_vt", opts = {}, ft = "html" },
 	{
 		"echasnovski/mini.hipatterns",
@@ -176,9 +224,10 @@ local plugins = {
 		end,
 	},
 	-- better quickfix window : little used
+	{ "yorickpeterse/nvim-pqf", opts = {}, event = "VeryLazy" },
 	{
 		"folke/trouble.nvim",
-		enabled = true,
+		enabled = false,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			auto_fold = true,

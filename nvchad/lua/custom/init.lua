@@ -233,3 +233,4 @@ vim.opt.fillchars = { fold = " " }
 if vim.fn.has("nvim-0.10") == 1 then
 	vim.o.foldtext = "" -- Use underlying text with its highlighting
 end
+vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>copen<cr>", { noremap = true, silent = true })
