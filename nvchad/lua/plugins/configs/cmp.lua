@@ -10,27 +10,27 @@ local field_arrangement = {
 	atom_colored = { "kind", "abbr", "menu" },
 }
 
-local formatting_style = {
-	-- default fields order i.e completion word + item.kind + item.kind icons
-	fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
-	-- fields = field_arrangement[cmp_style] or { "kind", "menu" },
-
-	format = function(_, item)
-		local icons = require("nvchad.icons.lspkind")
-		local icon = (cmp_ui.icons and icons[item.kind]) or ""
-
-		if cmp_style == "atom" or cmp_style == "atom_colored" then
-			-- icon = " " .. icon .. " "
-			item.menu = cmp_ui.lspkind_text and "   (" .. item.kind .. ")" or ""
-			item.kind = icon
-		else
-			icon = cmp_ui.lspkind_text and (" " .. icon .. " ") or icon
-			item.kind = string.format("%s %s", icon, cmp_ui.lspkind_text and item.kind or "")
-		end
-
-		return item
-	end,
-}
+-- local formatting_style = {
+-- 	-- default fields order i.e completion word + item.kind + item.kind icons
+-- 	fields = field_arrangement[cmp_style] or { "abbr", "kind", "menu" },
+-- 	-- fields = field_arrangement[cmp_style] or { "kind", "menu" },
+--
+-- 	format = function(_, item)
+-- 		local icons = require("nvchad.icons.lspkind")
+-- 		local icon = (cmp_ui.icons and icons[item.kind]) or ""
+--
+-- 		if cmp_style == "atom" or cmp_style == "atom_colored" then
+-- 			-- icon = " " .. icon .. " "
+-- 			item.menu = cmp_ui.lspkind_text and "   (" .. item.kind .. ")" or ""
+-- 			item.kind = icon
+-- 		else
+-- 			icon = cmp_ui.lspkind_text and (" " .. icon .. " ") or icon
+-- 			item.kind = string.format("%s %s", icon, cmp_ui.lspkind_text and item.kind or "")
+-- 		end
+--
+-- 		return item
+-- 	end,
+-- }
 
 local function border(hl_name)
 	return {

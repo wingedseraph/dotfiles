@@ -20,7 +20,7 @@ M.ui = {
 
 	-- cmp themeing
 	cmp = {
-		icons = true,
+		icons = false,
 		lspkind_text = true,
 		style = "atom", -- default/flat_light/flat_dark/atom/atom_colored
 		border_color = "grey_fg", -- only applicable for "default" style, use color names from base30 variables

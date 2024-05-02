@@ -1,4 +1,5 @@
 -- if vim.loader then
+--
 -- 	vim.loader.enable()
 -- end
 pcall(function()
@@ -48,7 +49,6 @@ vim.api.nvim_exec(
 )
 
 function setupHistory()
-	-- Define an autocommand to execute History command on BufEnter event after a delay
 	vim.defer_fn(function()
 		-- vim.cmd("History") -- fzf.vim
 		vim.cmd("FzfLua oldfiles") -- fzf.lua
