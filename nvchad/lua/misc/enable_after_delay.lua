@@ -18,5 +18,9 @@ require("mkdir")
 require("sniprun")
 require("vim-be-good")
 require("yazi").setup()
+require("mini.hues").setup({
+	background = "#10262c",
+	foreground = "#c0c8cb",
+})
 
 vim.notify("bootstrap")

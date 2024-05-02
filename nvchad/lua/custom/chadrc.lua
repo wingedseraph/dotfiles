@@ -5,7 +5,7 @@ local M = {}
 local highlights = require("custom.highlights")
 
 M.ui = {
-	-- new themes:
+	-- new themes only with files on windows:
 	-- jabuti, flexoki,  mito-laser, chadracula-evondev, nano-light, flexoki-light, material-darker, material-lighter
 	-- rosepine-dawn, solarized_osaka,
 	theme = "solarized_osaka",
