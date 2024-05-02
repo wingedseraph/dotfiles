@@ -41,6 +41,7 @@ local default_plugins = {
 
 	{
 		"NvChad/nvim-colorizer.lua",
+		enabled = false,
 		cmd = "ColorizerToggle",
 		-- init = function()
 		-- 	require("core.utils").lazy_load("nvim-colorizer.lua")

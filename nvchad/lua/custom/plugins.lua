@@ -50,37 +50,6 @@ local plugins = {
 			})
 		end,
 	},
-	{
-		"karb94/neoscroll.nvim",
-		main = "neoscroll",
-		opts = {
-			mappings = {},
-			hide_cursor = true,
-			stop_eof = true,
-			respect_scrolloff = false,
-			cursor_scrolls_alone = true,
-			easing_function = "sine",
-			pre_hook = nil,
-			post_hook = nil,
-			performance_mode = false,
-		},
-		keys = {
-			{
-				"<C-u>",
-				function()
-					require("neoscroll").scroll(-vim.wo.scroll, true, 250)
-				end,
-				desc = "scroll up",
-			},
-			{
-				"<C-d>",
-				function()
-					require("neoscroll").scroll(vim.wo.scroll, true, 250)
-				end,
-				desc = "scroll down",
-			},
-		},
-	},
 	-- better fold : very useful
 	{
 		"kevinhwang91/nvim-ufo",
@@ -175,7 +144,6 @@ local plugins = {
 	{
 		"nacro90/numb.nvim",
 		enabled = true,
-		event = { "VeryLazy" },
 		opts = {
 			show_numbers = true, -- Enable 'number' for the window while peeking
 			show_cursorline = true, -- Enable 'cursorline' for the window while peeking
@@ -185,15 +153,29 @@ local plugins = {
 		},
 	},
 
-	-- telescope file browser variant : not useful
+	{ "echasnovski/mini.indentscope", version = "*", ft = "python" },
+	{ "andersevenrud/nvim_context_vt", opts = {}, event = "VeryLazy", ft = "html" },
+	{
+		"echasnovski/mini.hipatterns",
+		event = "VeryLazy",
+		version = "*",
+		config = function()
+			require("mini.hipatterns").setup()
+			local hipatterns = require("mini.hipatterns")
+			hipatterns.setup({
+				highlighters = {
+					-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+					fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+					hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+					todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+					note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
 
-	-- track your time in neovim : useful
-	{ "wakatime/vim-wakatime", event = "VeryLazy", enabled = false },
-	-- more useful word motions for vim
-	-- camelcase, acronyms, uppercase, lowercase, hexcode and other
-	{ "chaoren/vim-wordmotion", event = "VeryLazy" },
-	-- other statusline : works slowly : not really useful
-
+					-- Highlight hex color strings (`#rrggbb`) using that color
+					hex_color = hipatterns.gen_highlighter.hex_color(),
+				},
+			})
+		end,
+	},
 	-- better quickfix window : little used
 	{
 		"folke/trouble.nvim",
@@ -210,7 +192,6 @@ local plugins = {
 	},
 	{
 		"SR-Mystar/yazi.nvim",
-		event = "VeryLazy",
 		cmd = "Yazi",
 		opts = {
 			size = {
@@ -221,15 +202,9 @@ local plugins = {
 		},
 		keys = {},
 	},
-	-- function usage as virtual text : little used
-
 	-- run some code directly in neovim : useful but most of time i'm using the whole file compiler
 	{
 		"michaelb/sniprun",
-		event = "VeryLazy",
-		-- ft = { "javascript",
-		-- cmd = "SnipRun",
-		--
 		-- keys = {
 		-- 	{
 		-- 		"<leader>rr",
@@ -303,33 +278,12 @@ local plugins = {
 	},
 
 	-- integration of lazygit in neovim : very useful
-	{ "kdheepak/lazygit.nvim", event = "VeryLazy" },
+	{ "kdheepak/lazygit.nvim" },
 
 	-- integration of lf file browser in neovim : very useful i like this file browser
 
 	-- game to learn vim
-	{ "ThePrimeagen/vim-be-good", event = "VeryLazy" },
-
-	-- write better todo-comments : very useful help pay attention to some comments
-	{
-		"folke/todo-comments.nvim",
-		event = "VeryLazy",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {
-			signs = false,
-			colors = {
-				default = { "Identifier", "#7C3AED" },
-				error = { "DiagnosticError", "ErrorMsg", "#DC2626" },
-				hint = { "DiagnosticHint", "#10B981" },
-				info = { "DiagnosticInfo", "#2563EB" },
-				test = { "Identifier", "#FF00FF" },
-				warning = { "DiagnosticWarn", "WarningMsg", "#FBBF24" },
-			},
-			highlight = {
-				keyword = "fg", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
-			},
-		},
-	},
+	{ "ThePrimeagen/vim-be-good" },
 
 	-- multi-cursor : very useful but rarely buggy
 	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
@@ -368,7 +322,6 @@ local plugins = {
 	},
 	{
 		"kevinhwang91/nvim-hlslens",
-		event = "VeryLazy",
 		opts = {
 			calm_down = true,
 			nearest_only = true,
@@ -498,9 +451,6 @@ local plugins = {
 	-- float terminal in neovim : very useful
 	{
 		"akinsho/toggleterm.nvim",
-		-- cmd = "ToogleTerm",
-		-- enabled = true,
-		event = "VeryLazy",
 		version = "*",
 		opts = {
 			-- 'single' | 'double' | 'shadow' | 'curved' |
@@ -583,7 +533,6 @@ local plugins = {
 	-- creates missing directories on saving a file : very useful
 	{
 		"jghauser/mkdir.nvim",
-		event = "VeryLazy",
 	},
 	-- stops inactive LSP clients to free RAM : very useful
 	{
@@ -639,7 +588,6 @@ local plugins = {
 	{
 		"nvim-neorg/neorg",
 		-- enabled = false,
-		cmd = "Neorg",
 		build = ":Neorg sync-parsers",
 		-- ft = { "norg" },
 		-- lazy = false,

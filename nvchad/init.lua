@@ -52,5 +52,5 @@ function setupHistory()
 	vim.defer_fn(function()
 		-- vim.cmd("History") -- fzf.vim
 		vim.cmd("FzfLua oldfiles") -- fzf.lua
-	end, 1)
+	end, 40)
 end
