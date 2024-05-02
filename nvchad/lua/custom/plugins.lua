@@ -152,9 +152,8 @@ local plugins = {
 			centered_peeking = true, -- Peeked line will be centered relative to window
 		},
 	},
-
 	{ "echasnovski/mini.indentscope", version = "*", ft = "python" },
-	{ "andersevenrud/nvim_context_vt", opts = {}, event = "VeryLazy", ft = "html" },
+	{ "andersevenrud/nvim_context_vt", opts = {}, ft = "html" },
 	{
 		"echasnovski/mini.hipatterns",
 		event = "VeryLazy",
