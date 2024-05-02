@@ -1,6 +1,6 @@
 if vim.bo.filetype ~= "markdown" then
 	vim.highlight.priorities.semantic_tokens = 95
-	require("nvim-treesitter.configs")
+	require("nvim-treesitter")
 end
 
 require("neorg")

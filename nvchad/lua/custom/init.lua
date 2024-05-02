@@ -214,6 +214,12 @@ function Toggle_diagnostics()
 end
 
 vim.keymap.set("n", "<leader>]", Toggle_diagnostics, { noremap = true, silent = true, desc = "toggle diagnostic" })
+vim.keymap.set(
+	"n",
+	"<leader>cd",
+	"<cmd>cd %:h<cr>",
+	{ noremap = true, silent = true, desc = "change working directory to current file" }
+)
 
 -- require("custom.discipline")
 

@@ -4,11 +4,11 @@ dofile(vim.g.base46_cache .. "cmp")
 
 local cmp_ui = require("core.utils").load_config().ui.cmp
 local cmp_style = cmp_ui.style
-
-local field_arrangement = {
-	atom = { "kind", "abbr", "menu" },
-	atom_colored = { "kind", "abbr", "menu" },
-}
+local defaults = require("cmp.config.default")()
+-- local field_arrangement = {
+-- 	atom = { "kind", "abbr", "menu" },
+-- 	atom_colored = { "kind", "abbr", "menu" },
+-- }
 
 -- local formatting_style = {
 -- 	-- default fields order i.e completion word + item.kind + item.kind icons
@@ -76,7 +76,7 @@ local options = {
 		end,
 	},
 
-	formatting = formatting_style,
+	-- formatting = formatting_style,
 
 	mapping = {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -131,10 +131,16 @@ local options = {
 		{ name = "rg", keyword_length = 2 },
 		{ name = "nvim_lsp_signature_help" },
 	},
+	experimental = {
+		ghost_text = {
+			hl_group = "CmpGhostText",
+		},
+	},
+	sorting = defaults.sorting,
 }
 
 if cmp_style ~= "atom" and cmp_style ~= "atom_colored" then
 	options.window.completion.border = border("CmpBorder")
 end
-
+vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 return options
