@@ -201,7 +201,6 @@ vim.api.nvim_set_keymap("n", "<leader>rc", "<cmd>lua require('base46').load_all_
 -- )
 -- TODO: fix close all folds at buffer start and make work alt+d in alacritty terminal shell
 -- 			vim.cmd('require("ufo").closeAllFolds()')
--- 			write vim.diagnostic.disable() and vim.diagnostic.enable() toggle
 vim.g["diagnostics_active"] = true
 function Toggle_diagnostics()
 	if vim.g.diagnostics_active then

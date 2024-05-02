@@ -226,19 +226,6 @@ local plugins = {
 	-- better quickfix window : little used
 	{ "yorickpeterse/nvim-pqf", opts = {}, event = "VeryLazy" },
 	{
-		"folke/trouble.nvim",
-		enabled = false,
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			auto_fold = true,
-			win_config = { border = "single" }, -- window configuration for floating windows. See |nvim_open_win()|.
-			winblend = 10,
-			action_keys = {
-				switch_severity = "S",
-			},
-		},
-	},
-	{
 		"SR-Mystar/yazi.nvim",
 		cmd = "Yazi",
 		opts = {
@@ -368,6 +355,7 @@ local plugins = {
 	{
 		"echasnovski/mini.hues",
 	},
+	{ "Mofiqul/vscode.nvim" },
 	{
 		"kevinhwang91/nvim-hlslens",
 		opts = {

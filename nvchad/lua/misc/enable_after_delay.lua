@@ -18,5 +18,4 @@ require("mkdir")
 require("sniprun")
 require("vim-be-good")
 require("yazi").setup()
-
 vim.notify("bootstrap")

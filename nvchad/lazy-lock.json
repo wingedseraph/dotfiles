@@ -53,5 +53,6 @@
   "vim-illuminate": { "branch": "master", "commit": "305bf07b919ac526deb5193280379e2f8b599926" },
   "vim-visual-multi": { "branch": "master", "commit": "e2ff111f123da6cf97f95b96b10eb95854f953c9" },
   "vscode-standardjs-snippets": { "branch": "master", "commit": "76a82d459e2c1c027a4b7aeb63cc9f69616e0a78" },
+  "vscode.nvim": { "branch": "main", "commit": "bf62428d842ed1fb9c33353be10af40bac51e825" },
   "yazi.nvim": { "branch": "main", "commit": "c091a30849481e3c6cfda1d143c0093cda7ecd4e" }
 }

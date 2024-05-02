@@ -8,7 +8,8 @@ local lspconfig = require("lspconfig")
 local servers = {
 	"html",
 	"cssls",
-	"pylsp",
+	-- "pylsp",
+	"pyright",
 	"tsserver",
 	-- "denols",
 	"clangd",
