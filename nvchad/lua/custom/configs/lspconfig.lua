@@ -40,7 +40,7 @@ end
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
-		handlers = handlers,
+		-- handlers = handlers,
 		on_attach = on_attach,
 		capabilities = capabilities,
 	})
@@ -48,7 +48,7 @@ end
 
 -- lspconfig.pyright.setup { blabla}
 lspconfig.tsserver.setup({
-	handlers = handlers,
+	-- handlers = handlers,
 	on_attach = on_attach,
 	capabilities = capabilities,
 	init_options = {
@@ -72,7 +72,7 @@ lspconfig.tsserver.setup({
 -- })
 lspconfig.clangd.setup({
 	on_attach = on_attach,
-	handlers = handlers,
+	-- handlers = handlers,
 	capabilities = capabilities,
 	cmd = {
 		"clangd",
@@ -93,7 +93,7 @@ capabilities.textDocument.foldingRange = {
 lspconfig.lua_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
-	handlers = handlers,
+	-- handlers = handlers,
 
 	settings = {
 		Lua = {

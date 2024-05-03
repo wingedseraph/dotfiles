@@ -21,8 +21,8 @@ M.override = {
 	-- IncSearch = { fg = "black", bg = "pink" },
 	IncSearch = { fg = "sun", bg = "none" },
 	Search = { fg = "black", bg = "sun" },
-	NormalFloat = { fg = "none", bg = "none" },
-	FloatBorder = { fg = "none", bg = "none" },
+	-- NormalFloat = { fg = "none", bg = "none" },
+	-- FloatBorder = { fg = "none", bg = "none" },
 	-- Cursor = { bg = "pink", fg = "black" },
 	DiffChange = { fg = "black", bg = "pink" },
 	-- CursorLine = { bg = "#2f2e3e" },
@@ -62,8 +62,6 @@ M.override = {
   CmpItemKindStructure = { fg = "none", bg = "none" },
   CmpItemKindIdentifier = { fg = "none", bg = "none" },
   CmpItemKindModule = { fg = "none", bg = "none" },
-  HoverNormal    = { fg = "none", bg = "none" },
-  HoverBorder    = { fg = "none", bg = "none" },
 
 }
 --stylua: ignore

@@ -241,3 +241,13 @@ if vim.fn.has("nvim-0.10") == 1 then
 end
 vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>copen<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fz", "<cmd>FzfLua<cr>", { noremap = true, silent = true })
+vim.o.fillchars = table.concat({
+	"eob: ",
+	"horiz:═",
+	"horizdown:╦",
+	"horizup:╩",
+	"vert:║",
+	"verthoriz:╬",
+	"vertleft:╣",
+	"vertright:╠",
+}, ",")

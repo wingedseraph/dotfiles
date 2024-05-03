@@ -1,6 +1,5 @@
 ---@type NvPluginSpec[]
 local plugins = {
-	-- Override plugin definition options
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -17,7 +16,6 @@ local plugins = {
 			require("custom.configs.lspconfig")
 		end, -- Override to setup mason-lspconfig
 	},
-
 	{
 		"stevearc/conform.nvim",
 		enabled = true,
@@ -53,7 +51,6 @@ local plugins = {
 			})
 		end,
 	},
-	-- better fold : very useful
 	{
 		"kevinhwang91/nvim-ufo",
 		enabled = false,
@@ -143,7 +140,6 @@ local plugins = {
 		-- 	},
 		-- },
 	},
-	-- interactive search in file by :<linenumber> : useful
 	{
 		"nacro90/numb.nvim",
 		enabled = true,
@@ -218,7 +214,6 @@ local plugins = {
 		},
 		keys = {},
 	},
-	-- run some code directly in neovim : useful but most of time i'm using the whole file compiler
 	{
 		"michaelb/sniprun",
 		-- keys = {
@@ -240,9 +235,6 @@ local plugins = {
 		-- 	},
 		-- },
 	},
-	-- Neovim plugin for automatically highlighting other uses of the word under the cursor
-	-- using either LSP, Tree-sitter, or regex matching.
-	-- : very useful
 	{
 		"RRethy/vim-illuminate",
 		-- event = "VeryLazy",
@@ -263,15 +255,11 @@ local plugins = {
 			})
 		end,
 	},
-	-- some more snippets for javascript with cmp engine : very useful
 	{ "capaj/vscode-standardjs-snippets", ff = { "javascript" } },
-	-- makes neovim transparent : works bad with tabline bufferline and statusline
 	{
 		"xiyaowong/transparent.nvim",
 		cmd = "TransparentEnable",
 	},
-	-- telescope project manager : useful
-	-- codeium ai auto-complete : works bad in neovim somehow in vscode its work better in x100 times
 	{
 		"Exafunction/codeium.vim",
 		enabled = false,
@@ -292,20 +280,9 @@ local plugins = {
 			end, { expr = true })
 		end,
 	},
-
-	-- integration of lazygit in neovim : very useful
 	{ "kdheepak/lazygit.nvim" },
-
-	-- integration of lf file browser in neovim : very useful i like this file browser
-
-	-- game to learn vim
 	{ "ThePrimeagen/vim-be-good" },
-
-	-- multi-cursor : very useful but rarely buggy
 	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
-	-- flash.nvim lets you navigate your code with search labels, enhanced character motions, and Treesitter integration.
-	-- like hop or any other jump plugin
-	-- : very useful
 	{
 		"folke/flash.nvim",
 		-- event = "BufRead",
@@ -323,20 +300,24 @@ local plugins = {
 				},
 			},
 		},
-  -- stylua: ignore
-  keys = {
-    { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
-    { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-  },
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "o", "x" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      },
 	},
-	-- always have a nice view over your split windows : very useful
 	{
 		"echasnovski/mini.hues",
 	},
 	{ "Mofiqul/vscode.nvim" },
+	{
+		"declancm/cinnamon.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
 	{
 		"kevinhwang91/nvim-hlslens",
 		opts = {
@@ -367,7 +348,6 @@ local plugins = {
 			vim.api.nvim_set_keymap("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
 		end,
 	},
-
 	{
 		"echasnovski/mini.tabline",
 		version = "*",
@@ -380,38 +360,38 @@ local plugins = {
 		config = function()
 			vim.opt.showmode = false
 			local statusline = require("mini.statusline")
-  --stylua: ignore
-  local active = function()
-    local mode, mode_hl = statusline.section_mode({ trunc_width = 120 })
-    -- Try out 'mini.git'
-    local git_summary  = vim.b.minigit_summary or {}
-    local git_head = git_summary.head_name or ''
-    if git_head ~= '' then
-      git_head = ' ' .. (git_head == 'HEAD' and git_summary.head:sub(1, 7) or git_head)
-    end
-    local git_status = git_summary.status or ''
-    if git_status ~= '' then
-      git_status = git_status == '  ' and '' or string.format('(%s)', git_status)
-    end
-    -- Try out 'mini.diff'
-    local diff_summary  = vim.b.minidiff_summary_string
-    local diff          = diff_summary ~= nil and string.format(' %s', diff_summary == '' and '-' or diff_summary) or ''
-    local diagnostics   = statusline.section_diagnostics({ trunc_width = 75 })
-    local filename      = statusline.section_filename({ trunc_width = 140 })
-    local fileinfo      = statusline.section_fileinfo({ trunc_width = 120 })
-    local location      = statusline.section_location({ trunc_width = 75 })
-    local search        = statusline.section_searchcount({ trunc_width = 75 })
+    --stylua: ignore
+    local active = function()
+      local mode, mode_hl = statusline.section_mode({ trunc_width = 120 })
+      -- Try out 'mini.git'
+      local git_summary  = vim.b.minigit_summary or {}
+      local git_head = git_summary.head_name or ''
+      if git_head ~= '' then
+        git_head = ' ' .. (git_head == 'HEAD' and git_summary.head:sub(1, 7) or git_head)
+      end
+      local git_status = git_summary.status or ''
+      if git_status ~= '' then
+        git_status = git_status == '  ' and '' or string.format('(%s)', git_status)
+      end
+      -- Try out 'mini.diff'
+      local diff_summary  = vim.b.minidiff_summary_string
+      local diff          = diff_summary ~= nil and string.format(' %s', diff_summary == '' and '-' or diff_summary) or ''
+      local diagnostics   = statusline.section_diagnostics({ trunc_width = 75 })
+      local filename      = statusline.section_filename({ trunc_width = 140 })
+      local fileinfo      = statusline.section_fileinfo({ trunc_width = 120 })
+      local location      = statusline.section_location({ trunc_width = 75 })
+      local search        = statusline.section_searchcount({ trunc_width = 75 })
 
-    return statusline.combine_groups({
-      { hl = mode_hl,                  strings = { mode } },
-      { hl = 'MiniStatuslineDevinfo',  strings = { git_head, diff, diagnostics } },
-      '%<', -- Mark general truncate point
-      { hl = 'MiniStatuslineFilename', strings = { filename } },
-      '%=', -- End left alignment
-      { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
-      { hl = mode_hl,                  strings = { search, location } },
-    })
-  end
+      return statusline.combine_groups({
+        { hl = mode_hl,                  strings = { mode } },
+        { hl = 'MiniStatuslineDevinfo',  strings = { git_head, diff, diagnostics } },
+        '%<', -- Mark general truncate point
+        { hl = 'MiniStatuslineFilename', strings = { filename } },
+        '%=', -- End left alignment
+        { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+        { hl = mode_hl,                  strings = { search, location } },
+      })
+    end
 			statusline.setup({ content = { active = active } })
 
 			-- require("mini.statusline").setup({
@@ -420,36 +400,34 @@ local plugins = {
 		end,
 	},
 	{
-		{
-			"ibhagwan/fzf-lua",
-			event = "VeryLazy",
-			enabled = true,
-			-- optional for icon support
-			dependencies = { "nvim-tree/nvim-web-devicons" },
-			-- cmd = "FzfLua",
-			config = function()
-				-- Map keybindings
-				vim.api.nvim_set_keymap("n", "<M-d>", ":FzfLua files<CR>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap("n", "<M-o>", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap("n", "<leader>o", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap("n", "<leader>ff", ":FzfLua files<CR>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap("n", "<leader>fw", ":FzfLua live_grep<CR>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap("n", "<leader>b", ":FzfLua buffers<CR>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua lgrep_curbuf<CR>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap("n", "<leader>L", ":FzfLua lines<CR>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap("n", "<leader>'", ":FzfLua marks<CR>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap("n", "<leader>H", ":FzfLua help_tags<CR>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap("n", "<leader>k", ":FzfLua keymaps<CR>", { noremap = true, silent = true })
-				-- calling `setup` is optional for customization
-				require("fzf-lua").setup({
-					winopts = {
-						width = 1,
-						height = 1,
-						border = "none",
-					},
-				})
-			end,
-		},
+		"ibhagwan/fzf-lua",
+		event = "VeryLazy",
+		enabled = true,
+		-- optional for icon support
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		-- cmd = "FzfLua",
+		config = function()
+			-- Map keybindings
+			vim.api.nvim_set_keymap("n", "<M-d>", ":FzfLua files<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<M-o>", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>o", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>ff", ":FzfLua files<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>fw", ":FzfLua live_grep<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>b", ":FzfLua buffers<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua lgrep_curbuf<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>L", ":FzfLua lines<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>'", ":FzfLua marks<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>H", ":FzfLua help_tags<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>k", ":FzfLua keymaps<CR>", { noremap = true, silent = true })
+			-- calling `setup` is optional for customization
+			require("fzf-lua").setup({
+				winopts = {
+					width = 1,
+					height = 1,
+					border = "none",
+				},
+			})
+		end,
 	},
 	{
 		"nvim-focus/focus.nvim",
@@ -496,17 +474,7 @@ local plugins = {
 			keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
 		},
 	},
-	-- starter window : some problem with buffer close
-
-	-- Better Around/Inside textobjects
-	--
-	-- Examples:
-	--  - va)  - [V]isually select [A]round [)]paren
-	--  - yinq - [Y]ank [I]nside [N]ext [']quote
-	--  - ci'  - [C]hange [I]nside [']quote
-	--  : very useful
 	{ "echasnovski/mini.ai", version = "*", event = "VeryLazy", opts = {} },
-	-- fzf search
 	{
 		"junegunn/fzf.vim",
 		enabled = false,
@@ -515,13 +483,10 @@ local plugins = {
 		dependencies = "junegunn/fzf",
 		opts = require("custom.configs.fzf_vim"),
 	},
-
 	{ "echasnovski/mini.move", version = "*" },
-	-- creates missing directories on saving a file : very useful
 	{
 		"jghauser/mkdir.nvim",
 	},
-	-- stops inactive LSP clients to free RAM : very useful
 	{
 		"zeioth/garbage-day.nvim",
 
@@ -532,13 +497,8 @@ local plugins = {
 			-- your options here
 		},
 	},
-	-- show code context in first line of buffer : very useful
 	{ "nvim-treesitter/nvim-treesitter-context", cmd = "TSContextEnable", opts = { mode = "cursor", max_lines = 3 } },
-	-- some other implementation of fzf in neovim with telescope : not really useful
-
 	{ "deathbeam/lspecho.nvim", enabled = false, event = "VeryLazy", opts = {} },
-	-- better remove buffer : very useful
-
 	{
 		"echasnovski/mini.bufremove",
 		keys = {
@@ -570,8 +530,6 @@ local plugins = {
 			},
 		},
 	},
-	-- note plugin to be like orgmode in emacs : useful
-
 	{
 		"nvim-neorg/neorg",
 		-- enabled = false,
