@@ -205,7 +205,6 @@ local plugins = {
 		"echasnovski/mini.hipatterns",
 		version = "*",
 	},
-	-- better quickfix window : little used
 	{ "yorickpeterse/nvim-pqf", opts = {}, event = "VeryLazy" },
 	{
 		"SR-Mystar/yazi.nvim",
@@ -607,6 +606,7 @@ local plugins = {
 				symbol_blacklist = {},
 			}
 
+			local filter
 			if type(filter) == "table" then
 				filter = filter.default
 				if type(filter) == "table" then

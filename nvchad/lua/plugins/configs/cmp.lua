@@ -117,24 +117,24 @@ local options = {
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
-		-- {
-		-- 	name = "buffer",
-		-- 	option = {
-		-- 		indexing_interval = 1000,
-		-- 		get_bufnrs = function()
-		-- 			return vim.api.nvim_list_bufs()
-		-- 		end,
-		-- 	},
-		-- },
+		{
+			name = "buffer",
+			option = {
+				indexing_interval = 1000,
+				get_bufnrs = function()
+					return vim.api.nvim_list_bufs()
+				end,
+			},
+		},
 		{ name = "nvim_lua" },
 		{ name = "path" },
-		{ name = "rg", keyword_length = 2 },
+		-- { name = "rg", keyword_length = 3 },
 		{ name = "nvim_lsp_signature_help" },
 	},
 	experimental = {
-		ghost_text = {
-			hl_group = "CmpGhostText",
-		},
+		-- ghost_text = {
+		-- 	hl_group = "CmpGhostText",
+		-- },
 	},
 	sorting = defaults.sorting,
 }
@@ -142,5 +142,5 @@ local options = {
 if cmp_style ~= "atom" and cmp_style ~= "atom_colored" then
 	options.window.completion.border = border("CmpBorder")
 end
-vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+-- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 return options

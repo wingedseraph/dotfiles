@@ -204,7 +204,6 @@ local default_plugins = {
 				"hrsh7th/cmp-buffer",
 				"hrsh7th/cmp-path",
 				"lukas-reineke/cmp-rg",
-				"hrsh7th/cmp-cmdline",
 				"hrsh7th/cmp-nvim-lsp-signature-help",
 				-- "Exafunction/codeium.nvim",
 				-- "capaj/vscode-standardjs-snippets",
