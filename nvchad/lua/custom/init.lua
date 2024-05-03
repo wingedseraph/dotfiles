@@ -199,8 +199,6 @@ vim.api.nvim_set_keymap("n", "<leader>rc", "<cmd>lua require('base46').load_all_
 --     ]],
 -- 	false
 -- )
--- TODO: fix close all folds at buffer start and make work alt+d in alacritty terminal shell
--- 			vim.cmd('require("ufo").closeAllFolds()')
 vim.g["diagnostics_active"] = true
 function Toggle_diagnostics()
 	if vim.g.diagnostics_active then
@@ -230,6 +228,16 @@ vim.g.markdown_folding = 1 -- Use folding by heading in markdown files
 vim.opt.fillchars = { fold = " " }
 
 if vim.fn.has("nvim-0.10") == 1 then
-	vim.o.foldtext = "" -- Use underlying text with its highlighting
+	-- vim.o.foldtext = "" -- Use underlying text with its highlighting
+	function _G.foldtext()
+		local line_count = vim.v.foldend - vim.v.foldstart + 1
+		local first_line = vim.trim(vim.fn.getline(vim.v.foldstart))
+		local indent_level = vim.v.foldlevel - 1
+		local indent = string.rep(" ", indent_level * 2)
+		return indent .. "  " .. first_line .. " [" .. line_count .. " lines] "
+	end
+
+	vim.opt.foldtext = "v:lua.foldtext()"
 end
 vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>copen<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>fz", "<cmd>FzfLua<cr>", { noremap = true, silent = true })

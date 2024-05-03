@@ -62,6 +62,9 @@ M.override = {
   CmpItemKindStructure = { fg = "none", bg = "none" },
   CmpItemKindIdentifier = { fg = "none", bg = "none" },
   CmpItemKindModule = { fg = "none", bg = "none" },
+  HoverNormal    = { fg = "none", bg = "none" },
+  HoverBorder    = { fg = "none", bg = "none" },
+
 }
 --stylua: ignore
 ---@type HLTable

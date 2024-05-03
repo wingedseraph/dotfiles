@@ -17,13 +17,9 @@ local default_plugins = {
 		branch = "v2.0",
 		lazy = false,
 		config = function()
-			require("vscode").load()
 			vim.wo.statusline = "%!v:lua.MiniStatusline.active()"
 			require("mini.tabline").setup()
-			-- require("mini.hues").setup({
-			-- 	background = "#10262c",
-			-- 	foreground = "#c0c8cb",
-			-- })
+			-- require("mini.hues").setup({ background = "#10262c", foreground = "#c0c8cb", saturation = "high" }) -- green
 		end,
 	},
 

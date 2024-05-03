@@ -165,7 +165,6 @@ local plugins = {
 	},
 	{
 		"SmiteshP/nvim-navbuddy",
-		event = "VeryLazy",
 		opts = {
 			lsp = { auto_attach = true },
 			source_buffer = {
@@ -204,24 +203,7 @@ local plugins = {
 	{ "andersevenrud/nvim_context_vt", opts = {}, ft = "html" },
 	{
 		"echasnovski/mini.hipatterns",
-		event = "VeryLazy",
 		version = "*",
-		config = function()
-			require("mini.hipatterns").setup()
-			local hipatterns = require("mini.hipatterns")
-			hipatterns.setup({
-				highlighters = {
-					-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
-					fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-					hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
-					todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
-					note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
-
-					-- Highlight hex color strings (`#rrggbb`) using that color
-					hex_color = hipatterns.gen_highlighter.hex_color(),
-				},
-			})
-		end,
 	},
 	-- better quickfix window : little used
 	{ "yorickpeterse/nvim-pqf", opts = {}, event = "VeryLazy" },
@@ -532,40 +514,10 @@ local plugins = {
 		lazy = false,
 		-- event = "VeryLazy",
 		dependencies = "junegunn/fzf",
-		config = function()
-			vim.cmd([[
-      command! -bang -nargs=* BLines
-      \ call fzf#vim#grep(
-      \   'rg --with-filename --column --line-number --no-heading --smart-case . '.fnameescape(expand('%:p')), 1,
-      \   fzf#vim#with_preview({'options': '--layout reverse --query '.shellescape(<q-args>).' --with-nth=4.. --delimiter=":"'}, 'right:50%', 'ctrl-l'))     " \   fzf#vim#with_preview({'options': '--layout reverse  --with-nth=-1.. --delimiter="/"'}, 'right:50%'))
-    ]])
-			-- Map keybindings
-			vim.api.nvim_set_keymap("n", "<M-d>", ":Files<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<M-o>", ":History<CR>", { noremap = true, silent = true })
-
-			vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>fw", ":RG<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>b", ":Buffers<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>o", ":History<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>/", ":BLines<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>L", ":Lines<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>'", ":Marks<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>a", ":AgRaw<space>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>H", ":Helptags!<CR>", { noremap = true, silent = true })
-			-- vim.api.nvim_set_keymap("n", "<leader>c", ":Commands<CR>", { noremap = true, silent = true })
-			-- vim.api.nvim_set_keymap("n", "<leader>:", ":History:<CR>", { noremap = true, silent = true })
-			-- vim.api.nvim_set_keymap("n", "<leader>/", ":History/<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>k", ":Maps<CR>", { noremap = true, silent = true })
-			-- vim.api.nvim_set_keymap("n", "<leader>s", ":Filetypes<CR>", { noremap = true, silent = true })
-
-			-- Search hidden
-			vim.cmd([[
-  command! -bang -nargs=? -complete=dir AllFiles call fzf#run(fzf#wrap('allfiles', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --no-ignore' }), <bang>0))
-]])
-			vim.api.nvim_set_keymap("n", "<leader>F", ":AllFiles <CR>", { noremap = true, silent = true })
-		end,
+		opts = require("custom.configs.fzf_vim"),
 	},
 
+	{ "echasnovski/mini.move", version = "*" },
 	-- creates missing directories on saving a file : very useful
 	{
 		"jghauser/mkdir.nvim",
@@ -643,6 +595,33 @@ local plugins = {
 				},
 			},
 		},
+	},
+	{
+		"hedyhli/outline.nvim",
+		keys = { { "<leader>cs", "<cmd>Outline<cr>", desc = "Toggle Outline" } },
+		cmd = "Outline",
+		opts = function()
+			local defaults = require("outline.config").defaults
+			local opts = {
+				symbols = {},
+				symbol_blacklist = {},
+			}
+
+			if type(filter) == "table" then
+				filter = filter.default
+				if type(filter) == "table" then
+					for kind, symbol in pairs(defaults.symbols) do
+						opts.symbols[kind] = {
+							hl = symbol.hl,
+						}
+						if not vim.tbl_contains(filter, kind) then
+							table.insert(opts.symbol_blacklist, kind)
+						end
+					end
+				end
+			end
+			return opts
+		end,
 	},
 }
 

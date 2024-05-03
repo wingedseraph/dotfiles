@@ -1,6 +1,6 @@
 if vim.bo.filetype ~= "markdown" then
 	vim.highlight.priorities.semantic_tokens = 95
-	require("nvim-treesitter")
+	-- vim.cmd(" silent TSEnable highlight")
 end
 
 require("neorg")
@@ -18,4 +18,9 @@ require("mkdir")
 require("sniprun")
 require("vim-be-good")
 require("yazi").setup()
+-- require("vscode").load()
 vim.notify("bootstrap")
+require("nvim-navbuddy")
+-------------------------------------
+-----------function_call-------------
+-------------------------------------

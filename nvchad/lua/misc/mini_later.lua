@@ -1,4 +1,5 @@
-opts = function()
+local function mini_ai()
+	require("mini.ai").setup()
 	local ai = require("mini.ai")
 	return {
 		n_lines = 500,
@@ -33,5 +34,31 @@ opts = function()
 		},
 	}
 end
-require("mini.ai").setup({ opts })
 -- require("mini.cursorword").setup()
+local function mini_hi()
+	require("mini.hipatterns").setup()
+	local hipatterns = require("mini.hipatterns")
+	hipatterns.setup({
+		highlighters = {
+			-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+			fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+			hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+			todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
+			note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
+
+			-- Highlight hex color strings (`#rrggbb`) using that color
+			hex_color = hipatterns.gen_highlighter.hex_color(),
+		},
+	})
+end
+-------------------------------------
+-----------function_call-------------
+-------------------------------------
+mini_ai()
+mini_hi()
+
+-------------------------------------
+---------------require---------------
+-------------------------------------
+-- require("mini.hues").setup({ background = "#10262c", foreground = "#c0c8cb", saturation = "high" }) -- green
+require("mini.move").setup()

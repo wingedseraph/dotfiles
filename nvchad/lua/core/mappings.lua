@@ -206,8 +206,7 @@ M.lspconfig = {
 
 		["gr"] = {
 			function()
-				-- vim.lsp.buf.references()
-				require("trouble").toggle("lsp_references")
+				vim.lsp.buf.references()
 			end,
 			"LSP references",
 		},
@@ -236,9 +235,8 @@ M.lspconfig = {
 		["<leader>q"] = {
 			function()
 				vim.diagnostic.setloclist()
-				-- require("trouble").toggle()
 			end,
-			"Diagnostic setloclist trouble",
+			"Diagnostic setloclist ",
 		},
 
 		["<leader>wa"] = {
