@@ -162,26 +162,6 @@ function lazy()
 	end)
 
 	later(function()
-		require("mini.completion").setup({
-			lsp_completion = {
-				source_func = "omnifunc",
-				auto_setup = true,
-				process_items = function(items, base)
-					-- Don't show 'Text' and 'Snippet' suggestions
-					items = vim.tbl_filter(function(x)
-						return x.kind ~= 1 and x.kind ~= 15
-					end, items)
-					return MiniCompletion.default_process_items(items, base)
-				end,
-			},
-			window = {
-				info = { border = "double" },
-				signature = { border = "double" },
-			},
-		})
-	end)
-
-	later(function()
 		local hipatterns = require("mini.hipatterns")
 		local hi_words = MiniExtra.gen_highlighter.words
 		hipatterns.setup({
@@ -194,18 +174,6 @@ function lazy()
 				hex_color = hipatterns.gen_highlighter.hex_color(),
 			},
 		})
-	end)
-
-	later(function()
-		require("mini.indentscope").setup()
-	end)
-
-	later(function()
-		require("mini.jump").setup()
-	end)
-	-- tryout
-	later(function()
-		require("mini.jump2d").setup({ view = { dim = true } })
 	end)
 
 	later(function()
@@ -284,9 +252,14 @@ function lazy()
 	end)
 
 	-- Language server configurations
-	later(function()
+	now(function()
 		add("neovim/nvim-lspconfig")
 		source("plugins/nvim-lspconfig.lua")
+	end)
+	-- cmp
+	now(function()
+		add("hrsh7th/nvim-cmp")
+		source("plugins/cmp.lua")
 	end)
 
 	-- Snippets
@@ -295,19 +268,35 @@ function lazy()
 		local src_file = vim.fn.has("nvim-0.10") == 1 and "my_snippets.lua" or "plugins/luasnip.lua"
 		source(src_file)
 	end)
+	later(function()
+		add("saadparwaiz1/cmp_luasnip")
+		add("hrsh7th/cmp-nvim-lua")
+		add("hrsh7th/cmp-nvim-lsp")
+		add("hrsh7th/cmp-buffer")
+		add("hrsh7th/cmp-path")
+		add("windwp/nvim-autopairs")
+		add("lukas-reineke/cmp-rg")
+		add("hrsh7th/cmp-nvim-lsp-signature-help")
+	end)
 
-	---------------------------------------
-	-------------------FZF-----------------
-	---------------------------------------
+	-- Fzf
 	later(function()
 		add("ibhagwan/fzf-lua")
 		source("plugins/fzf.lua")
 	end)
+
+	-- Yazi
 	later(function()
 		add("SR-Mystar/yazi.nvim")
 		source("plugins/yazi.lua")
 	end)
 
+	-- better quickfix
+	later(function()
+		add("yorickpeterse/nvim-pqf")
+		require("pqf").setup()
+	end)
+	-- multicursor
 	later(function()
 		add("mg979/vim-visual-multi")
 	end)
@@ -321,7 +310,7 @@ vim.api.nvim_exec(
 
 vim.api.nvim_exec(
 	[[
-        autocmd BufEnter * silent! lua vim.defer_fn(function() vim.cmd('LspStart') end, 253)
+        autocmd BufEnter * silent! lua vim.defer_fn(function() vim.cmd('LspStart') end, 23)
     ]],
 	false
 )

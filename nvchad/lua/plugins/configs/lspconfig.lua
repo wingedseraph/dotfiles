@@ -1,5 +1,6 @@
 dofile(vim.g.base46_cache .. "lsp")
 require("nvchad.lsp")
+local lspconfig = require("lspconfig")
 
 local M = {}
 local utils = require("core.utils")
@@ -41,7 +42,7 @@ M.capabilities.textDocument.completion.completionItem = {
 	},
 }
 
-require("lspconfig").lua_ls.setup({
+lspconfig.lua_ls.setup({
 	on_attach = M.on_attach,
 	capabilities = M.capabilities,
 

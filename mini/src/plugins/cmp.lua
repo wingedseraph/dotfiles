@@ -1,36 +1,5 @@
 local cmp = require("cmp")
-local lspkind = require("lspkind")
-dofile(vim.g.base46_cache .. "cmp")
-
-local cmp_ui = require("core.utils").load_config().ui.cmp
-local cmp_style = cmp_ui.style
 local defaults = require("cmp.config.default")()
--- local field_arrangement = {
--- 	atom = { "kind", "abbr", "menu" },
--- 	atom_colored = { "kind", "abbr", "menu" },
--- }
-
-local formatting_style = {
-	-- default fields order i.e completion word + item.kind + item.kind icons
-	fields = { "abbr", "kind", "menu" },
-	-- fields = field_arrangement[cmp_style] or { "kind", "menu" },
-
-	format = function(_, item)
-		local icons = require("nvchad.icons.lspkind")
-		local icon = (cmp_ui.icons and icons[item.kind]) or ""
-
-		if cmp_style == "atom" or cmp_style == "atom_colored" then
-			-- icon = " " .. icon .. " "
-			item.menu = cmp_ui.lspkind_text and "   (" .. item.kind .. ")" or ""
-			item.kind = icon
-		else
-			icon = cmp_ui.lspkind_text and (" " .. icon .. " ") or icon
-			item.kind = string.format("%s %s", icon, cmp_ui.lspkind_text and item.kind or "")
-		end
-
-		return item
-	end,
-}
 
 local function border(hl_name)
 	return {
@@ -59,7 +28,7 @@ local options = {
 		completion = {
 			-- side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
 			-- winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
-			winblend = 10,
+			-- winblend = 10,
 			scrollbar = false,
 		},
 		documentation = {
@@ -76,15 +45,8 @@ local options = {
 		end,
 	},
 
-	formatting = formatting_style,
-	-- formatting = {
-	-- 	format = lspkind.cmp_format({
-	-- 		mode = "symbol_text", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
-	-- 		maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-	-- 		ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-	-- 		show_labelDetails = true, -- show labelDetails in menu. Disabled by default
-	-- 	}),
-	-- },
+	-- formatting = formatting_style,
+
 	mapping = {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 		["<C-n>"] = cmp.mapping.select_next_item(),
@@ -139,15 +101,12 @@ local options = {
 		{ name = "nvim_lsp_signature_help" },
 	},
 	experimental = {
-		ghost_text = {
-			hl_group = "CmpGhostText",
-		},
+		-- ghost_text = {
+		-- 	hl_group = "CmpGhostText",
+		-- },
 	},
 	sorting = defaults.sorting,
 }
 
--- if cmp_style ~= "atom" and cmp_style ~= "atom_colored" then
--- 	options.window.completion.border = border("CmpBorder")
--- end
-vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-return options
+-- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+require("cmp").setup(options)

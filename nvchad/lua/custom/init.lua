@@ -225,7 +225,6 @@ vim.o.foldmethod = "indent" -- Set 'indent' folding method
 vim.o.foldlevel = 1 -- Display all folds except top ones
 vim.o.foldnestmax = 10 -- Create folds only for some number of nested levels
 vim.g.markdown_folding = 1 -- Use folding by heading in markdown files
-vim.opt.fillchars = { fold = " " }
 
 if vim.fn.has("nvim-0.10") == 1 then
 	-- vim.o.foldtext = "" -- Use underlying text with its highlighting
@@ -240,8 +239,8 @@ if vim.fn.has("nvim-0.10") == 1 then
 	vim.opt.foldtext = "v:lua.foldtext()"
 end
 vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>copen<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fz", "<cmd>FzfLua<cr>", { noremap = true, silent = true })
 vim.o.fillchars = table.concat({
+	"fold: ",
 	"eob: ",
 	"horiz:═",
 	"horizdown:╦",
@@ -251,3 +250,15 @@ vim.o.fillchars = table.concat({
 	"vertleft:╣",
 	"vertright:╠",
 }, ",")
+vim.o.winblend = 10 -- Make floating windows slightly transparent
+
+function read()
+	require("zen-mode").toggle()
+	vim.cmd("FSRead")
+	vim.cmd("set conceallevel=3")
+	vim.cmd("TSEnable highlight")
+	vim.o.foldlevel = 20 -- Display all folds except top ones
+	vim.cmd("set wrap")
+	-- find utils to convert epub and pdf to markdown
+end
+vim.api.nvim_set_keymap("n", "<leader>re", "<cmd>lua read()<cr>", { noremap = true, silent = true })

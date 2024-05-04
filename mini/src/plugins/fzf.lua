@@ -11,8 +11,6 @@ vim.api.nvim_set_keymap("n", "<leader>'", ":FzfLua marks<CR>", { noremap = true,
 vim.api.nvim_set_keymap("n", "<leader>H", ":FzfLua help_tags<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>k", ":FzfLua keymaps<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>fz", "<cmd>FzfLua<cr>", { noremap = true, silent = true })
--- calling `setup` is optional for customization
-
 require("fzf-lua").setup({
 	winopts = {
 		width = 1,

@@ -21,6 +21,7 @@ require("yazi").setup()
 -- require("vscode").load()
 vim.notify("bootstrap")
 require("nvim-navbuddy")
+require("plugins.configs.lspconfig")
 -------------------------------------
 -----------function_call-------------
 -------------------------------------

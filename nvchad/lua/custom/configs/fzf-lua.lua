@@ -12,11 +12,6 @@ vim.api.nvim_set_keymap("n", "<leader>H", ":FzfLua help_tags<CR>", { noremap = t
 vim.api.nvim_set_keymap("n", "<leader>k", ":FzfLua keymaps<CR>", { noremap = true, silent = true })
 -- calling `setup` is optional for customization
 require("fzf-lua").setup({
-	-- keymap = {
-	-- 	fzf = {
-	-- 		["alt-Q"] = "select-all+accept",
-	-- 	},
-	-- },
 	winopts = {
 		width = 1,
 		height = 1,

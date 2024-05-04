@@ -17,6 +17,24 @@ local plugins = {
 		end, -- Override to setup mason-lspconfig
 	},
 	{
+		"folke/zen-mode.nvim",
+		event = "VeryLazy",
+		opts = {
+			window = {
+				width = 90, -- width of the Zen window
+				height = 1, -- height of the Zen window
+			},
+			plugins = {
+				tmux = { enabled = true }, -- disables the tmux statusline
+				wezterm = {
+					enabled = false,
+					-- can be either an absolute font size or the number of incremental steps
+					font = "+4", -- (10% increase per step)
+				},
+			},
+		},
+	},
+	{
 		"stevearc/conform.nvim",
 		enabled = true,
 		event = "VeryLazy",
@@ -159,6 +177,7 @@ local plugins = {
 			options = { try_as_border = true },
 		},
 	},
+	{ "onsails/lspkind.nvim" },
 	{
 		"SmiteshP/nvim-navbuddy",
 		opts = {
@@ -315,6 +334,7 @@ local plugins = {
 	{ "Mofiqul/vscode.nvim" },
 	{
 		"declancm/cinnamon.nvim",
+		enabled = false,
 		event = "VeryLazy",
 		opts = {},
 	},
@@ -399,15 +419,14 @@ local plugins = {
 			-- })
 		end,
 	},
+	-- change
+	-- local re = cur:match("[%w\128-\255']+")
+	{ "nullchilly/fsread.nvim", cmd = "FSRead" },
 	{
 		"ibhagwan/fzf-lua",
-		event = "VeryLazy",
-		enabled = true,
-		-- optional for icon support
+		lazy = false,
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		-- cmd = "FzfLua",
 		config = function()
-			-- Map keybindings
 			vim.api.nvim_set_keymap("n", "<M-d>", ":FzfLua files<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<M-o>", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<leader>o", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
@@ -419,7 +438,8 @@ local plugins = {
 			vim.api.nvim_set_keymap("n", "<leader>'", ":FzfLua marks<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<leader>H", ":FzfLua help_tags<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<leader>k", ":FzfLua keymaps<CR>", { noremap = true, silent = true })
-			-- calling `setup` is optional for customization
+			vim.api.nvim_set_keymap("n", "<leader>fz", "<cmd>FzfLua<cr>", { noremap = true, silent = true })
+
 			require("fzf-lua").setup({
 				winopts = {
 					width = 1,

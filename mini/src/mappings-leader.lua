@@ -49,49 +49,20 @@ nmap_leader('em', '<Cmd>lua MiniFiles.open(vim.fn.stdpath("data").."/site/pack/d
 nmap_leader('ep', '<Cmd>lua MiniFiles.open(vim.fn.stdpath("data").."/site/pack/deps/opt")<CR>',             'Plugins directory')
 nmap_leader('eq', '<Cmd>lua Config.toggle_quickfix()<CR>',                                                  'Quickfix')
 
--- f is for 'fuzzy find'
-nmap_leader('f/', '<Cmd>Pick history scope="/"<CR>',                 '"/" history')
-nmap_leader('f:', '<Cmd>Pick history scope=":"<CR>',                 '":" history')
-nmap_leader('fa', '<Cmd>Pick git_hunks scope="staged"<CR>',          'Added hunks (all)')
-nmap_leader('fA', '<Cmd>Pick git_hunks path="%" scope="staged"<CR>', 'Added hunks (current)')
-nmap_leader('fb', '<Cmd>Pick buffers<CR>',                           'Buffers')
-nmap_leader('fc', '<Cmd>Pick git_commits<CR>',                       'Commits (all)')
-nmap_leader('fC', '<Cmd>Pick git_commits path="%"<CR>',              'Commits (current)')
-nmap_leader('fd', '<Cmd>Pick diagnostic scope="all"<CR>',            'Diagnostic workspace')
-nmap_leader('fD', '<Cmd>Pick diagnostic scope="current"<CR>',        'Diagnostic buffer')
-nmap_leader('ff', '<Cmd>Pick files<CR>',                             'Files')
-nmap_leader('fg', '<Cmd>Pick grep_live<CR>',                         'Grep live')
-nmap_leader('fG', '<Cmd>Pick grep pattern="<cword>"<CR>',            'Grep current word')
-nmap_leader('fh', '<Cmd>Pick help<CR>',                              'Help tags')
-nmap_leader('fH', '<Cmd>Pick hl_groups<CR>',                         'Highlight groups')
-nmap_leader('fl', '<Cmd>Pick buf_lines scope="all"<CR>',             'Lines (all)')
-nmap_leader('fL', '<Cmd>Pick buf_lines scope="current"<CR>',         'Lines (current)')
-nmap_leader('fm', '<Cmd>Pick git_hunks<CR>',                         'Modified hunks (all)')
-nmap_leader('fM', '<Cmd>Pick git_hunks path="%"<CR>',                'Modified hunks (current)')
-nmap_leader('fr', '<Cmd>Pick resume<CR>',                            'Resume')
-nmap_leader('fR', '<Cmd>Pick lsp scope="references"<CR>',            'References (LSP)')
-nmap_leader('fs', '<Cmd>Pick lsp scope="workspace_symbol"<CR>',      'Symbols workspace (LSP)')
-nmap_leader('fS', '<Cmd>Pick lsp scope="document_symbol"<CR>',       'Symbols buffer (LSP)')
-nmap_leader('fv', '<Cmd>Pick visit_paths cwd=""<CR>',                'Visit paths (all)')
-nmap_leader('fV', '<Cmd>Pick visit_paths<CR>',                       'Visit paths (cwd)')
-
 -- g is for git
 -- nmap_leader('gA', '<Cmd>lua require("gitsigns").stage_buffer()<CR>',        'Add buffer')
 -- nmap_leader('ga', '<Cmd>lua require("gitsigns").stage_hunk()<CR>',          'Add (stage) hunk')
 nmap_leader('gb', '<Cmd>lua require("gitsigns").blame_line()<CR>',          'Blame line')
-nmap_leader('gg', '<Cmd>lua Config.open_lazygit()<CR>',                     'Git tab')
+nmap_leader('lg', '<Cmd>Lazygit<CR>',                     'Git tab')
 nmap_leader('gp', '<Cmd>lua require("gitsigns").preview_hunk_inline()<CR>', 'Preview hunk')
-nmap_leader('go', '<Cmd>lua MiniDiff.toggle_overlay()<CR>',                 'Toggle overlay')
 nmap_leader('gq', '<Cmd>lua require("gitsigns").setqflist()<CR>:copen<CR>', 'Quickfix hunks')
 -- nmap_leader('gu', '<Cmd>lua require("gitsigns").undo_stage_hunk()<CR>',     'Undo stage hunk')
 -- nmap_leader('gx', '<Cmd>lua require("gitsigns").reset_hunk()<CR>',          'Discard (reset) hunk')
 -- nmap_leader('gX', '<Cmd>lua require("gitsigns").reset_buffer()<CR>',        'Discard (reset) buffer')
 
 -- l is for 'LSP' (Language Server Protocol)
-local formatting_cmd = '<Cmd>lua require("conform").format({ lsp_fallback = true })<CR>'
 nmap_leader('la', '<Cmd>lua vim.lsp.buf.signature_help()<CR>', 'Arguments popup')
 nmap_leader('ld', '<Cmd>lua vim.diagnostic.open_float()<CR>',  'Diagnostics popup')
-nmap_leader('lf', formatting_cmd,                              'Format')
 nmap_leader('li', '<Cmd>lua vim.lsp.buf.hover()<CR>',          'Information')
 nmap_leader('lj', '<Cmd>lua vim.diagnostic.goto_next()<CR>',   'Next diagnostic')
 nmap_leader('lk', '<Cmd>lua vim.diagnostic.goto_prev()<CR>',   'Prev diagnostic')
@@ -99,7 +70,6 @@ nmap_leader('lR', '<Cmd>lua vim.lsp.buf.references()<CR>',     'References')
 nmap_leader('lr', '<Cmd>lua vim.lsp.buf.rename()<CR>',         'Rename')
 nmap_leader('ls', '<Cmd>lua vim.lsp.buf.definition()<CR>',     'Source definition')
 
-xmap_leader('lf', formatting_cmd,                              'Format selection')
 
 -- L is for 'Lua'
 nmap_leader('Lc', '<Cmd>lua Config.log_clear()<CR>',               'Clear log')
@@ -107,13 +77,6 @@ nmap_leader('LL', '<Cmd>luafile %<CR><Cmd>echo "Sourced lua"<CR>', 'Source buffe
 nmap_leader('Ls', '<Cmd>lua Config.log_print()<CR>',               'Show log')
 nmap_leader('Lx', '<Cmd>lua Config.execute_lua_line()<CR>',        'Execute `lua` line')
 
--- m is for 'map'
-nmap_leader('mc', '<Cmd>lua MiniMap.close()<CR>',        'Close')
-nmap_leader('mf', '<Cmd>lua MiniMap.toggle_focus()<CR>', 'Focus (toggle)')
-nmap_leader('mo', '<Cmd>lua MiniMap.open()<CR>',         'Open')
-nmap_leader('mr', '<Cmd>lua MiniMap.refresh()<CR>',      'Refresh')
-nmap_leader('ms', '<Cmd>lua MiniMap.toggle_side()<CR>',  'Side (toggle)')
-nmap_leader('mt', '<Cmd>lua MiniMap.toggle()<CR>',       'Toggle')
 
 -- o is for 'other' rewrite from o to other command
 -- local trailspace_toggle_command = '<Cmd>lua vim.b.minitrailspace_disable = not vim.b.minitrailspace_disable<CR>'
@@ -127,23 +90,7 @@ nmap_leader('mt', '<Cmd>lua MiniMap.toggle()<CR>',       'Toggle')
 -- nmap_leader('oT', trailspace_toggle_command,                 'Trailspace hl toggle')
 -- nmap_leader('oz', '<Cmd>lua MiniMisc.zoom()<CR>',          'Zoom toggle')
 
--- r is for 'R'
--- - Mappings starting with `T` send commands to current neoterm buffer, so
---   some sort of R interpreter should already run there
-nmap_leader('rc', '<Cmd>T devtools::check()<CR>',                   'Check')
-nmap_leader('rC', '<Cmd>T devtools::test_coverage()<CR>',           'Coverage')
-nmap_leader('rd', '<Cmd>T devtools::document()<CR>',                'Document')
-nmap_leader('ri', '<Cmd>T devtools::install(keep_source=TRUE)<CR>', 'Install')
-nmap_leader('rk', '<Cmd>T rmarkdown::render("%")<CR>',              'Knit file')
-nmap_leader('rl', '<Cmd>T devtools::load_all()<CR>',                'Load all')
-nmap_leader('rT', '<Cmd>T testthat::test_file("%")<CR>',            'Test file')
-nmap_leader('rt', '<Cmd>T devtools::test()<CR>',                    'Test')
 
--- - Copy to clipboard and make reprex (which itself is loaded to clipboard)
-xmap_leader('rx', '"+y :T reprex::reprex()<CR>',                    'Reprex selection')
-
--- s is for 'send' (Send text to neoterm buffer)
-nmap_leader('s', '<Cmd>TREPLSendLine<CR>j', 'Send to terminal')
 
 -- - In simple visual mode send text and move to the last character in
 --   selection and move to the right. Otherwise (like in line or block visual
@@ -151,13 +98,6 @@ nmap_leader('s', '<Cmd>TREPLSendLine<CR>j', 'Send to terminal')
 local send_selection_cmd = [[mode() ==# "v" ? ":TREPLSendSelection<CR>`>l" : ":TREPLSendSelection<CR>'>j"]]
 xmap_leader('s', send_selection_cmd, 'Send to terminal', { expr = true })
 
--- t is for 'terminal' (uses 'neoterm') and 'minitest'
-nmap_leader('ta', '<Cmd>lua MiniTest.run()<CR>',                       'Test run all')
-nmap_leader('tf', '<Cmd>lua MiniTest.run_file()<CR>',                  'Test run file')
-nmap_leader('tl', '<Cmd>lua MiniTest.run_at_location()<CR>',           'Test run location')
-nmap_leader('ts', '<Cmd>lua Config.minitest_screenshots.browse()<CR>', 'Test show screenshot')
-nmap_leader('tT', '<Cmd>belowright Tnew<CR>',                          'Terminal (horizontal)')
-nmap_leader('tt', '<Cmd>vertical Tnew<CR>',                            'Terminal (vertical)')
 
 -- T is for 'test'
 nmap_leader('TF', '<Cmd>TestFile -strategy=make | copen<CR>',    'File (quickfix)')
