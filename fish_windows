@@ -62,8 +62,9 @@ bind \en 'yazi'
 
 
 # alias nvr='py /home/genie/.local/lib/python3.11/site-packages/nvr/nvr.py'
+alias N='nvim -c "lua toggle_minimal()"'
 alias o='nvim -c "lua setupHistory()"'
-# alias man='tldr'
+alias man_='tldr'
 alias ra='lf'
 alias pw='powershell.exe'
 alias gi='git clone'
@@ -194,21 +195,6 @@ cd $current_dir
 sudo chmod 600 ~/.ssh/id_rsa
 sudo chmod 600 ~/.ssh/id_rsa.pub
 end
-  
-function se 
-  echo "Enter the date (e.g., Mar 18, Apr  1):"
-  read date
-  echo "Files modified on $date:"
-find /mnt/c/SteamLibrary/steamapps/workshop/content/108600 -type d -name .git -prune -o -type f -exec ls -lt {} + | grep $date
-  echo "Do you want to open these files in Neovim? (y/n)"
-    read open_files
-      if test "$open_files" = "y"
-          find /mnt/c/SteamLibrary/steamapps/workshop/content/108600 -type d -name .git -prune -o -type f -exec ls -lt {} + | grep $date | awk '{print $NF}' | xargs -d '\n' nvim
-      else
-          echo "Files not opened."
-      end
-end
-
 
 function manfzf
   printf "Enter search term: "
