@@ -3,7 +3,7 @@ local g = vim.g
 local config = require("core.utils").load_config()
 
 -------------------------------------- globals -----------------------------------------
-g.nvchad_theme = config.ui.theme
+-- g.nvchad_theme = config.ui.theme
 g.base46_cache = vim.fn.stdpath("data") .. "/nvchad/base46/"
 g.toggle_theme_icon = ""
 -- g.toggle_theme_icon = "   "
@@ -13,7 +13,6 @@ g.transparency = config.ui.transparency
 opt.laststatus = 2 -- global statusline
 opt.showmode = true
 
-opt.clipboard = "unnamedplus"
 opt.cursorline = false
 
 -- Indenting
@@ -177,10 +176,3 @@ autocmd("BufWritePost", {
 -- vim.opt.complete:remove("t") -- Don't use tags for completion
 --
 -- vim.o.dictionary = vim.fn.stdpath("config") .. "lua/misc/dict/english.txt" -- Use specific dictionaries
-
--------------------------------------- commands ------------------------------------------
-local new_cmd = vim.api.nvim_create_user_command
-
-new_cmd("NvChadUpdate", function()
-	require("nvchad.updater")()
-end, {})

@@ -1,9 +1,18 @@
+-- @filetypes
 if vim.bo.filetype ~= "markdown" then
 	vim.highlight.priorities.semantic_tokens = 95
-	-- vim.cmd(" silent TSEnable highlight")
+	vim.cmd(" silent TSEnable highlight")
 end
 
-require("neorg")
+if vim.bo.filetype == "html" then
+	vim.cmd("IlluminateResume")
+end
+
+if vim.bo.filetype == "norg" then
+	require("neorg")
+end
+
+-- @require
 require("cmp")
 require("garbage-day.utils").start_lsp()
 require("focus")
@@ -18,10 +27,19 @@ require("mkdir")
 require("sniprun")
 require("vim-be-good")
 require("yazi").setup()
--- require("vscode").load()
-vim.notify("bootstrap")
+require("vscode").load()
 require("nvim-navbuddy")
 require("plugins.configs.lspconfig")
+-- @opt
+vim.opt.clipboard = "unnamedplus"
+
 -------------------------------------
 -----------function_call-------------
 -------------------------------------
+
+-- @vim.cmd
+-- vim.cmd("colorscheme base16-vulcan")
+-- vim.cmd("colorscheme base16-black-metal-dark-funeral")
+
+-- @vim.notify
+vim.notify("bootstrap")

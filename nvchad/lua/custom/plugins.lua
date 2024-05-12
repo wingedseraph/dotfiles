@@ -1,4 +1,7 @@
+-- function path_()
+
 ---@type NvPluginSpec[]
+
 local plugins = {
 	{
 		"neovim/nvim-lspconfig",
@@ -18,7 +21,7 @@ local plugins = {
 	},
 	{
 		"folke/zen-mode.nvim",
-		event = "VeryLazy",
+		cmd = "ZenMode",
 		opts = {
 			window = {
 				width = 90, -- width of the Zen window
@@ -169,6 +172,7 @@ local plugins = {
 			centered_peeking = true, -- Peeked line will be centered relative to window
 		},
 	},
+	{ "psliwka/vim-smoothie", lazy = false },
 	{
 		"echasnovski/mini.indentscope",
 		version = "*",
@@ -177,7 +181,20 @@ local plugins = {
 			options = { try_as_border = true },
 		},
 	},
+	{ "dstein64/vim-startuptime", cmd = "StartupTime" },
+
 	{ "onsails/lspkind.nvim" },
+	{
+		"RRethy/base16-nvim",
+		enabled = false,
+		lazy = false,
+		priority = 1,
+		config = function()
+			-- vim.cmd("colorscheme base16-black-metal-dark-funeral")
+			vim.cmd("colorscheme base16-black-metal")
+		end,
+	},
+
 	{
 		"SmiteshP/nvim-navbuddy",
 		opts = {
@@ -256,14 +273,13 @@ local plugins = {
 	},
 	{
 		"RRethy/vim-illuminate",
-		-- event = "VeryLazy",
 		cmd = "IlluminateResume",
 		config = function()
 			require("illuminate").configure({
 				providers = {
 					"lsp",
-					"treesitter",
-					"regex",
+					-- "treesitter",
+					-- "regex",
 				},
 				filetypes_denylist = {
 					"dirbuf",
@@ -271,7 +287,11 @@ local plugins = {
 					"fugitive",
 				},
 				min_count_to_highlight = 2,
+				under_cursor = true,
+				modes_denylist = { "v", "V", "" },
 			})
+			vim.cmd("hi IlluminatedWordText guibg=#393E4D gui=none")
+			vim.cmd("hi IlluminatedWordRead guibg=#393E4D gui=none")
 		end,
 	},
 	{ "capaj/vscode-standardjs-snippets", ff = { "javascript" } },
@@ -370,6 +390,7 @@ local plugins = {
 	},
 	{
 		"echasnovski/mini.tabline",
+		lazy = false,
 		version = "*",
 		opts = {},
 	},
@@ -378,7 +399,10 @@ local plugins = {
 		version = "*",
 		lazy = false,
 		config = function()
+			require("vscode").load()
+
 			vim.opt.showmode = false
+
 			local statusline = require("mini.statusline")
     --stylua: ignore
     local active = function()
@@ -406,7 +430,7 @@ local plugins = {
         { hl = mode_hl,                  strings = { mode } },
         { hl = 'MiniStatuslineDevinfo',  strings = { git_head, diff, diagnostics } },
         '%<', -- Mark general truncate point
-        { hl = 'MiniStatuslineFilename', strings = { filename } },
+        { hl = 'MiniStatuslineFileinfo', strings = { filename } },
         '%=', -- End left alignment
         { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
         { hl = mode_hl,                  strings = { search, location } },
@@ -417,27 +441,30 @@ local plugins = {
 			-- require("mini.statusline").setup({
 			-- 	use_icons = false,
 			-- })
+			vim.wo.statusline = "%!v:lua.MiniStatusline.active()"
 		end,
 	},
+
 	-- change
 	-- local re = cur:match("[%w\128-\255']+")
 	{ "nullchilly/fsread.nvim", cmd = "FSRead" },
 	{
 		"ibhagwan/fzf-lua",
-		lazy = false,
+		-- lazy = false,
+		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			vim.api.nvim_set_keymap("n", "<M-d>", ":FzfLua files<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<M-o>", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>o", ":FzfLua oldfiles<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>ff", ":FzfLua files<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>fw", ":FzfLua live_grep<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>b", ":FzfLua buffers<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua lgrep_curbuf<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>L", ":FzfLua lines<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>'", ":FzfLua marks<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>H", ":FzfLua help_tags<CR>", { noremap = true, silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>k", ":FzfLua keymaps<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<M-d>", "<cmd>FzfLua files<cr>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<M-o>", "<cmd>FzfLua oldfiles<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>o", "<cmd>FzfLua oldfiles<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>FzfLua files<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>b", "<cmd>FzfLua buffers<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>/", "<cmd>FzfLua lgrep_curbuf<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>L", "<cmd>FzfLua lines<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>'", "<cmd>FzfLua marks<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>H", "<cmd>FzfLua help_tags<CR>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>k", "<cmd>FzfLua keymaps<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<leader>fz", "<cmd>FzfLua<cr>", { noremap = true, silent = true })
 
 			require("fzf-lua").setup({
@@ -445,6 +472,7 @@ local plugins = {
 					width = 1,
 					height = 1,
 					border = "none",
+					preview = { hidden = "hidden" },
 				},
 			})
 		end,
@@ -464,6 +492,7 @@ local plugins = {
 		},
 	},
 	-- float terminal in neovim : very useful
+
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
@@ -483,6 +512,7 @@ local plugins = {
 		},
 	},
 	-- press jj in insert mode to exit : very useful
+	{ "chaoren/vim-wordmotion", event = "VeryLazy" },
 	{
 		"max397574/better-escape.nvim",
 		enabled = true,
@@ -507,6 +537,28 @@ local plugins = {
 	{
 		"jghauser/mkdir.nvim",
 	},
+
+	{
+		"uga-rosa/translate.nvim",
+		event = "VeryLazy",
+		keys = {
+			{ "<leader>tr", "<cmd>Translate ru <CR>", mode = { "n", "v" } },
+			{ "<leader>tR", "<cmd>Translate ru -output=replace<CR>", mode = { "n", "v" } },
+		},
+		opts = {
+			silent = true,
+			preset = {
+				output = {
+					split = {
+						append = true,
+					},
+				},
+			},
+			default = {
+				command = "translate_shell",
+			},
+		},
+	},
 	{
 		"zeioth/garbage-day.nvim",
 
@@ -518,7 +570,6 @@ local plugins = {
 		},
 	},
 	{ "nvim-treesitter/nvim-treesitter-context", cmd = "TSContextEnable", opts = { mode = "cursor", max_lines = 3 } },
-	{ "deathbeam/lspecho.nvim", enabled = false, event = "VeryLazy", opts = {} },
 	{
 		"echasnovski/mini.bufremove",
 		keys = {
@@ -602,5 +653,4 @@ local plugins = {
 		end,
 	},
 }
-
 return plugins

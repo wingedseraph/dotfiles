@@ -26,4 +26,5 @@ vim.api.nvim_set_keymap("n", "<leader>k", ":Maps<CR>", { noremap = true, silent 
 vim.cmd([[
   command! -bang -nargs=? -complete=dir AllFiles call fzf#run(fzf#wrap('allfiles', fzf#vim#with_preview({ 'dir': <q-args>, 'sink': 'e', 'source': 'rg --files --hidden --no-ignore' }), <bang>0))
 ]])
+
 vim.api.nvim_set_keymap("n", "<leader>F", ":AllFiles <CR>", { noremap = true, silent = true })

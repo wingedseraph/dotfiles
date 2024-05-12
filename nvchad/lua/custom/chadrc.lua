@@ -8,7 +8,7 @@ M.ui = {
 	-- new themes only with files on windows:
 	-- jabuti, flexoki,  mito-laser, chadracula-evondev, nano-light, flexoki-light, material-darker, material-lighter
 	-- rosepine-dawn, solarized_osaka,
-	theme = "monochrome",
+	-- theme = "monochrome",
 	theme_toggle = { "solarized_dark", "solarized_dark" },
 
 	hl_override = highlights.override,

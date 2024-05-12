@@ -51,7 +51,7 @@ local options = {
 		completeopt = "noselect,menu,menuone",
 	},
 	performance = {
-		-- debounce = 400,
+		-- debounce = 100,
 		-- throttle = 400,
 		max_view_entries = 8,
 	},
@@ -124,18 +124,22 @@ local options = {
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
-		{
-			name = "buffer",
-			option = {
-				indexing_interval = 1000,
-				get_bufnrs = function()
-					return vim.api.nvim_list_bufs()
-				end,
-			},
-		},
+		-- {
+		-- 	name = "buffer",
+		-- 	option = {
+		-- 		indexing_interval = 1000,
+		-- 		get_bufnrs = function()
+		-- 			return vim.api.nvim_list_bufs()
+		-- 		end,
+		-- 	},
+		-- },
 		{ name = "nvim_lua" },
 		{ name = "path" },
-		-- { name = "rg", keyword_length = 3 },
+		{
+			name = "rg",
+			keyword_length = 3,
+			option = { additional_arguments = "--max-depth 3", debug = true },
+		},
 		{ name = "nvim_lsp_signature_help" },
 	},
 	experimental = {

@@ -12,8 +12,8 @@ M.override = {
 	-- Visual = { bg = "#231942", fg = "white" },
 	-- Visual = { bg = "#4c3743" }, -- from everforest colorscheme
 	-- Visual = { bg = "#cccccc" },
-	Visual = { bg = "#303446" }, -- catpuccin
-	-- Visual = { bg = "#223249" }, -- from tokyonight colorscheme
+	-- Visual = { bg = "#303446" }, -- catpuccin
+	Visual = { bg = "#223249" }, -- from tokyonight colorscheme
 	MoreMsg = { fg = "pink" },
 	-- MatchWord = { bg = "none" },
 	-- MatchParen = { bg = "none" },
@@ -62,6 +62,8 @@ M.override = {
   CmpItemKindStructure = { fg = "none", bg = "none" },
   CmpItemKindIdentifier = { fg = "none", bg = "none" },
   CmpItemKindModule = { fg = "none", bg = "none" },
+  Todo = { fg = "none", bg = "green" },
+  IlluminatedWordRead = {bg='red'},
 
 }
 --stylua: ignore

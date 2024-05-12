@@ -63,7 +63,7 @@ bind \en 'yazi'
 
 # alias nvr='py /home/genie/.local/lib/python3.11/site-packages/nvr/nvr.py'
 alias o='nvim -c "lua setupHistory()"'
-alias man='tldr'
+# alias man='tldr'
 alias ra='lf'
 alias pw='powershell.exe'
 alias gi='git clone'
@@ -101,6 +101,7 @@ end
 
 # ===PATH===
    set -x PATH "$HOME/bin/win-bash-xclip-xsel" $PATH
+   # NEOVIM PATH
    set -gx PATH "/home/genie/.local/bin/nvim-linux64/bin" $PATH
    set -gx PATH "/home/genie/go/bin" $PATH
    set -gx PATH "/home/genie/.local/bin" $PATH
@@ -206,4 +207,11 @@ find /mnt/c/SteamLibrary/steamapps/workshop/content/108600 -type d -name .git -p
       else
           echo "Files not opened."
       end
+end
+
+
+function manfzf
+  printf "Enter search term: "
+  read -l SEARCH_TERM
+  man -k $SEARCH_TERM | fzf --preview="man {1}{2}" | awk '{print $1$2}' | xargs man
 end

@@ -15,10 +15,10 @@ local default_plugins = {
 	{
 		"NvChad/ui",
 		branch = "v2.0",
-		lazy = false,
+
+		-- lazy = false,
 		config = function()
-			vim.wo.statusline = "%!v:lua.MiniStatusline.active()"
-			require("mini.tabline").setup()
+			-- vim.wo.statusline = "%!v:lua.MiniStatusline.active()"
 			-- require("mini.hues").setup({ background = "#10262c", foreground = "#c0c8cb", saturation = "high" }) -- green
 		end,
 	},
@@ -57,10 +57,10 @@ local default_plugins = {
 		-- enabled=false,
 		event = "VeryLazy",
 		opts = function()
-			return { override = require("nvchad.icons.devicons") }
+			-- return { override = require("nvchad.icons.devicons") }
 		end,
 		config = function(_, opts)
-			dofile(vim.g.base46_cache .. "devicons")
+			-- dofile(vim.g.base46_cache .. "devicons")
 			require("nvim-web-devicons").setup(opts)
 		end,
 	},
@@ -85,9 +85,9 @@ local default_plugins = {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		-- event = "BufReadPre",
-		-- event = "BufRead",
+		event = "BufEnter",
 		-- event = "InsertEnter",
-		event = "UIEnter",
+		-- event = "UIEnter",
 		init = function()
 			require("core.utils").lazy_load("nvim-treesitter")
 		end,
@@ -97,7 +97,7 @@ local default_plugins = {
 			return require("plugins.configs.treesitter")
 		end,
 		config = function(_, opts)
-			dofile(vim.g.base46_cache .. "syntax")
+			-- dofile(vim.g.base46_cache .. "syntax")
 			require("nvim-treesitter.configs").setup(opts)
 		end,
 	},

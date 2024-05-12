@@ -1,31 +1,7 @@
 local wezterm = require("wezterm")
 
--- wezterm.on("user-var-changed", function(window, pane, name, value)
--- 	local overrides = window:get_config_overrides() or {}
--- 	if name == "ZEN_MODE" then
--- 		local incremental = value:find("+")
--- 		local number_value = tonumber(value)
--- 		if incremental ~= nil then
--- 			while number_value > 0 do
--- 				window:perform_action(wezterm.action.IncreaseFontSize, pane)
--- 				number_value = number_value - 1
--- 			end
--- 			overrides.enable_tab_bar = false
--- 		elseif number_value < 0 then
--- 			window:perform_action(wezterm.action.ResetFontSize, pane)
--- 			overrides.font_size = nil
--- 			overrides.enable_tab_bar = true
--- 		else
--- 			overrides.font_size = number_value
--- 			overrides.enable_tab_bar = false
--- 		end
--- 	end
--- 	window:set_config_overrides(overrides)
--- end)
-
 -- local act = wezterm.action
 local config = {}
-config.window_decorations = "RESIZE"
 config.adjust_window_size_when_changing_font_size = false
 
 -- =============================================================================================
@@ -49,20 +25,23 @@ config.adjust_window_size_when_changing_font_size = false
 -- config.font = wezterm.font({ family = "Monaspace Argon", weight = "Regular" })
 -- config.font = wezterm.font({ family = "Monaspace Neon", weight = "Regular" })
 -- config.font = wezterm.font({ family = "Monaspace Xenon" })
-config.font = wezterm.font({ family = "IosevkaTerm Nerd Font" })
+-- config.font = wezterm.font({ family = "IosevkaTerm Nerd Font" })
 -- config.font = wezterm.font({ family = "CozetteVector", weight = "Regular" })
 -- config.font = wezterm.font({ family = "Operator Mono Light", weight = "Regular" })
 config.font = wezterm.font({ family = "JetBrainsMono Nerd Font" })
+-- config.font = wezterm.font({ family = "DotGothic16" })
 -- config.font = wezterm.font({ family = "BlexMono Nerd Font", weight = "Regular" })
 -- config.font = wezterm.font({ family = "CaskaydiaCove NF" })
 config.window_background_opacity = 1
--- config.cell_width = 0.9 -- like alacritty
-config.line_height = 1.4
-config.font_size = 8
-config.dpi = 144
-config.freetype_load_flags = "DEFAULT" -- NO_HINTING or DEFAULT
-config.freetype_load_target = "Light" -- Normal, Light, Mono and HorizontalLcd
-config.freetype_render_target = "HorizontalLcd"
+config.cell_width = 0.9 -- like alacritty
+config.line_height = 1.35
+config.font_size = 15.0
+config.front_end = "WebGpu"
+config.freetype_load_flags = "NO_HINTING"
+-- config.dpi = 104 -- working bad white lines on startup if dpi > 110
+-- config.freetype_load_flags = "DEFAULT" -- NO_HINTING or DEFAULT
+-- config.freetype_load_target = "Light" -- Normal, Light, Mono and HorizontalLcd
+-- config.freetype_render_target = "HorizontalLcd"
 
 -- =============================================================================================
 -- =========================================== COLORS ==========================================
@@ -71,10 +50,20 @@ config.audible_bell = "Disabled"
 config.colors = {
 	-- background = "#002b36", -- solarized
 	-- background = "#181818", -- sunburn
-	-- background = "#1e1e1e", -- vscode
+	background = "#1e1e1e", -- vscode
 	-- background = "#1f1f28", -- kanagawa
 	-- background = "#a1b26", -- tokyonight
-	background = "#10262c", -- mini hue
+	-- background = "#10262c", -- mini hue green
+	-- background = "#2b1f31", -- mini hue purple
+	-- background = "#002734", -- mini hue azure
+	-- background = "#1d1d1d", -- adwaita
+	-- background = "#101010", -- monochrome
+	-- background = "#24292e", -- github dark
+	-- background = "#041320", -- base 16 vulcan
+	-- background = "#000000", -- lunaperche and base16-black-metal-gorgoroth
+	-- background = "#1c1c1c", -- nvim colorscheme retrobox:like gruvbox
+
+	-- cursor_bg = "#2b1f31",
 }
 -- COLORS_SCHEME
 -- config.color_scheme = "hardhacker"
@@ -156,19 +145,21 @@ config.color_scheme = "tokyonight"
 -- =============================================================================================
 -- ===================================== ELSE ==================================================
 -- =============================================================================================
---
+
 config.exit_behavior = "Close"
 config.cursor_thickness = "150%"
 config.underline_thickness = "250%"
-config.initial_rows = 25
+config.initial_rows = 20
 config.initial_cols = 120
 config.hide_mouse_cursor_when_typing = true
 config.hide_tab_bar_if_only_one_tab = true
+config.window_decorations = "RESIZE" -- NONE, TITLE, RESIZE
 config.keys = {
 	-- { action = wezterm.action.ActivateCommandPalette, mods = "CTRL", key = "p" },
 	{ action = wezterm.action.DecreaseFontSize, mods = "CTRL", key = "-" },
+	{ action = wezterm.action.DecreaseFontSize, mods = "CTRL", key = "-" },
 	{ action = wezterm.action.IncreaseFontSize, mods = "CTRL", key = "=" },
-	{ action = wezterm.action.Hide, mods = "ALT", key = "Enter" },
+	-- { action = wezterm.action.ToggleFullScreen, mods = "ALT", key = "f" },
 	{ action = wezterm.action.PasteFrom("Clipboard"), mods = "CTRL", key = "v" },
 	{ action = wezterm.action.PasteFrom("PrimarySelection"), mods = "CTRL", key = "v" },
 	{ action = wezterm.action.PasteFrom("Clipboard"), mods = "CTRL", key = "м" },
@@ -237,4 +228,26 @@ config.mouse_bindings = {
 		action = wezterm.action.DecreaseFontSize,
 	},
 }
+wezterm.on("user-var-changed", function(window, pane, name, value)
+	local overrides = window:get_config_overrides() or {}
+	if name == "ZEN_MODE" then
+		local incremental = value:find("+")
+		local number_value = tonumber(value)
+		if incremental ~= nil then
+			while number_value > 0 do
+				window:perform_action(wezterm.action.IncreaseFontSize, pane)
+				number_value = number_value - 1
+			end
+			overrides.enable_tab_bar = false
+		elseif number_value < 0 then
+			window:perform_action(wezterm.action.ResetFontSize, pane)
+			overrides.font_size = nil
+			overrides.enable_tab_bar = true
+		else
+			overrides.font_size = number_value
+			overrides.enable_tab_bar = false
+		end
+	end
+	window:set_config_overrides(overrides)
+end)
 return config

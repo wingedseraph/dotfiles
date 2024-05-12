@@ -12,7 +12,6 @@ return {
 			-- not_loaded = "",
 		},
 	},
-
 	performance = {
 		cache = {
 			enabled = true,
