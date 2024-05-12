@@ -43,7 +43,7 @@ opt.list = false -- display trailing space
 opt.swapfile = false
 opt.backup = false
 opt.relativenumber = false
-opt.number = false
+opt.number = true
 -- opt.langmap =
 -- "ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
 local langmap_keys = {

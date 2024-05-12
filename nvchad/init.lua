@@ -94,4 +94,4 @@ function setupHistory()
 		vim.cmd("FzfLua oldfiles") -- fzf.lua
 	end, 50)
 end
--- vim.cmd("colorscheme retrobox")
+vim.cmd("colorscheme retrobox")

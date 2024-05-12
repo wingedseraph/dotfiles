@@ -27,7 +27,7 @@ require("mkdir")
 require("sniprun")
 require("vim-be-good")
 require("yazi").setup()
-require("vscode").load()
+-- require("vscode").load()
 require("nvim-navbuddy")
 require("plugins.configs.lspconfig")
 -- @opt

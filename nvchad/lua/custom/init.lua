@@ -263,7 +263,7 @@ vim.o.fillchars = table.concat({
 	"vertleft:╣",
 	"vertright:╠",
 }, ",")
-vim.o.winblend = 10 -- Make floating windows slightly transparent
+-- vim.o.winblend = 10 -- Make floating windows slightly transparent
 
 function read()
 	require("zen-mode").toggle()

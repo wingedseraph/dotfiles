@@ -15,7 +15,6 @@ local default_plugins = {
 	{
 		"NvChad/ui",
 		branch = "v2.0",
-
 		-- lazy = false,
 		config = function()
 			-- vim.wo.statusline = "%!v:lua.MiniStatusline.active()"

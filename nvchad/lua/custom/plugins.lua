@@ -394,12 +394,62 @@ local plugins = {
 		version = "*",
 		opts = {},
 	},
+	-- lazy.nvim
+	{
+		"folke/noice.nvim",
+		event = "LspAttach",
+		opts = {
+			lsp = {
+				override = {
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+				},
+				hover = {
+					enabled = true,
+					silent = false, -- set to true to not show a message if hover is not available
+					view = nil, -- when nil, use defaults from documentation
+					opts = {}, -- merged with defaults from documentation
+				},
+				progress = {
+					enabled = false,
+				},
+				signature = {
+					enabled = true,
+				},
+				message = {
+					-- Messages shown by lsp servers
+					enabled = false,
+				},
+			},
+			-- you can enable a preset for easier configuration
+			cmdline = {
+				enabled = false, -- enables the Noice cmdline UI
+			},
+			messages = {
+				-- NOTE: If you enable messages, then the cmdline is enabled automatically.
+				-- This is a current Neovim limitation.
+				enabled = false, -- enables the Noice messages UI
+			},
+			popupmenu = {
+				enabled = false, -- enables the Noice popupmenu UIs
+			},
+			notify = {
+				enabled = false,
+				view = "notify",
+			},
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+		},
+	},
 	{
 		"echasnovski/mini.statusline",
 		version = "*",
 		lazy = false,
 		config = function()
-			require("vscode").load()
+			-- require("vscode").load()
 
 			vim.opt.showmode = false
 
