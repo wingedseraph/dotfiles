@@ -1,0 +1,33 @@
+
+# Media && Doc
+*.jpg
+*.svg
+*.epub
+*.png
+*.mp4
+*.docx
+*.itermcolors
+*.sh
+*.pdf
+#
+#
+
+
+# Fonts
+*.woff2
+# Assets
+**/assets/**
+# Else
+LICENSE
+*.gz
+*.zip
+*.tar
+*.uf2
+*.out
+
+
+# EXCLUDE LIBRARIES ON MACOS
+/Library/**
+/Users/Library/**
+.DS_Store
+.luarc.json

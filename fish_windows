@@ -175,7 +175,7 @@ function miner
 end
 function sw
 set current_dir (pwd)
-cd /home/genie/.ssh
+cd $HOME/.ssh
      if test -f seraph
         mv id_rsa may
         mv id_rsa.pub may.pub
