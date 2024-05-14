@@ -1,9 +1,10 @@
 ---@type MappingsTable
 local M = {}
 -- Use wslview for gx in WSL
-if vim.fn.has("unix") then
-	vim.g.netrw_browsex_viewer = "wslview"
-end
+-- @not need for mac
+-- if vim.fn.has("unix") then
+-- 	vim.g.netrw_browsex_viewer = "wslview"
+-- end
 ----------------------------------Function----------------------------------
 function ToggleTabline()
 	-- Check if the tabline is currently visible
@@ -30,7 +31,7 @@ function RunFile()
 	elseif file_type == "c" or file_type == "cpp" then
 		vim.cmd("!gcc % && ./a.out")
 	else
-		print("Unsupported file type")
+		print("unsupported file type")
 	end
 end
 function Zen()

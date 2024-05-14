@@ -62,6 +62,7 @@ local default_plugins = {
 			},
 		},
 	},
+
 	{
 		"junegunn/fzf.vim",
 		lazy = false,

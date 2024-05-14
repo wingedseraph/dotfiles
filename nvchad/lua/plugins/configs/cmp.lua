@@ -142,16 +142,16 @@ local options = {
 		-- },
 		-- { name = "nvim_lsp_signature_help" },
 	},
-	experimental = {
-		ghost_text = {
-			hl_group = "CmpGhostText",
-		},
-	},
+	-- experimental = {
+	-- 	ghost_text = {
+	-- 		hl_group = "CmpGhostText",
+	-- 	},
+	-- },
 	sorting = defaults.sorting,
 }
 
 -- if cmp_style ~= "atom" and cmp_style ~= "atom_colored" then
 -- 	options.window.completion.border = border("CmpBorder")
 -- end
-vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+-- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 return options

@@ -1,5 +1,3 @@
--- local autocmd = vim.api.nvim_create_autocmd
-
 -- Auto resize panes when resizing nvim window
 -- autocmd("VimResized", {
 --   pattern = "*",
@@ -26,17 +24,6 @@ vim.api.nvim_exec(
 	false
 )
 
--- vim.highlight.priorities.semantic_tokens = 95
--- Set transparency for the status line
--- vim.cmd([[ hi StatusLine   guibg=NONE ctermbg=NONE ]])
--- vim.cmd([[ hi StatusLineNC guibg=NONE ctermbg=NONE ]])
-
--- Set transparency for the active and inactive status line
--- vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
-
--- Set transparency for the active and inactive status line
--- vim.cmd([[ hi StatusLineNC   guibg=NONE ctermbg=NONE ]])
-
 vim.api.nvim_exec(
 	[[
   augroup MarkdownConceal
@@ -46,20 +33,6 @@ vim.api.nvim_exec(
 ]],
 	false
 )
-
--- Autocmd to jump to the last edited position after reading a buffer
--- vim.cmd([[
---   au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
--- ]])
-
--- vim.api.nvim_create_autocmd("VimEnter", {
--- 	callback = function()
--- 		if vim.fn.argv(0) == "" then
--- 			require("telescope.builtin").oldfiles()
--- 		end
--- 	end,
--- })
---
 
 -------------
 -- Neovide --

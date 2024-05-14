@@ -18,54 +18,7 @@ local servers = {
 	-- "lua_ls",
 }
 
-for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
-		on_attach = on_attach,
-		capabilities = capabilities,
-	})
-end
-
--- lspconfig.pyright.setup { blabla}
-lspconfig.tsserver.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	init_options = {
-		preferences = {
-			disableSuggestions = true,
-		},
-	},
-})
--- lspconfig.lua_ls.setup({
--- 	on_attach = on_attach,
--- 	capabilities = capabilities,
--- 	settings = {
--- 		Lua = {
--- 			diagnostics = {
--- 				globals = { "vim" },
--- 				disable = { "undefined-global" },
--- 			},
--- 		},
--- 	},
--- })
-lspconfig.clangd.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	cmd = {
-		"clangd",
-		"--background-index",
-		"--pch-storage=memory",
-		"--clang-tidy",
-		"--suggest-missing-includes",
-		"--cross-file-rename",
-		"--completion-style=detailed",
-		"--offset-encoding=utf-16",
-	},
-})
--- Setup required for ufo
-capabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true,
-}
+-- @lua
 lspconfig.lua_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
@@ -88,3 +41,42 @@ lspconfig.lua_ls.setup({
 		},
 	},
 })
+
+-- @else
+for _, lsp in ipairs(servers) do
+	lspconfig[lsp].setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
+	})
+end
+
+-- @javascript
+lspconfig.tsserver.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	init_options = {
+		preferences = {
+			disableSuggestions = true,
+		},
+	},
+})
+-- @c++
+lspconfig.clangd.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = {
+		"clangd",
+		"--background-index",
+		"--pch-storage=memory",
+		"--clang-tidy",
+		"--suggest-missing-includes",
+		"--cross-file-rename",
+		"--completion-style=detailed",
+		"--offset-encoding=utf-16",
+	},
+})
+-- Setup required for ufo
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}

@@ -9,7 +9,6 @@ minimal = 0
 function toggle_minimal()
 	minimal = 1
 end
-
 -- Disable some default plugins that we have
 vim.g.loaded_gzip = false
 vim.g.loaded_matchit = false
@@ -79,6 +78,8 @@ function starter_n()
 	-- end
 	---------------------
 end
+
+-- @other
 vim.api.nvim_exec(
 	[[
 		autocmd VimEnter * silent lua starter_n()
@@ -89,9 +90,11 @@ vim.api.nvim_exec(
 vim.cmd([[
   au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 ]])
+
 function setupHistory()
 	vim.defer_fn(function()
 		vim.cmd("FzfLua oldfiles") -- fzf.lua
 	end, 50)
 end
-vim.cmd("colorscheme retrobox")
+
+vim.cmd.colorscheme("retrobox")

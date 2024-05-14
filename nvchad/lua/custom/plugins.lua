@@ -8,7 +8,8 @@ local plugins = {
 		dependencies = {
 			-- format & linting
 			{
-				"jose-elias-alvarez/null-ls.nvim",
+				-- "jose-elias-alvarez/null-ls.nvim",
+				"mfussenegger/nvim-lint",
 				config = function()
 					require("custom.configs.null-ls")
 				end,
@@ -232,12 +233,14 @@ local plugins = {
 			"MunifTanjim/nui.nvim",
 		},
 	},
-	{ "andersevenrud/nvim_context_vt", opts = {}, ft = "html" },
+	-- { "andersevenrud/nvim_context_vt", opts = {}, ft = "html" },
 	{
 		"echasnovski/mini.hipatterns",
 		version = "*",
 	},
-	{ "yorickpeterse/nvim-pqf", opts = {}, event = "VeryLazy" },
+
+	-- { "yorickpeterse/nvim-pqf", opts = {}, event = "VeryLazy" },
+	{ "kevinhwang91/nvim-bqf", event = "VeryLazy", opts = {} },
 	{
 		"SR-Mystar/yazi.nvim",
 		cmd = "Yazi",
@@ -324,6 +327,7 @@ local plugins = {
 	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
 	{
 		"folke/flash.nvim",
+		enabled = false,
 		-- event = "BufRead",
 		opts = {
 			label = {
@@ -347,6 +351,19 @@ local plugins = {
       { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
       },
+	},
+	{
+		"smoka7/hop.nvim",
+		version = "*",
+		event = "VeryLazy",
+		config = function()
+			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
+
+			vim.api.nvim_set_keymap("n", "S", "<cmd>HopNodes<cr>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("v", "S", "<cmd>HopNodes<cr>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("n", "s", "<cmd>HopChar1<cr>", { noremap = true, silent = true })
+			vim.api.nvim_set_keymap("v", "s", "<cmd>HopChar1<cr>", { noremap = true, silent = true })
+		end,
 	},
 	{
 		"echasnovski/mini.hues",
@@ -522,7 +539,8 @@ local plugins = {
 					width = 1,
 					height = 1,
 					border = "none",
-					preview = { hidden = "hidden" },
+					-- @windows usage
+					-- preview = { hidden = "hidden" },
 				},
 			})
 		end,
@@ -652,8 +670,14 @@ local plugins = {
 		},
 	},
 	{
+		"MeanderingProgrammer/markdown.nvim",
+
+		name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+	},
+	{
 		"nvim-neorg/neorg",
-		-- enabled = false,
+		enabled = false,
 		build = ":Neorg sync-parsers",
 		-- ft = { "norg" },
 		-- lazy = false,

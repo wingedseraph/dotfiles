@@ -53,7 +53,7 @@ local default_plugins = {
 
 	{
 		"nvim-tree/nvim-web-devicons",
-		-- enabled=false,
+		enabled = false,
 		event = "VeryLazy",
 		opts = function()
 			-- return { override = require("nvchad.icons.devicons") }

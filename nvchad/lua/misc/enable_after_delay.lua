@@ -8,6 +8,10 @@ if vim.bo.filetype == "html" then
 	vim.cmd("IlluminateResume")
 end
 
+if vim.bo.filetype == "markdown" then
+	require("render-markdown").setup({})
+end
+
 if vim.bo.filetype == "norg" then
 	require("neorg")
 end
@@ -42,4 +46,4 @@ vim.opt.clipboard = "unnamedplus"
 -- vim.cmd("colorscheme base16-black-metal-dark-funeral")
 
 -- @vim.notify
-vim.notify("bootstrap")
+vim.notify("ready to go :>")
