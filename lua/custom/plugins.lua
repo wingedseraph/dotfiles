@@ -195,7 +195,6 @@ local plugins = {
 			vim.cmd("colorscheme base16-black-metal")
 		end,
 	},
-
 	{
 		"SmiteshP/nvim-navbuddy",
 		opts = {
@@ -204,7 +203,7 @@ local plugins = {
 				follow_node = true, -- Keep the current node in focus on the source buffer
 				highlight = true, -- Highlight the currently focused node
 			},
-			border = "none",
+			border = "double",
 			size = { 60, 60 }, -- Or table format example: { height = "40%", width = "100%"}
 			sections = {
 				left = {
@@ -327,7 +326,6 @@ local plugins = {
 	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
 	{
 		"folke/flash.nvim",
-		enabled = false,
 		-- event = "BufRead",
 		opts = {
 			label = {
@@ -352,20 +350,8 @@ local plugins = {
       -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
       },
 	},
-	{
-		"smoka7/hop.nvim",
-		version = "*",
-		event = "VeryLazy",
-		config = function()
-			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
 
-			local modes = { "n", "v", "x", "o" }
-			for _, mode in ipairs(modes) do
-				vim.api.nvim_set_keymap(mode, "S", "<cmd>HopNodes<cr>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap(mode, "s", "<cmd>HopChar1<cr>", { noremap = true, silent = true })
-			end
-		end,
-	},
+	{ "echasnovski/mini.bracketed", version = "*" },
 	{
 		"echasnovski/mini.hues",
 	},
@@ -470,6 +456,7 @@ local plugins = {
 			require("vscode").load()
 
 			vim.opt.showmode = false
+			-- require("mini.hues").setup({ background = "#10262c", foreground = "#c0c8cb", saturation = "high" }) -- green
 
 			local statusline = require("mini.statusline")
     --stylua: ignore
@@ -552,6 +539,7 @@ local plugins = {
 		opts = {
 			ui = {
 				number = false, -- Display line numbers in the focussed window only
+				winhighlight = false,
 				cursorline = false, -- Display a cursorline in the focussed window only
 			},
 			split = {

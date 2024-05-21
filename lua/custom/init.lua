@@ -309,3 +309,20 @@ vim.api.nvim_create_autocmd("TermOpen", {
 		vim.opt_local.signcolumn = "no"
 	end,
 })
+
+-- @@ m-f to toggle maximise buffer
+local is_maximized = false
+local function toggle_focus()
+	if is_maximized then
+		require("focus").focus_autoresize()
+	else
+		require("focus").focus_maximise()
+	end
+	is_maximized = not is_maximized
+end
+vim.keymap.set(
+	"n",
+	"<M-f>",
+	toggle_focus,
+	{ noremap = true, silent = true, desc = "Toggle maximize/auto-resize buffer focus" }
+)

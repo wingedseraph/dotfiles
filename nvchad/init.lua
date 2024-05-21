@@ -4,6 +4,7 @@
 -- end
 pcall(function()
 	vim.loader.enable()
+	-- vim.loader.disable()
 end)
 minimal = 0
 function toggle_minimal()
@@ -19,6 +20,7 @@ vim.g.loaded_zipPlugin = false
 vim.g.loaded_man = false
 vim.g.loaded_2html_plugin = false
 vim.g.loaded_remote_plugins = false
+
 function starter_n()
 	require("core")
 
@@ -97,4 +99,7 @@ function setupHistory()
 	end, 50)
 end
 
-vim.cmd.colorscheme("retrobox")
+-- vim.cmd.colorscheme("sun")
+
+-- todo:
+-- write M-f to toggle maximise split/buffer
