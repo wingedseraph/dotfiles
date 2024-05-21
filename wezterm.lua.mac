@@ -170,7 +170,7 @@ config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = "TITLE | RESIZE" -- NONE, TITLE, RESIZE
 -- config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 local function macCMDtoMeta()
-	local keys = "abdefghijklmnopqrsuxyz" -- no c,v,t,w
+	local keys = "abdefghijklmnoprsuxyz" -- no c,v,t,w,q
 	local keymappings = {}
 
 	for i = 1, #keys do
@@ -271,4 +271,3 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
 	window:set_config_overrides(overrides)
 end)
 return config
-
