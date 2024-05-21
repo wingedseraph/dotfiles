@@ -28,8 +28,10 @@ function RunFile()
 		vim.cmd("!go run %")
 	elseif file_type == "python" then
 		vim.cmd("!python3 % ")
-	elseif file_type == "c" or file_type == "cpp" then
+	elseif file_type == "c" then
 		vim.cmd("!gcc % && ./a.out")
+	elseif file_type == "cpp" then
+		vim.cmd("!cpp % && ./a.out")
 	else
 		print("unsupported file type")
 	end
