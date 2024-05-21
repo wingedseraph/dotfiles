@@ -155,7 +155,7 @@ M.general = {
 		-- ["<tab>"] = { "<cmd>bnext<CR>", "next buffer", opts = { nowait = true } },
 		-- ["<C-s>"] = { ":w<CR>", "[S]ave [F]ile", opts = { nowait = true } },
 		-- ["<M-b>"] = { "<cmd>Oil<CR>", "[O]il", opts = { nowait = true } },
-		["<C-q>"] = { "<cmd>q!<CR>", "quit without save", opts = { nowait = true } },
+		["<C-q>"] = { "<cmd>q<CR>", "quit", opts = { nowait = true } },
 		-- ["<C-v>"] = { "P", "PASTE", opts = { nowait = true } },
 		["<C-z>"] = { "u", "[U]ndo", opts = { nowait = true } },
 		["<C-a>"] = { "gg<S-v>G", "[S]elect [A]ll", opts = { nowait = true } },
