@@ -16,7 +16,7 @@ local formatting_style = {
 	-- fields = field_arrangement[cmp_style] or { "kind", "menu" },
 
 	format = function(_, item)
-		local icons = require("nvchad.icons.lspkind")
+		local icons = require("lspkind")
 		local icon = (cmp_ui.icons and icons[item.kind]) or ""
 
 		if cmp_style == "atom" or cmp_style == "atom_colored" then
@@ -81,9 +81,11 @@ local options = {
 	-- formatting = {
 	-- 	format = lspkind.cmp_format({
 	-- 		mode = "symbol_text", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
-	-- 		maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+	-- 		maxwidth = function()
+	-- 			return math.floor(0.45 * vim.o.columns)
+	-- 		end, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 	-- 		ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-	-- 		show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+	-- 		-- show_labelDetails = disable, -- show labelDetails in menu. Disabled by default
 	-- 	}),
 	-- },
 	mapping = {

@@ -32,8 +32,9 @@ require("sniprun")
 require("vim-be-good")
 require("yazi").setup()
 -- require("vscode").load()
-require("nvim-navbuddy")
+-- require("nvim-navbuddy")
 require("plugins.configs.lspconfig")
+
 -- @opt
 vim.opt.clipboard = "unnamedplus"
 
@@ -46,4 +47,4 @@ vim.opt.clipboard = "unnamedplus"
 -- vim.cmd("colorscheme base16-black-metal-dark-funeral")
 
 -- @vim.notify
-vim.notify("ready to go :>")
+vim.notify("古池や蛙飛び込む水の音 ふるいけやかわずとびこむみずのおと")

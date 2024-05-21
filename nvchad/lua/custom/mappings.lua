@@ -164,31 +164,31 @@ M.general = {
 		["1"] = { "$", "go to end of line", opts = { nowait = true } },
 
 		-- probably working :x
-		-- ["gx"] = {
-		-- 	function()
-		-- 		local cursor_position = vim.fn.getpos(".")
-		-- 		local line = vim.fn.getline(cursor_position[2])
-		-- 		-- https://doka.guide/
-		-- 		local start_col, end_col = string.find(line, "https://[^ %c}]*")
-		-- 		if start_col then
-		-- 			local url = string.sub(line, start_col, end_col):gsub("[%c)}]+$", "") -- Remove trailing symbols after ')' and '}'
-		-- 			local formatted_url = '"' .. url .. '"' -- Wrap URL in quotes to better work with open
-		--
-		-- 			if vim.fn.has("clipboard") == 1 then
-		-- 				vim.fn.setreg("+", url) -- Use system clipboard
-		-- 			else
-		-- 				vim.fn.setreg('"', url) -- Fallback to default register
-		-- 			end
-		-- 			-- print(url)
-		-- 			-- print(formatted_url)
-		-- 			vim.cmd("silent !open " .. formatted_url)
-		-- 		else
-		-- 			print("no url found under the cursor")
-		-- 		end
-		-- 	end,
-		-- 	"copy yank url under cursor to system clipboard and remove trailing symbols after '}'",
-		-- 	opts = { nowait = true },
-		-- },
+		["gx"] = {
+			function()
+				local cursor_position = vim.fn.getpos(".")
+				local line = vim.fn.getline(cursor_position[2])
+				-- https://doka.guide/
+				local start_col, end_col = string.find(line, "https://[^ %c}]*")
+				if start_col then
+					local url = string.sub(line, start_col, end_col):gsub("[%c)}]+$", "") -- Remove trailing symbols after ')' and '}'
+					local formatted_url = '"' .. url .. '"' -- Wrap URL in quotes to better work with open
+
+					if vim.fn.has("clipboard") == 1 then
+						vim.fn.setreg("+", url) -- Use system clipboard
+					else
+						vim.fn.setreg('"', url) -- Fallback to default register
+					end
+					-- print(url)
+					-- print(formatted_url)
+					vim.cmd("silent !open " .. formatted_url)
+				else
+					print("no url found under the cursor")
+				end
+			end,
+			"copy yank url under cursor to system clipboard and remove trailing symbols after '}'",
+			opts = { nowait = true },
+		},
 	},
 	v = {
 		["<C-c>"] = { '"+y', "[C]opy", opts = { nowait = true } },

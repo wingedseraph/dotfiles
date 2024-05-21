@@ -25,7 +25,7 @@ local plugins = {
 		cmd = "ZenMode",
 		opts = {
 			window = {
-				width = 90, -- width of the Zen window
+				width = 130, -- width of the Zen window
 				height = 1, -- height of the Zen window
 			},
 			plugins = {
@@ -58,9 +58,9 @@ local plugins = {
 					-- Conform will run multiple formatters sequentially
 					python = { "autopep8" },
 					-- Use a sub-list to run only the first available formatter
-					html = { { "prettierd", "prettier" } },
-					css = { { "prettierd", "prettier" } },
-					javascript = { { "prettierd", "prettier" } },
+					html = { { "biome", "prettierd" } },
+					css = { { "biome", "prettierd" } },
+					javascript = { { "biome" } },
 					c = { { "clang_format" } },
 
 					vim.api.nvim_create_autocmd("BufWritePre", {
@@ -162,6 +162,29 @@ local plugins = {
 		-- 	},
 		-- },
 	},
+	-- {
+	-- 	"brenoprata10/nvim-highlight-colors",
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		-- Ensure termguicolors is enabled if not already
+	-- 		---Render style
+	-- 		---@usage 'background'|'foreground'|'virtual'
+	-- 		render = "virtual",
+	-- 		---Set virtual symbol (requires render to be set to 'virtual')
+	-- 		virtual_symbol = "■",
+	-- 		---Highlight named colors, e.g. 'green'
+	-- 		enable_named_colors = true,
+	-- 		---Highlight tailwind colors, e.g. 'bg-blue-500'
+	-- 		enable_tailwind = false,
+	-- 		---Set custom colors
+	-- 		---Label must be properly escaped with '%' to adhere to `string.gmatch`
+	-- 		--- :help string.gmatch
+	-- 		-- custom_colors = {
+	-- 		-- 	{ label = "%-%-theme%-primary%-color", color = "#0f1219" },
+	-- 		-- 	{ label = "%-%-theme%-secondary%-color", color = "#5a5d64" },
+	-- 		-- },
+	-- 	},
+	-- },
 	{
 		"nacro90/numb.nvim",
 		enabled = true,
@@ -185,6 +208,15 @@ local plugins = {
 	{ "dstein64/vim-startuptime", cmd = "StartupTime" },
 
 	{ "onsails/lspkind.nvim" },
+	-- { "rockerBOO/boo-colorscheme-nvim", event = "VeryLazy" },
+	{
+		"projekt0n/github-nvim-theme",
+		lazy = false,
+		priority = 9,
+		config = function()
+			vim.cmd.colorscheme("github_dark_dimmed")
+		end,
+	},
 	{
 		"RRethy/base16-nvim",
 		enabled = false,
@@ -233,14 +265,13 @@ local plugins = {
 			"MunifTanjim/nui.nvim",
 		},
 	},
-	-- { "andersevenrud/nvim_context_vt", opts = {}, ft = "html" },
+	-- { "andersevenrud/nvim_context_vt", opts = {}, ft = "html", enabled = false },
 	{
 		"echasnovski/mini.hipatterns",
 		version = "*",
 	},
-
 	-- { "yorickpeterse/nvim-pqf", opts = {}, event = "VeryLazy" },
-	{ "kevinhwang91/nvim-bqf", event = "VeryLazy", opts = {} },
+	{ "kevinhwang91/nvim-bqf", opts = {}, event = "VeryLazy" },
 	{
 		"SR-Mystar/yazi.nvim",
 		cmd = "Yazi",
@@ -297,7 +328,7 @@ local plugins = {
 			vim.cmd("hi IlluminatedWordRead guibg=#393E4D gui=none")
 		end,
 	},
-	{ "capaj/vscode-standardjs-snippets", ff = { "javascript" } },
+	-- { "capaj/vscode-standardjs-snippets", ft = { "javascript" } },
 	{
 		"xiyaowong/transparent.nvim",
 		cmd = "TransparentEnable",
@@ -323,6 +354,11 @@ local plugins = {
 		end,
 	},
 	{ "kdheepak/lazygit.nvim" },
+	{
+		"ramojus/mellifluous.nvim",
+		lazy = false,
+		priority = 100,
+	},
 	{ "ThePrimeagen/vim-be-good" },
 	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
 	{
@@ -383,7 +419,7 @@ local plugins = {
 			nearest_only = true,
 			nearest_float_when = "never",
 		},
-		confug = function()
+		config = function()
 			require("hlslens").setup()
 
 			local kopts = { noremap = true, silent = true }
@@ -408,9 +444,10 @@ local plugins = {
 	},
 	{
 		"echasnovski/mini.tabline",
-		lazy = false,
-		version = "*",
 		opts = {},
+		lazy = false,
+		priority = 9,
+		version = "*",
 	},
 	-- lazy.nvim
 	{
@@ -536,6 +573,26 @@ local plugins = {
 			vim.api.nvim_set_keymap("n", "<leader>fz", "<cmd>FzfLua<cr>", { noremap = true, silent = true })
 
 			require("fzf-lua").setup({
+				keymap = {
+					-- These override the default tables completely
+					-- no need to set to `false` to disable a bind
+					-- delete or modify is sufficient
+					fzf = {
+						-- fzf '--bind=' options
+						-- ["ctrl-l"] = "clear-query",
+						-- ["ctrl-c"] = "abort",
+						-- ["tab"] = "toggle-out",
+						-- ["f6"] = "toggle-in",
+						-- ["ctrl-o"] = "toggle-all",
+						-- ["ctrl-f"] = "preview-down",
+						-- ["ctrl-b"] = "preview-up",
+						-- Only valid with fzf previewers (bat/cat/git/etc)
+						-- ["f3"] = "toggle-preview-wrap",
+						-- ["f4"] = "toggle-preview",
+						-- ["ctrl-d"] = "preview-page-down",
+						-- ["ctrl-u"] = "preview-page-up",
+					},
+				},
 				winopts = {
 					width = 1,
 					height = 1,
@@ -561,7 +618,6 @@ local plugins = {
 		},
 	},
 	-- float terminal in neovim : very useful
-
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",

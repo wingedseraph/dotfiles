@@ -63,5 +63,4 @@ M.capabilities.textDocument.completion.completionItem = {
 -- 		},
 -- 	},
 -- })
-
 return M

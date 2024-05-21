@@ -1,7 +1,3 @@
--- if vim.loader then
---
--- 	vim.loader.enable()
--- end
 pcall(function()
 	vim.loader.enable()
 	-- vim.loader.disable()
@@ -30,8 +26,6 @@ function starter_n()
 		dofile(custom_init_path)
 	end
 
-	require("core.utils").load_mappings()
-
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 	-- bootstrap lazy.nvim!
@@ -48,6 +42,7 @@ function starter_n()
 	if file_size > 100 * 1024 or minimal == 1 then
 		require("book_plugins") -- very minimal config
 	else
+		require("core.utils").load_mappings()
 		require("plugins")
 
 		vim.api.nvim_exec(
@@ -57,28 +52,6 @@ function starter_n()
 			false
 		)
 	end
-	-- require("null-ls").setup()
-	-- bootstrap plugins!
-
-	-- vim.api.nvim_exec(
-	-- 	[[
-	-- 		autocmd VimEnter * silent lua require("plugins")
-	-- 	]],
-	-- 	false
-	-- )
-
-	---------------------
-	-- @enable_after_delay
-	-- local file_size = vim.fn.getfsize(vim.fn.expand("%"))
-	-- if file_size < 100 * 1024 then
-	-- 	vim.api.nvim_exec(
-	-- 		[[
-	--            autocmd UIEnter * silent lua vim.defer_fn(function() require('misc.enable_after_delay') end, 253)
-	--       ]],
-	-- 		false
-	-- 	)
-	-- end
-	---------------------
 end
 
 -- @other
@@ -100,6 +73,3 @@ function setupHistory()
 end
 
 -- vim.cmd.colorscheme("sun")
-
--- todo:
--- write M-f to toggle maximise split/buffer

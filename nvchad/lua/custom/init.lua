@@ -141,7 +141,7 @@ vim.env.FZF_DEFAULT_OPTS =
 	'-i  --reverse --cycle --margin=2 --preview-window noborder --prompt="> " --marker=">" --pointer="◆" --scrollbar="" --layout=reverse --no-preview'
 local fzf_default_opts = vim.env.FZF_DEFAULT_OPTS or ""
 local additional_opts =
-	"--bind=Tab:down --color=fg:#d0d0d0,fg+:#d0d0d0,bg:-1,bg+:-1 --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00 --color=prompt:#d7005f,spinner:-1,pointer:-1,header:#87afaf --color=border:-1,label:#aeaeae,query:#d9d9d9"
+	"--bind=Tab:down,ctrl-space:toggle --color=fg:#d0d0d0,fg+:#d0d0d0,bg:-1,bg+:-1 --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00 --color=prompt:#d7005f,spinner:-1,pointer:-1,header:#87afaf --color=border:-1,label:#aeaeae,query:#d9d9d9"
 vim.env.FZF_DEFAULT_OPTS = fzf_default_opts .. " " .. additional_opts
 
 vim.api.nvim_set_keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", {
@@ -231,6 +231,7 @@ vim.o.fillchars = table.concat({
 }, ",")
 -- vim.o.winblend = 10 -- Make floating windows slightly transparent
 
+-- @function
 function read()
 	require("zen-mode").toggle()
 	vim.cmd("FSRead")
@@ -307,5 +308,13 @@ vim.api.nvim_create_autocmd("TermOpen", {
 		vim.opt_local.number = false
 		vim.opt_local.relativenumber = false
 		vim.opt_local.signcolumn = "no"
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "TextChanged" }, {
+	callback = function()
+		-- try_lint without arguments runs the linters defined in `linters_by_ft`
+		-- for the current filetype
+		require("lint").try_lint()
 	end,
 })

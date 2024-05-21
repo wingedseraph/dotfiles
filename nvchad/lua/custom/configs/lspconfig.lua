@@ -9,19 +9,68 @@ local servers = {
 	"html",
 	"cssls",
 	-- "pylsp",
-	"pyright",
 	-- "basedpyright",
 	"tsserver",
+	-- "pyright",
+	"basedpyright",
 	-- "denols",
 	"clangd",
 	"gopls",
 	-- "lua_ls",
 }
+lspconfig.tsserver.setup({
+	settings = {
+		inlayHints = {
+			includeInlayEnumMemberValueHints = true,
+			includeInlayFunctionLikeReturnTypeHints = true,
+			includeInlayFunctionParameterTypeHints = true,
+			includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+			includeInlayPropertyDeclarationTypeHints = true,
+			includeInlayVariableTypeHints = true,
+		},
+	},
+	on_attach = require("plugins.configs.lspconfig").on_attach,
+	capabilities = require("plugins.configs.lspconfig").capabilities,
+	init_options = {
+		preferences = {
+			disableSuggestions = true,
+		},
+	},
+})
 
 -- @lua
-lspconfig.lua_ls.setup({
+for _, lsp in ipairs(servers) do
+	lspconfig[lsp].setup({
+		on_attach = on_attach,
+		capabilities = capabilities,
+	})
+end
+
+-- lspconfig.pyright.setup { blabla}
+
+lspconfig.clangd.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
+	cmd = {
+		"clangd",
+		"--background-index",
+		"--pch-storage=memory",
+		"--clang-tidy",
+		"--suggest-missing-includes",
+		"--cross-file-rename",
+		"--completion-style=detailed",
+		"--offset-encoding=utf-16",
+	},
+})
+-- Setup required for ufo
+capabilities.textDocument.foldingRange = {
+	dynamicRegistration = false,
+	lineFoldingOnly = true,
+}
+lspconfig.lua_ls.setup({
+	on_attach = require("plugins.configs.lspconfig").on_attach,
+	capabilities = require("plugins.configs.lspconfig").capabilities,
 
 	settings = {
 		Lua = {
