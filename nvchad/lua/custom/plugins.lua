@@ -363,7 +363,7 @@ local plugins = {
 	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
 	{
 		"folke/flash.nvim",
-		enabled = false,
+		enabled = true,
 		-- event = "BufRead",
 		opts = {
 			label = {
@@ -387,20 +387,6 @@ local plugins = {
       { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
       },
-	},
-	{
-		"smoka7/hop.nvim",
-		version = "*",
-		event = "VeryLazy",
-		config = function()
-			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-
-			local modes = { "n", "v", "x", "o" }
-			for _, mode in ipairs(modes) do
-				vim.api.nvim_set_keymap(mode, "S", "<cmd>HopNodes<cr>", { noremap = true, silent = true })
-				vim.api.nvim_set_keymap(mode, "s", "<cmd>HopChar1<cr>", { noremap = true, silent = true })
-			end
-		end,
 	},
 	{
 		"echasnovski/mini.hues",
