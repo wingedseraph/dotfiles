@@ -1,0 +1,70 @@
+set -U fish_greeting "use ncdu instead of du"
+alias N 'nvim -c "lua Toggle_minimal()"'
+alias n "nvim"
+alias vpn "cd && sudo openvpn Documents/latvia.ovpn"
+alias gc "git clone"
+alias ls "eza"
+alias i "brew install" # mac brew install
+alias un "brew uninstall" # mac brew uninstall
+alias r "ranger"
+alias rm "rm -rf"
+alias cp "cp -rf"
+# alias mv "mv -rf"
+alias l "lazygit"
+alias gt "git status"
+alias du "du -sh"
+alias py "python"
+alias tw "$HOME/.config/fish/run.bash"
+# Generated for envman. Do not edit.
+test -s "$HOME/.config/envman/load.fish"; and source "$HOME/.config/envman/load.fish"
+# function fish_user_key_bindings
+#     bind \t 'commandline -f accept-autosuggestion'
+# end
+source $HOME/lscolors.csh
+set -x NNN_FIFO /tmp/nnn.fifo
+set -x NNN_PLUG "p:preview-tui;z:autojump"
+
+function preview_nvim
+ # find . -maxdepth 3 -type f | grep -v '/\.' | fzf -i --cycle --preview="cat {}" --bind 'enter:become(nvim {})' 
+ fd --type f | fzf -i --reverse  --cycle --preview-window noborder  --prompt="> " --marker=">" --pointer="◆" --scrollbar="" --layout="reverse" --preview="bat --theme 1337 --paging never --decorations never --wrap character --color always  {}" --bind 'enter:become(nvim {})'
+ # fzf -i --reverse  --cycle  --prompt="> " --marker=">" --pointer="◆" --scrollbar="" --layout="reverse" --preview="bat --color=always {}" --bind 'enter:become(nvim {})'
+ # find . -maxdepth 3 -type f -not -path '*/\.*' | fzf -i --cycle --preview="bat --color=always {}" --bind 'enter:execute(nvim {})'
+ end
+bind \eo 'nvim -c "lua SetupHistory()"'
+bind \ed 'preview_nvim'
+bind \en 'yazi'
+
+set -x FZF_DEFAULT_OPTS "--bind=Tab:down --color=fg:-1,fg+:#d0d0d0,bg:-1,bg+:-1
+  --color=hl:#5f87af,hl+:#5fd7ff,info:#afaf87,marker:#87ff00
+  --color=prompt:#d7005f,spinner:-1,pointer:-1,header:#87afaf
+  --color=border:-1,label:#aeaeae,query:#d9d9d9"
+
+
+# @macos
+set -gx EDITOR nvim
+
+
+function sw
+set current_dir (pwd)
+cd $HOME/.ssh
+     if test -f seraph
+        mv id_rsa may
+        mv id_rsa.pub may.pub
+        mv seraph id_rsa
+        mv seraph.pub id_rsa.pub
+        echo " === seraph ssh loaded === "
+    else if test -f may
+        mv id_rsa seraph
+        mv id_rsa.pub seraph.pub
+        mv may id_rsa
+        mv may.pub id_rsa.pub
+        echo " === may ssh loaded === "
+    else
+        echo "Neither seraph nor may file found."
+    end
+cd $current_dir
+sudo chmod 600 ~/.ssh/id_rsa
+sudo chmod 600 ~/.ssh/id_rsa.pub
+end
+
+

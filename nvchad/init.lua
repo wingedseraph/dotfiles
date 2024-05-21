@@ -2,8 +2,8 @@ pcall(function()
 	vim.loader.enable()
 	-- vim.loader.disable()
 end)
-minimal = 0
-function toggle_minimal()
+local minimal = 0
+function Toggle_minimal()
 	minimal = 1
 end
 -- Disable some default plugins that we have
@@ -17,7 +17,7 @@ vim.g.loaded_man = false
 vim.g.loaded_2html_plugin = false
 vim.g.loaded_remote_plugins = false
 
-function starter_n()
+function BOOT()
 	require("core")
 
 	local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
@@ -57,7 +57,7 @@ end
 -- @other
 vim.api.nvim_exec(
 	[[
-		autocmd VimEnter * silent lua starter_n()
+		autocmd VimEnter * silent lua BOOT()
 	]],
 	false
 )
@@ -66,7 +66,7 @@ vim.cmd([[
   au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 ]])
 
-function setupHistory()
+function SetupHistory()
 	vim.defer_fn(function()
 		vim.cmd("FzfLua oldfiles") -- fzf.lua
 	end, 50)
