@@ -3,29 +3,10 @@
 -- local b = null_ls.builtins
 --
 -- local sources = {
---
--- 	-- webdev stuff
--- 	-- b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
--- 	-- b.formatting.cbfmt.with({ filetypes = { "markdown" } }),
--- 	-- b.formatting.htmlbeautifier.with({ filetypes = { "html" } }), -- for no warnings in w3 validator
---
--- 	b.diagnostics.eslint_d.with({ filetype = { "javascript" } }),
---
--- 	-- NOTE: turn off all formatting to test conform
---
--- 	-- Lua
--- 	-- b.formatting.stylua,
--- 	-- Python
--- 	-- b.formatting.autopep8.with({ filetypes = { "python" } }),
--- 	-- cpp
--- 	-- b.formatting.clang_format.with({ filetypes = { "c" } }),
--- 	-- b.formatting.gofmt.with({ filetypes = { "go" } }),
--- 	-- html css javascript
--- 	-- b.formatting.prettierd.with({ filetypes = { "html", "css", "javascript" } }), -- so prettier works only on these filetypes
--- 	b.diagnostics.eslint_d.with({ filetype = { "javascript" } }),
--- 	-- b.diagnostics.eslint_d.with({ filetype = { "javascript" } }),
+-- b.formatting.biome.with({ filetype = { "javascript" } }),
+-- b.diagnostics.eslint_d.with({ filetype = { "javascript" } }),
 -- }
---
+
 -- null_ls.setup({
 -- 	debug = false,
 -- 	sources = sources,
@@ -45,20 +26,20 @@
 -- 		end
 -- 	end,
 -- })
-
-vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-	callback = function()
-		-- try_lint without arguments runs the linters defined in `linters_by_ft`
-		-- for the current filetype
-		require("lint").try_lint()
-	end,
-})
 JS_linters = {}
 if vim.fn.filereadable("./node_modules/.bin/biome") == 1 then
 	table.insert(JS_linters, "biomejs")
 else
 	table.insert(JS_linters, "eslint_d")
 end
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+	callback = function()
+		-- try_lint without arguments runs the linters defined in `linters_by_ft`
+		-- for the current filetype
+		require("lint").try_lint()
+	end,
+})
 require("lint").linters_by_ft = {
 	html = { "htmlhint" },
 	javascript = JS_linters,

@@ -9,6 +9,7 @@ local plugins = {
 			-- format & linting
 			{
 				-- "jose-elias-alvarez/null-ls.nvim",
+				-- "nvimtools/none-ls.nvim",
 				"mfussenegger/nvim-lint",
 				config = function()
 					require("custom.configs.null-ls")
@@ -44,6 +45,7 @@ local plugins = {
 		event = "VeryLazy",
 		config = function()
 			require("conform").setup({
+				notify_on_error = true,
 				formatters_by_ft = {
 					format_on_save = {
 						-- These options will be passed to conform.format()
@@ -58,9 +60,9 @@ local plugins = {
 					-- Conform will run multiple formatters sequentially
 					python = { "autopep8" },
 					-- Use a sub-list to run only the first available formatter
-					html = { { "biome", "prettierd" } },
-					css = { { "biome", "prettierd" } },
-					javascript = { { "biome" } },
+					html = { { "prettierd" } },
+					css = { { "prettierd" } },
+					javascript = { { "eslint_d", "biome", "prettierd" } },
 					c = { { "clang_format" } },
 
 					vim.api.nvim_create_autocmd("BufWritePre", {
@@ -73,95 +75,7 @@ local plugins = {
 			})
 		end,
 	},
-	{
-		"kevinhwang91/nvim-ufo",
-		enabled = false,
-		dependencies = {
-			"kevinhwang91/promise-async",
-		},
-		-- event = "BufRead",
-		event = "VeryLazy",
-		-- lazy = false,
-		-- event = "BufEnter",
-		-- cmd = "UfoEnable",
-		-- event = "UIEnter",
-		-- event = { "BufReadPost", "BufNewFile" },
-		keys = {
-			{
-				"zr",
-				function()
-					require("ufo").openAllFolds()
-				end,
-				desc = "Open all folds",
-			},
-			{
-				"zm",
-				function()
-					require("ufo").closeAllFolds()
-				end,
-				desc = "Close all folds",
-			},
-			{
-				"zp",
-				function()
-					require("ufo").peekFoldedLinesUnderCursor()
-				end,
-				desc = "Peek folded lines under cursor",
-			},
-		},
-		config = function()
-			require("ufo").setup({
-				open_fold_hl_timeout = 0,
-				fold_virt_text_handler = function(text, lnum, endLnum, width)
-					local suffix = (" ··· %d lines ···"):format(endLnum - lnum)
-					local lines = ("[%d lines] "):format(endLnum - lnum)
-					local cur_width = 0
-					for _, section in ipairs(text) do
-						cur_width = cur_width + vim.fn.strdisplaywidth(section[1])
-					end
-					suffix = suffix .. (" "):rep(width - cur_width - vim.fn.strdisplaywidth(lines) - 3)
-					table.insert(text, { suffix, "Comment" })
-					table.insert(text, { lines, "Todo" })
-					return text
-				end,
-				provider_selector = function(_, _, _)
-					return { "treesitter" }
-				end,
-				preview = {
-					win_config = {
-						border = { "", "", "", "", "", "", "", "" },
-						winblend = 0,
-						winhighlight = "Normal:Folded",
-					},
-				},
-			})
-		end,
-		-- opts = {
-		-- 	open_fold_hl_timeout = 0,
-		-- 	fold_virt_text_handler = function(text, lnum, endLnum, width)
-		-- 		local suffix = (" ··· %d lines ···"):format(endLnum - lnum)
-		-- 		local lines = ("[%d lines] "):format(endLnum - lnum)
-		-- 		local cur_width = 0
-		-- 		for _, section in ipairs(text) do
-		-- 			cur_width = cur_width + vim.fn.strdisplaywidth(section[1])
-		-- 		end
-		-- 		suffix = suffix .. (" "):rep(width - cur_width - vim.fn.strdisplaywidth(lines) - 3)
-		-- 		table.insert(text, { suffix, "Comment" })
-		-- 		table.insert(text, { lines, "Todo" })
-		-- 		return text
-		-- 	end,
-		-- 	provider_selector = function(_, _, _)
-		-- 		return { "treesitter" }
-		-- 	end,
-		-- 	preview = {
-		-- 		win_config = {
-		-- 			border = { "", "", "", "", "", "", "", "" },
-		-- 			winblend = 0,
-		-- 			winhighlight = "Normal:Folded",
-		-- 		},
-		-- 	},
-		-- },
-	},
+
 	-- {
 	-- 	"brenoprata10/nvim-highlight-colors",
 	-- 	event = "VeryLazy",
@@ -209,17 +123,6 @@ local plugins = {
 
 	{ "onsails/lspkind.nvim" },
 	-- { "rockerBOO/boo-colorscheme-nvim", event = "VeryLazy" },
-
-	{
-		"RRethy/base16-nvim",
-		enabled = false,
-		lazy = false,
-		priority = 1,
-		config = function()
-			-- vim.cmd("colorscheme base16-black-metal-dark-funeral")
-			vim.cmd("colorscheme base16-black-metal")
-		end,
-	},
 
 	{
 		"SmiteshP/nvim-navbuddy",

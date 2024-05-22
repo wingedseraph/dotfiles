@@ -197,7 +197,7 @@ vim.keymap.set(
 	{ noremap = true, silent = true, desc = "change working directory to current file" }
 )
 
-require("custom.discipline")
+-- require("custom.discipline")
 
 -- Folds ======================================================================
 vim.o.foldmethod = "indent" -- Set 'indent' folding method
@@ -308,10 +308,10 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "TextChanged" }, {
-	callback = function()
-		-- try_lint without arguments runs the linters defined in `linters_by_ft`
-		-- for the current filetype
-		require("lint").try_lint()
-	end,
-})
+-- vim.api.nvim_create_autocmd({ "TextChanged" }, {
+-- 	callback = function()
+-- 		-- try_lint without arguments runs the linters defined in `linters_by_ft`
+-- 		-- for the current filetype
+-- 		require("lint").try_lint()
+-- 	end,
+-- })
