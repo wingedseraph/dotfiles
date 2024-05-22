@@ -72,4 +72,9 @@ function SetupHistory()
 	end, 50)
 end
 
-vim.cmd.colorscheme("molokai")
+vim.cmd.colorscheme("yellow-moon")
+-- fix for all vim colorschemes
+vim.cmd("highlight clear Float")
+vim.cmd("highlight clear NormalFloat")
+vim.cmd("highlight link Float Folded")
+vim.cmd("highlight link NormalFloat Folded")

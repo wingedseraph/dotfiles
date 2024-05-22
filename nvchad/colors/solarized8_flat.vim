@@ -69,6 +69,10 @@ if &background == 'dark'
   hi! link lCursor Cursor
 
   hi Normal guifg=#839496 guibg=#002b36 guisp=NONE gui=NONE
+  hi Float guifg=#839496 guibg=#002b36 guisp=NONE gui=NONE
+  hi NormalFloat guifg=#839496 guibg=#002b36 guisp=NONE gui=NONE
+  hi Float guifg=#839496 guibg=#002b36 guisp=NONE gui=NONE
+  hi NormalFloat guifg=#839496 guibg=#002b36 guisp=NONE gui=NONE
   hi Added guifg=#859900 guibg=NONE guisp=NONE gui=NONE
   hi Changed guifg=#b58900 guibg=NONE guisp=NONE gui=NONE
   hi ColorColumn guifg=NONE guibg=#073642 guisp=NONE gui=NONE
@@ -1258,6 +1262,8 @@ if &background == 'light'
   hi! link lCursor Cursor
 
   hi Normal guifg=#657b83 guibg=#fdf6e3 guisp=NONE gui=NONE
+  hi Float guifg=#657b83 guibg=#fdf6e3 guisp=NONE gui=NONE
+  hi NormalFloat guifg=#657b83 guibg=#fdf6e3 guisp=NONE gui=NONE
   hi Added guifg=#859900 guibg=NONE guisp=NONE gui=NONE
   hi Changed guifg=#b58900 guibg=NONE guisp=NONE gui=NONE
   hi ColorColumn guifg=NONE guibg=#eee8d5 guisp=NONE gui=NONE
@@ -1325,6 +1331,8 @@ if &background == 'light'
   hi VisualNOS guifg=NONE guibg=#eee8d5 guisp=NONE gui=reverse
   hi WarningMsg guifg=#cb4b16 guibg=NONE guisp=NONE gui=bold
   hi WildMenu guifg=#93a1a1 guibg=#fdf6e3 guisp=NONE gui=reverse
+  hi FloatBorder guifg=#657b83 guibg=#fdf6e3 guisp=NONE gui=NONE
+  hi NormalFloat guifg=#657b83 guibg=#fdf6e3 guisp=NONE gui=NONE
 
   if has('gui_running')
     if s:diffmode == "high"

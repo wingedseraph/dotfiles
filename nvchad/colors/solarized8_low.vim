@@ -69,6 +69,8 @@ if &background == 'dark'
   hi! link lCursor Cursor
 
   hi Normal guifg=#839496 guibg=#073642 guisp=NONE gui=NONE
+  hi Float guifg=#839496 guibg=#073642 guisp=NONE gui=NONE
+  hi NormalFloat guifg=#839496 guibg=#073642 guisp=NONE gui=NONE
   hi Added guifg=#859900 guibg=NONE guisp=NONE gui=NONE
   hi Changed guifg=#b58900 guibg=NONE guisp=NONE gui=NONE
   hi ColorColumn guifg=NONE guibg=#586e75 guisp=NONE gui=NONE
@@ -1318,6 +1320,8 @@ if &background == 'light'
   hi! link lCursor Cursor
 
   hi Normal guifg=#657b83 guibg=#eee8d5 guisp=NONE gui=NONE
+  hi Float guifg=#657b83 guibg=#eee8d5 guisp=NONE gui=NONE
+  hi NormalFloat guifg=#657b83 guibg=#eee8d5 guisp=NONE gui=NONE
   hi Added guifg=#859900 guibg=NONE guisp=NONE gui=NONE
   hi Changed guifg=#b58900 guibg=NONE guisp=NONE gui=NONE
   hi ColorColumn guifg=#eee8d5 guibg=#93a1a1 guisp=NONE gui=NONE
