@@ -10,6 +10,7 @@ M.override = {
 		italic = false,
 	},
 	-- Visual = { bg = "#231942", fg = "white" },
+	CursorLine = { bg = "#231942", fg = "white" },
 	-- Visual = { bg = "#4c3743" }, -- from everforest colorscheme
 	-- Visual = { bg = "#cccccc" },
 	-- Visual = { bg = "#303446" }, -- catpuccin

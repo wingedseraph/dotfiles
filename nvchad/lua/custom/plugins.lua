@@ -39,6 +39,7 @@ local plugins = {
 			},
 		},
 	},
+	{ "echasnovski/mini.colors", opts = {} },
 	{
 		"stevearc/conform.nvim",
 		enabled = true,
@@ -296,6 +297,12 @@ local plugins = {
 	},
 	{
 		"echasnovski/mini.hues",
+		enabled = false,
+		lazy = false,
+		config = function()
+			-- require("mini.hues").setup({ background = "#10262c", foreground = "#c0c8cb" })
+			vim.cmd.colorscheme("randomhue")
+		end,
 	},
 	{ "Mofiqul/vscode.nvim" },
 	{
@@ -394,8 +401,20 @@ local plugins = {
 			"MunifTanjim/nui.nvim",
 		},
 	},
+
+	{
+		"nvim-lua/lsp-status.nvim",
+
+		lazy = false,
+		-- event = "VeryLazy",
+		config = function()
+			require("custom.status")
+			vim.opt_local.statusline = [[%{%v:lua.statusline()%}]]
+		end,
+	},
 	{
 		"echasnovski/mini.statusline",
+		enabled = false,
 		version = "*",
 		lazy = false,
 		config = function()
