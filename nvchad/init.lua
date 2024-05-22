@@ -29,7 +29,7 @@ function BOOT()
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 	-- bootstrap lazy.nvim!
-	if not vim.loop.fs_stat(lazypath) then
+	if not vim.uv.fs_stat(lazypath) then
 		require("core.bootstrap").gen_chadrc_template()
 		require("core.bootstrap").lazy(lazypath)
 	end
@@ -72,4 +72,4 @@ function SetupHistory()
 	end, 50)
 end
 
--- vim.cmd.colorscheme("retrobox")
+vim.cmd.colorscheme("molokai")

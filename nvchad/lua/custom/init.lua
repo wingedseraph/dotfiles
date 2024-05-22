@@ -197,7 +197,7 @@ vim.keymap.set(
 	{ noremap = true, silent = true, desc = "change working directory to current file" }
 )
 
--- require("custom.discipline")
+require("custom.discipline")
 
 -- Folds ======================================================================
 vim.o.foldmethod = "indent" -- Set 'indent' folding method
@@ -231,7 +231,7 @@ vim.o.fillchars = table.concat({
 }, ",")
 
 -- @function
-function read()
+function READ()
 	require("zen-mode").toggle()
 	vim.cmd("FSRead")
 	vim.cmd("set conceallevel=3")
@@ -243,7 +243,7 @@ function read()
 	vim.cmd("set wrap")
 	-- find utils to convert epub and pdf to markdown
 end
-vim.api.nvim_set_keymap("n", "<leader>re", "<cmd>lua read()<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>re", "<cmd>lua READ()<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>mj",
@@ -257,10 +257,9 @@ if file_size > 100 * 1024 then
 	vim.cmd("set nofoldenable")
 end
 
-function translateLines()
+function TranslateLines()
 	local currentLine = vim.fn.line(".")
 	local maxLines = vim.fn.line("$")
-
 	vim.cmd("number")
 	-- vim.notify("started line: " .. currentLine)
 	for i = currentLine, math.min(currentLine + 99, maxLines) do
@@ -272,7 +271,6 @@ function translateLines()
 			vim.cmd(tostring(i))
 			-- Execute translation command
 			vim.cmd("Translate ru -output=replace")
-
 			-- Move to next line
 			vim.cmd("normal! k")
 		end

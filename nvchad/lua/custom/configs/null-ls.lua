@@ -53,16 +53,16 @@ vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 		require("lint").try_lint()
 	end,
 })
-js_linters = {}
+JS_linters = {}
 if vim.fn.filereadable("./node_modules/.bin/biome") == 1 then
-	table.insert(js_linters, "biomejs")
+	table.insert(JS_linters, "biomejs")
 else
-	table.insert(js_linters, "eslint_d")
+	table.insert(JS_linters, "eslint_d")
 end
 require("lint").linters_by_ft = {
 	html = { "htmlhint" },
-	javascript = js_linters,
-	javascriptreact = js_linters,
-	typescript = js_linters,
-	typescriptreact = js_linters,
+	javascript = JS_linters,
+	javascriptreact = JS_linters,
+	typescript = JS_linters,
+	typescriptreact = JS_linters,
 }
