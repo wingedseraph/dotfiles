@@ -1,6 +1,21 @@
-local diagnostics = require("lsp-status/diagnostics")
-local redraw = require("lsp-status/redraw")
--- local utils = require("custom.utils")
+-- local diagnostics = require("lsp-status/diagnostics")
+-- local redraw = require("lsp-status/redraw")
+
+local levels = {
+	errors = vim.diagnostic.severity.ERROR,
+	warnings = vim.diagnostic.severity.WARN,
+	info = vim.diagnostic.severity.INFO,
+	hints = vim.diagnostic.severity.HINT,
+}
+
+local function get_all_diagnostics(bufnr)
+	local result = {}
+	for k, level in pairs(levels) do
+		result[k] = #vim.diagnostic.get(bufnr, { severity = level })
+	end
+
+	return result
+end
 
 local highlights = {
 	reset = "%*",
@@ -15,7 +30,7 @@ local icons = {
 	warning = " ",
 	info = " ",
 	hint = " ",
-	ok = " ",
+	ok = "",
 }
 
 local padding = " "
@@ -68,7 +83,6 @@ end
 
 local progress_status = {}
 local spinner_index = 1
-local timer
 
 local function lsp_progress()
 	local in_progress_clients = 0
@@ -84,6 +98,7 @@ local function lsp_progress()
 	end
 end
 M = {}
+
 M.spinner_frames = {
 	"",
 	"",
@@ -123,12 +138,16 @@ local function start_timer()
 			vim.schedule_wrap(function()
 				if lsp_progress() then
 					spinner_index = (spinner_index + 1) % #M.spinner_frames
-					-- redraw.redraw()
+					vim.cmd("redrawstatus!")
 				elseif timer then
 					spinner_index = 1
 					timer:close()
-					timer = nil
-					redraw.redraw()
+					local function redraw_after_delay()
+						vim.defer_fn(function()
+							vim.cmd("redrawstatus!")
+						end, 100)
+					end
+					redraw_after_delay()
 				end
 			end)
 		)
@@ -159,7 +178,7 @@ vim.lsp.handlers["$/progress"] = function(_, msg, info)
 end
 
 -- Templated off of https://github.com/sorbet/sorbet/blob/23836cbded86135219da1b204d79675a1615cc49/vscode_extension/src/SorbetStatusBarEntry.ts#L119
-vim.lsp.handlers["sorbet/showOperation"] = function(err, result, context, config)
+vim.lsp.handlers["sorbet/showOperation"] = function(err, result, context)
 	if err ~= nil then
 		error(err)
 		return
@@ -179,7 +198,7 @@ local function lsp_status()
 	if #vim.lsp.buf_get_clients(bufnr) == 0 then
 		return nil
 	end
-	local buf_diagnostics = diagnostics(bufnr) or nil
+	local buf_diagnostics = get_all_diagnostics(bufnr) or nil
 	if buf_diagnostics == nil then
 		return nil
 	end
@@ -195,9 +214,10 @@ local function lsp_status()
 		if lsp_progress() then
 			return nil
 		else
-			return icons.ok
+			return nil
 		end
 	end
+
 	return table.concat(status_parts, " ")
 end
 

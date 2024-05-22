@@ -405,7 +405,8 @@ local plugins = {
 	{
 		"nvim-lua/lsp-status.nvim",
 
-		-- lazy = false,
+		-- enabled = false,
+		lazy = false,
 		-- event = "UIEnter",
 		config = function()
 			require("custom.status")

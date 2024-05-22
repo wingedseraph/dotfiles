@@ -44,6 +44,8 @@ function BOOT()
 	else
 		require("core.utils").load_mappings()
 		require("plugins")
+		require("custom.status")
+		vim.opt_local.statusline = [[%{%v:lua.statusline()%}]]
 
 		vim.api.nvim_exec(
 			[[
@@ -79,4 +81,4 @@ vim.cmd("highlight link Float Folded")
 vim.cmd("highlight link NormalFloat Folded")
 
 -- if I use custom.status
-vim.opt.statusline = "normal  %{expand('%:~:.')}"
+-- vim.opt.statusline = "normal  %{expand('%:~:.')}"
