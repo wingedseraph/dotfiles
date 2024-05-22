@@ -216,7 +216,7 @@ local function insert_item(t, value)
 	end
 end
 
-local non_standard_filetypes = { "", "Trouble", "vimwiki", "help" }
+local non_standard_filetypes = { "", "Trouble", "vimwiki", "help", "startuptime" }
 
 local function is_standard_filetype(ft)
 	local ret = true
@@ -237,6 +237,7 @@ local function get_left_segment(active, standard_filetype)
 		n = "normal",
 		i = "insert",
 		c = "command",
+		v = "visual",
 		V = "visual-line",
 		R = "replace",
 	}

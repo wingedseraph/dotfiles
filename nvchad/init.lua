@@ -77,3 +77,6 @@ vim.cmd("highlight clear Float")
 vim.cmd("highlight clear NormalFloat")
 vim.cmd("highlight link Float Folded")
 vim.cmd("highlight link NormalFloat Folded")
+
+-- if I use custom.status
+vim.opt.statusline = "normal  %{expand('%:~:.')}"

@@ -405,8 +405,8 @@ local plugins = {
 	{
 		"nvim-lua/lsp-status.nvim",
 
-		lazy = false,
-		-- event = "VeryLazy",
+		-- lazy = false,
+		-- event = "UIEnter",
 		config = function()
 			require("custom.status")
 			vim.opt_local.statusline = [[%{%v:lua.statusline()%}]]
