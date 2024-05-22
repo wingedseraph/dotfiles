@@ -40,9 +40,9 @@ local function mini_hi()
 	local hipatterns = require("mini.hipatterns")
 	hipatterns.setup({
 		highlighters = {
-			-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
-			fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-			hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+			-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE', 'DONE':
+			-- fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+			-- hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
 			todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
 			note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
 			done = { pattern = "%f[%w]()DONE()%f[%W]", group = "St_InsertMode" },
@@ -62,7 +62,7 @@ mini_hi()
 ---------------require---------------
 -------------------------------------
 -- require("mini.hues").setup({ background = "#10262c", foreground = "#c0c8cb", saturation = "high" }) -- green
-require("mini.move").setup()
+-- require("mini.move").setup()
 -- local current_hl = vim.api.nvim_get_hl_by_name("MiniTablineCurrent", true)
 -- local modified_current_hl = vim.api.nvim_get_hl_by_name("MiniTablineModifiedCurrent", true)
 -- vim.api.nvim_set_hl(0, "MiniTablineCurrent", modified_current_hl)

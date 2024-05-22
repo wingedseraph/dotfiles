@@ -72,4 +72,4 @@ function SetupHistory()
 	end, 50)
 end
 
--- vim.cmd.colorscheme("sun")
+vim.cmd.colorscheme("sun")

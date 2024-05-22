@@ -62,8 +62,6 @@ M.override = {
   CmpItemKindStructure = { fg = "none", bg = "none" },
   CmpItemKindIdentifier = { fg = "none", bg = "none" },
   CmpItemKindModule = { fg = "none", bg = "none" },
-  Todo = { fg = "none", bg = "green" },
-  IlluminatedWordRead = {bg='red'},
 
 }
 --stylua: ignore

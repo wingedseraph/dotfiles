@@ -86,15 +86,7 @@ M.tabufline = {
 	plugin = false,
 
 	n = {
-		-- cycle through buffers
-		["gt"] = {
-			-- ["<tab>"] = {
-			function()
-				-- require("nvchad.tabufline").tabuflineNext()
-				vim.cmd("bnext")
-			end,
-			"Goto next buffer",
-		},
+
 		["<tab>"] = {
 			-- ["<tab>"] = {
 			function()
@@ -125,21 +117,9 @@ M.comment = {
 	plugin = true,
 
 	-- toggle comment in both modes
-	n = {
-		["<A-/>"] = {
-			function()
-				require("Comment.api").toggle.linewise.current()
-			end,
-			"Toggle comment",
-		},
-	},
+	n = {},
 
-	v = {
-		["<A-/>"] = {
-			"<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-			"Toggle comment",
-		},
-	},
+	v = {},
 }
 
 M.lspconfig = {

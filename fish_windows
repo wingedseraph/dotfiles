@@ -51,7 +51,7 @@ function ee
     execute "buffer #"
 end
 # Bind alt+d to the function and alt+0
-bind \eo 'nvim -c "lua setupHistory()"'
+bind \eo 'nvim -c "lua SetupHistory()"'
 bind \ed 'preview_nvim'
 bind \en 'yazi'
 # bind \el 'vide .'
@@ -62,8 +62,8 @@ bind \en 'yazi'
 
 
 # alias nvr='py /home/genie/.local/lib/python3.11/site-packages/nvr/nvr.py'
-alias N='nvim -c "lua toggle_minimal()"'
-alias o='nvim -c "lua setupHistory()"'
+alias N='nvim -c "lua Toggle_minimal()"'
+alias o='nvim -c "lua SetupHistory()"'
 alias man_='tldr'
 alias ra='lf'
 alias pw='powershell.exe'
@@ -105,6 +105,7 @@ end
    # NEOVIM PATH
    set -gx PATH "/home/genie/.local/bin/nvim-linux64/bin" $PATH
    set -gx PATH "/home/genie/go/bin" $PATH
+   set -gx PATH "/home/genie/.local/bin/helix/" $PATH
    set -gx PATH "/home/genie/.local/bin" $PATH
    set -gx PATH "/home/genie/tmp/yazi-x86_64-unknown-linux-gnu/yazi-x86_64-unknown-linux-gnu/" $PATH
    # set -gx PATH "/home/genie/.local/lib/python3.11/site-packages/nvr" $PATH
@@ -175,7 +176,7 @@ function miner
 end
 function sw
 set current_dir (pwd)
-cd $HOME/.ssh
+cd /home/genie/.ssh
      if test -f seraph
         mv id_rsa may
         mv id_rsa.pub may.pub

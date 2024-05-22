@@ -209,14 +209,7 @@ local plugins = {
 
 	{ "onsails/lspkind.nvim" },
 	-- { "rockerBOO/boo-colorscheme-nvim", event = "VeryLazy" },
-	{
-		"projekt0n/github-nvim-theme",
-		lazy = false,
-		priority = 9,
-		config = function()
-			vim.cmd.colorscheme("github_dark_dimmed")
-		end,
-	},
+
 	{
 		"RRethy/base16-nvim",
 		enabled = false,
@@ -272,17 +265,27 @@ local plugins = {
 	},
 	-- { "yorickpeterse/nvim-pqf", opts = {}, event = "VeryLazy" },
 	{ "kevinhwang91/nvim-bqf", opts = {}, event = "VeryLazy" },
+
 	{
 		"SR-Mystar/yazi.nvim",
 		cmd = "Yazi",
 		opts = {
+			continue_use_it = true,
 			size = {
 				width = 0.9, -- maximally available columns
 				height = 0.8, -- maximally available lines
 			},
 			border = "none",
 		},
-		keys = {},
+		keys = {
+			{
+				"<M-n>",
+				function()
+					vim.cmd("Yazi")
+				end,
+				desc = "Open the file manager",
+			},
+		},
 	},
 	{
 		"michaelb/sniprun",
