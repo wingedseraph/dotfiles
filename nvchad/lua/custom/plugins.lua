@@ -493,8 +493,7 @@ local plugins = {
 		version = "*",
 		lazy = false,
 		config = function()
-			require("vscode").load()
-
+			-- require("vscode").load()
 			vim.opt.showmode = false
 
 			local statusline = require("mini.statusline")
@@ -538,10 +537,26 @@ local plugins = {
 			vim.wo.statusline = "%!v:lua.MiniStatusline.active()"
 		end,
 	},
+	{
+		"echasnovski/mini.base16",
+		-- enabled = false,
+		version = false,
+		lazy = false,
+		-- opts = require("colors.base16_gruvbox"), -- gruvbox
+		-- opts = require("colors.base16_test"),
+		-- opts = require("colors.catppuccin-mocha"),
+		-- opts = require("colors.yoru"),
+		-- opts = require("colors.tokyonight"),
 
-	-- change
-	-- local re = cur:match("[%w\128-\255']+")
-	{ "nullchilly/fsread.nvim", cmd = "FSRead" },
+		config = function()
+			vim.cmd.colorscheme("minischeme")
+			vim.o.winblend = 10 -- Make floating windows slightly transparent only with minischeme
+			-- require("colors.base_many") -- many themes
+			-- require("colors.base16_config") -- emacs vibe
+			-- require("colors.base16_config_1") -- dimmed monochrome
+		end,
+	},
+	{ "nullchilly/fsread.nvim", cmd = "FSRead" }, -- change local re = cur:match("[%w\128-\255']+") in local files to search for cyrillic symbols
 	{
 		"ibhagwan/fzf-lua",
 		-- lazy = false,
