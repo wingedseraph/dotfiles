@@ -56,14 +56,6 @@ local function get_filename()
 	return pad_item(filename)
 end
 
-local function get_lines()
-	-- pad current line number to number of digits in total lines to keep length
-	-- of segment consistent
-	local num_lines = vim.fn.line("$")
-	local num_digits = string.len(num_lines)
-	return "L%0" .. num_digits .. "l/%L"
-end
-
 local function insert_diagnostic_part(status_parts, diagnostic, type)
 	if diagnostic and diagnostic > 0 then
 		if highlights[type] then
@@ -141,6 +133,13 @@ local function start_timer()
 			end)
 		)
 	end
+end
+local function get_lines()
+	-- pad current line number to number of digits in total lines to keep length
+	-- of segment consistent
+	local num_lines = vim.fn.line("$")
+	local num_digits = string.len(num_lines)
+	return "L%0" .. num_digits .. "l/%L"
 end
 
 vim.lsp.handlers["$/progress"] = function(_, msg, info)
@@ -238,6 +237,8 @@ local function get_left_segment(active, standard_filetype)
 		i = "insert",
 		c = "command",
 		v = "visual",
+		[""] = "v-block", -- ^V is a block visual mode
+		t = "terminal",
 		V = "visual-line",
 		R = "replace",
 	}
