@@ -403,17 +403,6 @@ local plugins = {
 	},
 
 	{
-		"nvim-lua/lsp-status.nvim",
-
-		-- enabled = false,
-		lazy = false,
-		-- event = "UIEnter",
-		config = function()
-			require("custom.status")
-			vim.opt_local.statusline = [[%{%v:lua.statusline()%}]]
-		end,
-	},
-	{
 		"echasnovski/mini.statusline",
 		enabled = false,
 		version = "*",
