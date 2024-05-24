@@ -43,7 +43,7 @@ function BOOT()
 	else
 		require("core.utils").load_mappings()
 		require("plugins")
-		require("custom.status")
+		require("misc.status")
 		vim.opt_local.statusline = [[%{%v:lua.statusline()%}]]
 
 		vim.api.nvim_exec(
@@ -72,15 +72,16 @@ function SetupHistory()
 		vim.cmd("FzfLua oldfiles") -- fzf.lua
 	end, 50)
 end
--- vim.cmd.colorscheme("retrobox")
+
 require("misc.base16").setup() -- minischeme colorscheme
+-- vim.cmd.colorscheme("retrobox")
 -- fix for all vim colorschemes
 vim.cmd("highlight clear Float")
 vim.cmd("highlight clear NormalFloat")
 vim.cmd("highlight link Float Folded")
 vim.cmd("highlight link NormalFloat Folded")
 
--- if I use custom.status
+-- if I use misc.status
 -- vim.opt.statusline = "%{mode()} %{expand('%:~:.')}"
 vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/tmp/undo"
 vim.opt.undofile = true
