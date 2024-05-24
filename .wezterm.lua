@@ -35,7 +35,8 @@ config.hide_mouse_cursor_when_typing = true
 config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = "RESIZE" -- NONE, TITLE, RESIZE
 config.keys = {
-	{ action = wezterm.action.ActivateCommandPalette, mods = "CTRL", key = "p" },
+	{ action = wezterm.action.ActivateCommandPalette, mods = "ALT", key = "p" },
+	{ action = wezterm.action.ActivateCommandPalette, mods = "ALT", key = "з" },
 	{ action = wezterm.action.DecreaseFontSize, mods = "CTRL", key = "-" },
 	{ action = wezterm.action.DecreaseFontSize, mods = "CTRL", key = "-" },
 	{ action = wezterm.action.IncreaseFontSize, mods = "CTRL", key = "=" },
