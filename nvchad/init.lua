@@ -83,3 +83,5 @@ vim.cmd("highlight link NormalFloat Folded")
 
 -- if I use custom.status
 -- vim.opt.statusline = "normal  %{expand('%:~:.')}"
+vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/tmp/undo"
+vim.opt.undofile = true
