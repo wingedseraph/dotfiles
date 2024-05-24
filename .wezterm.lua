@@ -25,7 +25,6 @@ if wezterm.config_builder then
 end
 
 require("modules.tabs").setup(builder, false)
-
 config.window_background_opacity = 1
 config.exit_behavior = "Close"
 config.cursor_thickness = "150%"
@@ -36,7 +35,7 @@ config.hide_mouse_cursor_when_typing = true
 config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = "RESIZE" -- NONE, TITLE, RESIZE
 config.keys = {
-	-- { action = wezterm.action.ActivateCommandPalette, mods = "CTRL", key = "p" },
+	{ action = wezterm.action.ActivateCommandPalette, mods = "CTRL", key = "p" },
 	{ action = wezterm.action.DecreaseFontSize, mods = "CTRL", key = "-" },
 	{ action = wezterm.action.DecreaseFontSize, mods = "CTRL", key = "-" },
 	{ action = wezterm.action.IncreaseFontSize, mods = "CTRL", key = "=" },
@@ -45,8 +44,8 @@ config.keys = {
 	{ action = wezterm.action.PasteFrom("PrimarySelection"), mods = "CTRL", key = "v" },
 	{ action = wezterm.action.PasteFrom("Clipboard"), mods = "CTRL", key = "м" },
 	{ action = wezterm.action.PasteFrom("PrimarySelection"), mods = "CTRL", key = "м" },
-	{ key = "w", mods = "ALT", action = wezterm.action.CloseCurrentTab({ confirm = false }) },
-	{ key = "ц", mods = "ALT", action = wezterm.action.CloseCurrentTab({ confirm = false }) },
+	{ key = "w", mods = "ALT", action = wezterm.action.CloseCurrentTab({ confirm = true }) },
+	{ key = "ц", mods = "ALT", action = wezterm.action.CloseCurrentTab({ confirm = true }) },
 	{ action = wezterm.action.ResetFontSize, mods = "CTRL", key = "0" },
 	{ action = wezterm.action.ToggleFullScreen, key = "F11" },
 }
