@@ -1,6 +1,5 @@
 pcall(function()
 	vim.loader.enable()
-	-- vim.loader.disable()
 end)
 local minimal = 0
 function Toggle_minimal()
@@ -82,6 +81,6 @@ vim.cmd("highlight link Float Folded")
 vim.cmd("highlight link NormalFloat Folded")
 
 -- if I use custom.status
--- vim.opt.statusline = "normal  %{expand('%:~:.')}"
+-- vim.opt.statusline = "%{mode()} %{expand('%:~:.')}"
 vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/tmp/undo"
 vim.opt.undofile = true

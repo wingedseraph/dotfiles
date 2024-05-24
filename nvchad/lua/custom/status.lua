@@ -145,7 +145,7 @@ local function start_timer()
 					local function redraw_after_delay()
 						vim.defer_fn(function()
 							vim.cmd("redrawstatus!")
-						end, 100)
+						end, 200)
 					end
 					redraw_after_delay()
 				end

@@ -19,17 +19,7 @@ local servers = {
 	-- "lua_ls",
 }
 lspconfig.tsserver.setup({
-	settings = {
-		inlayHints = {
-			includeInlayEnumMemberValueHints = true,
-			includeInlayFunctionLikeReturnTypeHints = true,
-			includeInlayFunctionParameterTypeHints = true,
-			includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-			includeInlayPropertyDeclarationTypeHints = true,
-			includeInlayVariableTypeHints = true,
-		},
-	},
+	settings = {},
 	on_attach = require("plugins.configs.lspconfig").on_attach,
 	capabilities = require("plugins.configs.lspconfig").capabilities,
 	init_options = {

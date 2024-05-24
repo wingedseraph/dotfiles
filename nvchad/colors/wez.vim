@@ -43,7 +43,7 @@ hi LineNr       term=bold cterm=bold ctermfg=DarkRed ctermbg=NONE
                 \ gui=NONE guifg=Orange guibg=NONE
 
 hi Folded       term=underline cterm=bold ctermfg=DarkCyan ctermbg=NONE
-                \ gui=NONE guifg=#55cccc guibg=#011111
+                \ gui=NONE guifg=#c0bfbf guibg=#000000
 
 " Green for types
 hi Type         term=underline cterm=None ctermfg=DarkGreen ctermbg=NONE
