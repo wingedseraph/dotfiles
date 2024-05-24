@@ -74,6 +74,7 @@ function SetupHistory()
 end
 
 require("misc.base16").setup() -- minischeme colorscheme
+vim.cmd("hi LineNr guifg=NONE guibg=NONE")
 -- vim.cmd.colorscheme("retrobox")
 -- fix for all vim colorschemes
 vim.cmd("highlight clear Float")
