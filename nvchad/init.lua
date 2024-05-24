@@ -73,7 +73,8 @@ function SetupHistory()
 		vim.cmd("FzfLua oldfiles") -- fzf.lua
 	end, 50)
 end
-vim.cmd.colorscheme("retrobox")
+-- vim.cmd.colorscheme("retrobox")
+require("misc.base16").setup() -- minischeme colorscheme
 -- fix for all vim colorschemes
 vim.cmd("highlight clear Float")
 vim.cmd("highlight clear NormalFloat")
