@@ -478,28 +478,13 @@ local plugins = {
 					-- These override the default tables completely
 					-- no need to set to `false` to disable a bind
 					-- delete or modify is sufficient
-					fzf = {
-						-- fzf '--bind=' options
-						-- ["ctrl-l"] = "clear-query",
-						-- ["ctrl-c"] = "abort",
-						-- ["tab"] = "toggle-out",
-						-- ["f6"] = "toggle-in",
-						-- ["ctrl-o"] = "toggle-all",
-						-- ["ctrl-f"] = "preview-down",
-						-- ["ctrl-b"] = "preview-up",
-						-- Only valid with fzf previewers (bat/cat/git/etc)
-						-- ["f3"] = "toggle-preview-wrap",
-						-- ["f4"] = "toggle-preview",
-						-- ["ctrl-d"] = "preview-page-down",
-						-- ["ctrl-u"] = "preview-page-up",
-					},
 				},
 				winopts = {
 					width = 1,
 					height = 1,
 					border = "none",
 					-- @windows usage
-					-- preview = { hidden = "hidden" },
+					preview = { hidden = "hidden" },
 				},
 			})
 		end,

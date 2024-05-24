@@ -77,7 +77,21 @@ local options = {
 		end,
 	},
 
-	formatting = formatting_style,
+	-- formatting = formatting_style,
+	formatting = {
+		format = function(entry, vim_item)
+			vim_item.kind = "" -- display nothing or icons?
+
+			vim_item.menu = ({
+				nvim_lsp = "[LSP]",
+				nvim_lua = "[Lua]",
+				luasnip = "[Snippet]",
+				buffer = "[Buffer]",
+				path = "[Path]",
+			})[entry.source.name]
+			return vim_item
+		end,
+	},
 	-- formatting = {
 	-- 	format = lspkind.cmp_format({
 	-- 		mode = "symbol_text", -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'

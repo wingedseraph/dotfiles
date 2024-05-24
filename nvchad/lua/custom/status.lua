@@ -131,7 +131,7 @@ M.spinner_frames = {
 
 local function start_timer()
 	if timer == nil then
-		timer = vim.loop.new_timer()
+		timer = vim.uv.new_timer()
 		timer:start(
 			0,
 			100,
@@ -190,11 +190,12 @@ vim.lsp.handlers["sorbet/showOperation"] = function(err, result, context)
 			title = result.description,
 		},
 	}
-	vim.lsp.handlers["$/progress"](err, message, context, config)
+	vim.lsp.handlers["$/progress"](err, message, context, nil)
 end
 
 local function lsp_status()
 	local bufnr = 0
+	-- TODO rewrite later
 	if #vim.lsp.buf_get_clients(bufnr) == 0 then
 		return nil
 	end
