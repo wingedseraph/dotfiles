@@ -257,9 +257,9 @@ local function get_left_segment(active, standard_filetype)
 		i = "insert",
 		c = "command",
 		v = "visual",
+		V = "v-line",
 		[""] = "v-block", -- ^V is a block visual mode
 		t = "terminal",
-		V = "visual-line",
 		R = "replace",
 	}
 	local mode = mode_map[mode_code] or mode_code

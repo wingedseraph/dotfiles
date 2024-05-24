@@ -46,4 +46,4 @@ vim.opt.clipboard = "unnamedplus"
 -- vim.cmd("colorscheme base16-black-metal-dark-funeral")
 
 -- @vim.notify
-vim.notify("古池や蛙飛び込む水の音 ふるいけやかわずとびこむみずのおと")
+-- vim.notify("古池や蛙飛び込む水の音 ふるいけやかわずとびこむみずのおと")

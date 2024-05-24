@@ -33,7 +33,7 @@ else
 	table.insert(JS_linters, "eslint_d")
 end
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 	callback = function()
 		-- try_lint without arguments runs the linters defined in `linters_by_ft`
 		-- for the current filetype
