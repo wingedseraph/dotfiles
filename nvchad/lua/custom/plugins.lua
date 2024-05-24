@@ -111,7 +111,7 @@ local plugins = {
 			centered_peeking = true, -- Peeked line will be centered relative to window
 		},
 	},
-	{ "psliwka/vim-smoothie", lazy = false },
+	-- { "psliwka/vim-smoothie", lazy = false },
 	{
 		"echasnovski/mini.indentscope",
 		version = "*",
