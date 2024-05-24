@@ -3,33 +3,31 @@ local wezterm = require("wezterm")
 local M = {}
 
 function M.set_font(config)
-	-- config.font_rules = {
-	-- 	{
-	-- 		intensity = "Normal",
-	-- 		font = wezterm.font({
-	-- 			family = "Iosevka Comfy",
-	-- 			weight = "Regular",
-	-- 		}),
-	-- 	},
-	-- }
-	-- config.font = wezterm.font({ family = "Brutalist Mono" })
-	-- config.font = wezterm.font({ family = "Anonymous Pro", weight = "Regular" })
-	-- config.font = wezterm.font({ family = "Dank Mono", weight = "Regular" })
-	-- config.font = wezterm.font({ family = "VictorMono Nerd Font Mono", weight = "Regular" })
-	-- config.font = wezterm.font({ family = "MonoLisa Nerd Font Mono", weight = "Regular" })
-	-- config.font = wezterm.font({ family = "Monaspace Krypton", weight = "Regular" })
-	-- config.font = wezterm.font({ family = "Monaspace Argon", weight = "Regular" })
-	-- config.font = wezterm.font({ family = "Monaspace Neon", weight = "Regular" })
-	-- config.font = wezterm.font({ family = "Monaspace Xenon" })
-	-- config.font = wezterm.font({ family = "IosevkaTerm Nerd Font" })
-	-- config.font = wezterm.font({ family = "IosevkaTerm Nerd Font" })
-	-- config.font = wezterm.font({ family = "CozetteVector", weight = "Regular" })
-	-- config.font = wezterm.font({ family = "Operator Mono Light", weight = "Regular" })
-	config.font = wezterm.font({ family = "JetBrainsMono Nerd Font" })
-	-- config.font = wezterm.font({ family = "DotGothic16" })
-	-- config.font = wezterm.font({ family = "BlexMono Nerd Font", weight = "Regular" })
-	-- config.font = wezterm.font({ family = "CaskaydiaCove NF" })
-
+	-- local font = "Brutalist Mono"
+	-- local font = "Anonymous Pro"
+	-- local font = "Dank Mono"
+	-- local font = "VictorMono Nerd Font Mono"
+	-- local font = "MonoLisa Nerd Font Mono"
+	-- local font = "Monaspace Krypton"
+	-- local font = "Monaspace Argon"
+	-- local font = "Monaspace Neon"
+	-- local font = "Monaspace Xenon"
+	local font = "Iosevka Comfy"
+	-- local font = "IosevkaTerm Nerd Font"
+	-- local font = "CozetteVector"
+	-- local font = "Operator Mono Light"
+	-- local font = "BlexMono Nerd Font"
+	-- local font = "CaskaydiaCove NF"
+	-- local font = "JetBrainsMono Nerd Font"
+	config.font_rules = {
+		{
+			intensity = "Normal",
+			font = wezterm.font({
+				family = font,
+				weight = "Regular",
+			}),
+		},
+	}
 	config.cell_width = 0.9 -- like alacritty
 	-- config.line_height = 1.35
 	config.font_size = 16.0
