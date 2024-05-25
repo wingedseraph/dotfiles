@@ -26,6 +26,7 @@ end
 
 require("modules.tabs").setup(builder, false)
 config.window_background_opacity = 1
+-- config.win32_system_backdrop = "Acrylic"
 config.exit_behavior = "Close"
 config.cursor_thickness = "150%"
 config.underline_thickness = "250%"
@@ -36,6 +37,8 @@ config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = "RESIZE" -- NONE, TITLE, RESIZE
 config.keys = {
 	{ action = wezterm.action.ActivateCommandPalette, mods = "ALT", key = "p" },
+	{ action = wezterm.action.ShowTabNavigator, mods = "ALT", key = "e" },
+	{ action = wezterm.action.ShowTabNavigator, mods = "ALT", key = "у" },
 	{ action = wezterm.action.ActivateCommandPalette, mods = "ALT", key = "з" },
 	{ action = wezterm.action.DecreaseFontSize, mods = "CTRL", key = "-" },
 	{ action = wezterm.action.DecreaseFontSize, mods = "CTRL", key = "-" },

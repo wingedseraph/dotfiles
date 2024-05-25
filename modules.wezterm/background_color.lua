@@ -15,6 +15,7 @@ local color_schemes = {
 	{ name = "nvim_colorscheme_retrobox", background = "#1c1c1c" },
 	{ name = "github_colorscheme", background = "#22272e" },
 	{ name = "minischeme", background = "#112641" },
+	{ name = "catppuccin", background = "#24273a" },
 }
 
 -- Function to select a color scheme by name or index
@@ -34,6 +35,6 @@ end
 -- Example usage
 -- local selected_color_scheme = select_color_scheme(17) -- Select by index
 -- local selected_color_scheme = select_color_scheme("#112641") -- Select by color code
-local selected_color_scheme = select_color_scheme("nvim_colorscheme_retrobox") -- Select by name
+local selected_color_scheme = select_color_scheme("catppuccin") -- Select by name
 
 return selected_color_scheme

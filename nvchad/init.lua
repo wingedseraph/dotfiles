@@ -73,8 +73,10 @@ function SetupHistory()
 	end, 50)
 end
 
+vim.cmd.colorscheme("catppuccin_macchiato")
 -- require("misc.base16").setup() -- minischeme colorscheme
-vim.cmd.colorscheme("retrobox")
+-- require("misc.neofusion").load()
+-- require("misc.default_colorschemes_fix")
 vim.cmd("hi LineNr guifg=NONE guibg=NONE")
 -- fix for all vim colorschemes
 vim.cmd("highlight clear Float")
