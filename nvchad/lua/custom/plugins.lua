@@ -351,6 +351,7 @@ local plugins = {
 	-- lazy.nvim
 	{
 		"folke/noice.nvim",
+		enabled = false,
 		event = "LspAttach",
 		opts = {
 			presets = {

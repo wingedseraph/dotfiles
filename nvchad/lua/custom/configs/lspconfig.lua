@@ -14,7 +14,7 @@ local servers = {
 	-- "pyright",
 	"basedpyright",
 	-- "denols",
-	"clangd",
+	-- "clangd",
 	"gopls",
 	-- "lua_ls",
 }
@@ -39,20 +39,20 @@ end
 
 -- lspconfig.pyright.setup { blabla}
 
-lspconfig.clangd.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	cmd = {
-		"clangd",
-		"--background-index",
-		"--pch-storage=memory",
-		"--clang-tidy",
-		"--suggest-missing-includes",
-		"--cross-file-rename",
-		"--completion-style=detailed",
-		"--offset-encoding=utf-16",
-	},
-})
+-- lspconfig.clangd.setup({
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	cmd = {
+-- 		"clangd",
+-- 		"--background-index",
+-- 		"--pch-storage=memory",
+-- 		"--clang-tidy",
+-- 		"--suggest-missing-includes",
+-- 		"--cross-file-rename",
+-- 		"--completion-style=detailed",
+-- 		"--offset-encoding=utf-16",
+-- 	},
+-- })
 -- Setup required for ufo
 capabilities.textDocument.foldingRange = {
 	dynamicRegistration = false,

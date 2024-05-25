@@ -157,7 +157,7 @@ local options = {
 		-- 	keyword_length = 3,
 		-- 	option = { additional_arguments = "--max-depth 3", debug = true },
 		-- },
-		-- { name = "nvim_lsp_signature_help" },
+		{ name = "nvim_lsp_signature_help" },
 	},
 	-- experimental = {
 	-- 	ghost_text = {
