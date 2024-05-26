@@ -1,5 +1,4 @@
 local cmp = require("cmp")
-local lspkind = require("lspkind")
 dofile(vim.g.base46_cache .. "cmp")
 
 local cmp_ui = require("core.utils").load_config().ui.cmp
@@ -16,7 +15,6 @@ local formatting_style = {
 	-- fields = field_arrangement[cmp_style] or { "kind", "menu" },
 
 	format = function(_, item)
-		local icons = require("lspkind")
 		local icon = (cmp_ui.icons and icons[item.kind]) or ""
 
 		if cmp_style == "atom" or cmp_style == "atom_colored" then

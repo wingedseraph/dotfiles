@@ -204,7 +204,6 @@ vim.o.foldmethod = "indent" -- Set 'indent' folding method
 vim.o.foldlevel = 1 -- Display all folds except top ones
 vim.o.foldnestmax = 10 -- Create folds only for some number of nested levels
 vim.g.markdown_folding = 1 -- Use folding by heading in markdown files
-
 if vim.fn.has("nvim-0.10") == 1 then
 	-- vim.o.foldtext = "" -- Use underlying text with its highlighting
 	function _G.foldtext()
@@ -315,3 +314,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
 -- 		require("lint").try_lint()
 -- 	end,
 -- })
+vim.keymap.set("n", "J", "mzJ`z", { silent = true }) -- Don't move the cursor when using J
+vim.keymap.set("i", "<C-j>", "<C-x><C-o>", { silent = true }) -- Lsp completion
+vim.keymap.set("i", "<C-f>", "<C-x><C-f>", { silent = true }) -- Filepath completion

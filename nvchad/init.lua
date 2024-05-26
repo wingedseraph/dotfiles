@@ -42,10 +42,15 @@ function BOOT()
 		require("book_plugins") -- very minimal config
 	else
 		require("core.utils").load_mappings()
+		-- require("plugins")
+
+		-- NOTE Delay the execution of the require statement by 1 millisecond
+		-- vim.defer_fn(function()
+		-- end, 0)
+
 		require("plugins")
 		require("misc.status")
 		vim.opt_local.statusline = [[%{%v:lua.statusline()%}]]
-
 		vim.api.nvim_exec(
 			[[
 	           autocmd UIEnter * silent lua vim.defer_fn(function() require('misc.enable_after_delay') end, 253)
@@ -74,6 +79,7 @@ function SetupHistory()
 end
 
 vim.cmd.colorscheme("catppuccin_macchiato")
+-- require("misc.pax").load() -- monochrome colorscheme
 -- require("misc.base16").setup() -- minischeme colorscheme
 -- require("misc.neofusion").load()
 -- require("misc.default_colorschemes_fix")
@@ -86,5 +92,3 @@ vim.cmd("highlight link NormalFloat Folded")
 
 -- if I use misc.status
 -- vim.opt.statusline = "%{mode()} %{expand('%:~:.')}"
-vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/tmp/undo"
-vim.opt.undofile = true

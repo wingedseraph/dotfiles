@@ -27,14 +27,19 @@ opt.breakindent = true -- break indentation for long lines
 opt.breakindentopt = { shift = 2 }
 -- opt.showbreak = "↳" -- character for line break
 opt.showbreak = "↪"
-opt.listchars = { eol = "↩", space = "·", tab = "→ " }
+-- opt.listchars = { eol = "↩", space = "·", tab = "→ " }
 opt.fillchars = {
-	diff = " ",
-	eob = " ",
-	fold = " ",
-	foldopen = "",
-	foldclose = "",
+	-- Characters to be used in various user-interface elements.
+	stl = " ", -- Status-line of the current window.
+	stlnc = " ", -- Status-line of the non-current windows.
+	vert = " ", -- Vertical separator to be used with :vsplit.
+	fold = " ", -- Character to be used with 'foldtext'.
+	diff = "╱", -- Deleted lines of the 'diff' option.
+	msgsep = "─", -- Message separator for 'display' option.
+	eob = " ", -- Empty lines at the end of a buffer.
 }
+opt.listchars = { tab = "-->", multispace = " ", trail = "", extends = "⟩", precedes = "⟨" } -- Make whitespace more informative in your buffer
+
 -- opt.scrolloff = 2 -- NOTE: перемещение экрана при перемещении курсора, невозможность пользоваться курсором, дерганное перемещение TESTING
 -- vim.o.guicursor = "n-v-c-i:block" -- NOTE: bold caret in insert mode TESTING
 opt.wrap = false
@@ -83,7 +88,6 @@ local langmap_keys = {
 	"юЮ;.>",
 }
 vim.o.langmap = table.concat(langmap_keys, ",")
-opt.fillchars = { eob = " " }
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = "a"
@@ -93,14 +97,29 @@ g.netrw_banner = 0
 opt.numberwidth = 1
 opt.ruler = false
 
--- disable nvim intro
 opt.shortmess:append("sI")
-
+opt.diffopt = { -- Option settings for diff mode.
+	"filler", -- Show filler lines.
+	"vertical", -- Start diff mode with vertical splits.
+	"hiddenoff", -- Do not use diff mode for a buffer when it becomes hidden.
+	"foldcolumn:0", -- Set the 'foldcolumn' option to 0.
+	"algorithm:histogram", -- Use the specified diff algorithm.
+}
+opt.foldopen = { -- Specifies for which type of commands folds will be opened.
+	"hor", -- Horizontal movements: "l", "w", "fx", etc.
+	"mark", -- Jumping to a mark: "'m", CTRL-O, etc.
+	"percent", -- % key.
+	"quickfix", -- ":cn", ":crew", ":make", etc.
+	"tag", -- Jumping to a tag: ":ta", CTRL-T, etc.
+	"undo", -- Undo or redo: "u" and CTRL-R.
+}
+opt.confirm = true
 opt.signcolumn = "no"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
 opt.timeoutlen = 500
+opt.ttimeoutlen = 0 -- Time in milliseconds to wait for a key code sequence to complete.
 opt.undofile = true
 
 -- interval for writing swap file to disk, also used by gitsigns
@@ -176,3 +195,6 @@ autocmd("BufWritePost", {
 -- vim.opt.complete:remove("t") -- Don't use tags for completion
 --
 -- vim.o.dictionary = vim.fn.stdpath("config") .. "lua/misc/dict/english.txt" -- Use specific dictionaries
+opt.undodir = os.getenv("HOME") .. "/.config/nvim/tmp/undo"
+opt.undofile = true
+opt.inccommand = "split"

@@ -39,7 +39,6 @@ local plugins = {
 			},
 		},
 	},
-	{ "echasnovski/mini.colors", opts = {} },
 	{
 		"stevearc/conform.nvim",
 		enabled = true,
@@ -111,7 +110,6 @@ local plugins = {
 			centered_peeking = true, -- Peeked line will be centered relative to window
 		},
 	},
-	-- { "psliwka/vim-smoothie", lazy = false },
 	{
 		"echasnovski/mini.indentscope",
 		version = "*",
@@ -121,8 +119,6 @@ local plugins = {
 		},
 	},
 	{ "dstein64/vim-startuptime", cmd = "StartupTime" },
-
-	{ "onsails/lspkind.nvim" },
 	-- { "rockerBOO/boo-colorscheme-nvim", event = "VeryLazy" },
 
 	{
@@ -193,24 +189,6 @@ local plugins = {
 	},
 	{
 		"michaelb/sniprun",
-		-- keys = {
-		-- 	{
-		-- 		"<leader>rr",
-		-- 		mode = { "v" },
-		-- 		function()
-		-- 			vim.cmd("SnipRun")
-		-- 		end,
-		-- 		desc = "snip run",
-		-- 	},
-		-- 	{
-		-- 		"<leader>rr",
-		-- 		mode = { "n" },
-		-- 		function()
-		-- 			vim.cmd("SnipClose")
-		-- 		end,
-		-- 		desc = "snip close",
-		-- 	},
-		-- },
 	},
 	{
 		"RRethy/vim-illuminate",
@@ -261,11 +239,7 @@ local plugins = {
 		end,
 	},
 	{ "kdheepak/lazygit.nvim" },
-	{
-		"ramojus/mellifluous.nvim",
-		lazy = false,
-		priority = 100,
-	},
+
 	{ "ThePrimeagen/vim-be-good" },
 	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
 	{
@@ -348,7 +322,6 @@ local plugins = {
 		priority = 9,
 		version = "*",
 	},
-	-- lazy.nvim
 	{
 		"folke/noice.nvim",
 		enabled = false,
@@ -552,7 +525,7 @@ local plugins = {
 
 	{
 		"uga-rosa/translate.nvim",
-		event = "VeryLazy",
+		cmd = "Translate",
 		keys = {
 			{ "<leader>tr", "<cmd>Translate ru <CR>", mode = { "n", "v" } },
 			{ "<leader>tR", "<cmd>Translate ru -output=replace<CR>", mode = { "n", "v" } },

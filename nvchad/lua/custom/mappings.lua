@@ -22,15 +22,15 @@ end
 M.general = {
 	n = {
 
-		["<M-1>"] = { "1gt", "switch buffers", opts = opts },
-		["<M-2>"] = { "2gt", "switch buffers", opts = opts },
-		["<M-3>"] = { "3gt", "switch buffers", opts = opts },
-		["<M-4>"] = { "4gt", "switch buffers", opts = opts },
-		["<M-5>"] = { "5gt", "switch buffers", opts = opts },
-		["<M-6>"] = { "6gt", "switch buffers", opts = opts },
-		["<M-7>"] = { "7gt", "switch buffers", opts = opts },
-		["<M-8>"] = { "8gt", "switch buffers", opts = opts },
-		["<M-9>"] = { "9gt", "switch buffers", opts = opts },
+		["<M-1>"] = { "1gt", "switch tabs", opts = opts },
+		["<M-2>"] = { "2gt", "switch tabs", opts = opts },
+		["<M-3>"] = { "3gt", "switch tabs", opts = opts },
+		["<M-4>"] = { "4gt", "switch tabs", opts = opts },
+		["<M-5>"] = { "5gt", "switch tabs", opts = opts },
+		["<M-6>"] = { "6gt", "switch tabs", opts = opts },
+		["<M-7>"] = { "7gt", "switch tabs", opts = opts },
+		["<M-8>"] = { "8gt", "switch tabs", opts = opts },
+		["<M-9>"] = { "9gt", "switch tabs", opts = opts },
 
 		["<tab>"] = {
 			"<cmd>bnext<cr>",
