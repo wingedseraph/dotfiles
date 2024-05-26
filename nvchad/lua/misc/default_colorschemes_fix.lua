@@ -33,3 +33,9 @@ highlight TabLineSel ctermfg=White ctermbg=none
 highlight Visual ctermfg=none ctermbg=Black
 
 ]])
+vim.cmd("hi LineNr guifg=NONE guibg=NONE")
+-- fix for all vim colorschemes
+vim.cmd("highlight clear Float")
+vim.cmd("highlight clear NormalFloat")
+vim.cmd("highlight link Float Folded")
+vim.cmd("highlight link NormalFloat Folded")

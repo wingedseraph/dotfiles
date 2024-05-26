@@ -82,13 +82,10 @@ vim.cmd.colorscheme("catppuccin_macchiato")
 -- require("misc.pax").load() -- monochrome colorscheme
 -- require("misc.base16").setup() -- minischeme colorscheme
 -- require("misc.neofusion").load()
--- require("misc.default_colorschemes_fix")
-vim.cmd("hi LineNr guifg=NONE guibg=NONE")
--- fix for all vim colorschemes
-vim.cmd("highlight clear Float")
-vim.cmd("highlight clear NormalFloat")
-vim.cmd("highlight link Float Folded")
-vim.cmd("highlight link NormalFloat Folded")
-
+require("misc.default_colorschemes_fix")
+require("misc.open_buffer_by_number")
 -- if I use misc.status
 -- vim.opt.statusline = "%{mode()} %{expand('%:~:.')}"
+
+-- NOTE check https://github.com/willothy/nvim-cokeline
+-- bufline
