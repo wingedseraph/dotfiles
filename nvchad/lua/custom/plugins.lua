@@ -432,7 +432,6 @@ local plugins = {
 		"ibhagwan/fzf-lua",
 		-- lazy = false,
 		event = "VeryLazy",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			vim.api.nvim_set_keymap("n", "<M-d>", "<cmd>FzfLua files<cr>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<M-o>", "<cmd>FzfLua oldfiles<CR>", { noremap = true, silent = true })
