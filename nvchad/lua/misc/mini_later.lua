@@ -36,13 +36,14 @@ local function mini_ai()
 end
 -- require("mini.cursorword").setup()
 local function mini_hi()
+	vim.cmd.hi("clear Todo")
 	require("mini.hipatterns").setup()
 	local hipatterns = require("mini.hipatterns")
 	hipatterns.setup({
 		highlighters = {
 			-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE', 'DONE':
-			-- fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-			-- hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
+			fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
+			hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
 			todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
 			note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
 			done = { pattern = "%f[%w]()DONE()%f[%W]", group = "St_InsertMode" },

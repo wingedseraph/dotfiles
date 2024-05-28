@@ -2,21 +2,24 @@
 function list_buffers()
 	local buffers = vim.api.nvim_list_bufs()
 	local buffer_list = {}
-	-- local current_buf = vim.api.nvim_get_current_buf()
 
 	for _, buf in ipairs(buffers) do
-		if vim.api.nvim_buf_is_loaded(buf) then
+		-- Check if the buffer is valid and listed (not hidden)
+		if vim.api.nvim_buf_is_valid(buf) and vim.fn.buflisted(buf) == 1 then
 			local buf_name = vim.api.nvim_buf_get_name(buf)
 			local is_preview = vim.fn.getbufvar(buf, "&previewwindow") == 1
 
+			-- Exclude empty buffers and the current buffer
 			if buf_name ~= "" and not is_preview then
-				table.insert(buffer_list, buf)
+				table.insert(buffer_list, { id = buf, name = buf_name })
 			end
 		end
 	end
 
-	-- Sort buffer IDs in ascending order
-	table.sort(buffer_list)
+	-- Sort buffers by their ID
+	table.sort(buffer_list, function(a, b)
+		return a.id < b.id
+	end)
 
 	return buffer_list
 end
@@ -25,8 +28,8 @@ end
 function open_buffer_by_number(number)
 	local buffers = list_buffers()
 
-	if number >= 1 and number <= 9 and number <= #buffers then
-		vim.api.nvim_set_current_buf(buffers[number]) -- Adjust index to start from 1
+	if number >= 1 and number <= #buffers then
+		vim.api.nvim_set_current_buf(buffers[number].id)
 	else
 		print("Invalid buffer number: " .. number)
 	end

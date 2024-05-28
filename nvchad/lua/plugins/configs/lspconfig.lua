@@ -64,4 +64,14 @@ M.capabilities.textDocument.completion.completionItem = {
 -- 	},
 -- })
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+	-- border = "double",
+
+	-- none, double, single, shadow, rounded, solid
+	-- block, inner_block, thinblock, inner_thinblock,
+	-- bullet, star, simple, light_shade, medium_shade,
+	-- dark_shade, arrow, full_block, diff
+	border = require("misc.border").rounded,
+})
+
 return M
