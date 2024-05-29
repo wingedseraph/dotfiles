@@ -1,29 +1,3 @@
--- Auto resize panes when resizing nvim window
--- autocmd("VimResized", {
---   pattern = "*",
---   command = "tabdo wincmd =",
--- })
-vim.g.syntastic_javascript_checkers = { "eslint" }
-vim.g.syntastic_javascript_eslint_exec = "eslint_d"
-vim.o.timeoutlen = 900
--- Automatically add 'use strict' to the first line of new JavaScript files
-vim.cmd([[
-  augroup add_use_strict
-    autocmd!
-    autocmd BufNewFile *.js silent! 0r !echo "\"use strict\""
-  augroup END
-]])
--- Automatically add '<!-- prettier-ignore --> ' to the first line of new html files
-vim.api.nvim_exec(
-	[[
-  augroup add_prettier_ignore
-    autocmd!
-    autocmd BufNewFile *.html call append(0, "<!-- prettier-ignore -->")
-  augroup END
-]],
-	false
-)
-
 vim.api.nvim_exec(
 	[[
   augroup MarkdownConceal
@@ -97,36 +71,10 @@ if vim.g.neovide then
 	-- )
 end
 
------------------------
--- EnableAfterDelay --
------------------------
-
--- execute the autocmd only if the file size is less than 100KB
--- local file_size = vim.fn.getfsize(vim.fn.expand("%"))
---
--- if file_size < 100 * 1024 then
--- 	vim.api.nvim_exec(
--- 		[[
---              autocmd UIEnter * silent lua vim.defer_fn(function() require('misc.enable_after_delay') end, 253)
---         ]],
--- 		false
--- 	)
--- end
--- zen mode
--- vim.cmd("autocmd VimEnter * lua Zen()")
-
 -- vim.o.path = ".,**"
 vim.keymap.set("v", "p", "P")
 -- working bad with fzf
 -- vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
--- neorg better work
-vim.cmd([[
-    augroup SetNorgFileType
-        autocmd!
-        autocmd BufRead,BufNewFile *.norg lua vim.cmd("setlocal filetype=norg")
-    augroup END
-]])
 
 -- Set fzf layout options
 vim.g.fzf_vim = {
@@ -201,7 +149,9 @@ vim.keymap.set(
 
 -- Folds ======================================================================
 vim.o.foldmethod = "indent" -- Set 'indent' folding method
-vim.o.foldlevel = 1 -- Display all folds except top ones
+-- vim.o.foldmethod = "expr"
+-- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldlevel = 0 -- Display all folds except top ones
 vim.o.foldnestmax = 10 -- Create folds only for some number of nested levels
 vim.g.markdown_folding = 1 -- Use folding by heading in markdown files
 if vim.fn.has("nvim-0.10") == 1 then

@@ -21,6 +21,7 @@ local plugins = {
 			require("custom.configs.lspconfig")
 		end, -- Override to setup mason-lspconfig
 	},
+	{ "echasnovski/mini.diff", version = false, event = "VeryLazy", opts = {} },
 	{
 		"folke/zen-mode.nvim",
 		cmd = "ZenMode",
@@ -376,6 +377,21 @@ local plugins = {
 		},
 	},
 
+	{
+		"samjwill/nvim-unception",
+		event = "VeryLazy",
+		init = function()
+			-- Optional settings go here!
+			-- e.g.) vim.g.unception_open_buffer_in_new_tab = true
+		end,
+	},
+	{
+		"m4xshen/hardtime.nvim",
+		enabled = false,
+		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+		event = "VeryLazy",
+		opts = {},
+	},
 	{
 		"echasnovski/mini.statusline",
 		enabled = false,
