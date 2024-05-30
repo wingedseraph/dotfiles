@@ -1,92 +1,79 @@
-"########################################
-"########################################
-" Blink (rainglow)
-"
-" https://github.com/rainglow/vim
-"
-" Copyright (c) Dayle Rees.
-"########################################
-"########################################
+" Vim color file
+" Maintainer:	Adam Blinkinsop <blinks@acm.org>
+" Last Change:	2006 Sept 29
 
-
-"########################################
-"# Settings.                            #
-"########################################
-
+" Remove all existing highlighting.
 set background=dark
-highlight clear
-
+hi clear
 if exists("syntax_on")
   syntax reset
 endif
 
-let g:colors_name = "blink"
+let colors_name = "blink"
 
-"########################################
-"# Base Colors.                         #
-"########################################
+" Set Default
+hi Normal term=NONE cterm=NONE ctermfg=Gray ctermbg=Black gui=NONE guifg=Gray guibg=Black
 
-hi Cursor         guifg=#283035 guibg=#ffffff gui=NONE
-hi Visual         guifg=#ffffff guibg=#43b5b3 gui=NONE
-hi CursorLine     guifg=NONE guibg=#2f383e gui=NONE
-hi CursorLineNr   guifg=#6a7f8c guibg=#191e21 gui=NONE
-hi CursorColumn   guifg=NONE guibg=#191e21 gui=NONE
-hi ColorColumn    guifg=NONE guibg=#121618 gui=NONE
-hi LineNr         guifg=#3e4a52 guibg=#1d2326 gui=NONE
-hi VertSplit      guifg=#3e4a52 guibg=#3e4a52 gui=NONE
-hi MatchParen     guifg=#d4856a guibg=NONE gui=underline
-hi StatusLine     guifg=#c0ccdb guibg=#1d2326 gui=bold
-hi StatusLineNC   guifg=#c0ccdb guibg=#1d2326 gui=NONE
-hi Pmenu          guifg=#c0ccdb guibg=#1d2326 gui=NONE
-hi PmenuSel       guifg=NONE guibg=#5298c4 gui=NONE
-hi IncSearch      guifg=#c0ccdb guibg=#529ca8 gui=NONE
-hi Search         guifg=NONE guibg=NONE gui=underline
-hi Directory      guifg=#5298c4 guibg=NONE gui=NONE
-hi Folded         guifg=#b0bfd2 guibg=#121618 gui=NONE
-hi Normal         guifg=#43b5b3 guibg=#283035 gui=NONE
-hi Boolean        guifg=#43b5b3 guibg=NONE gui=NONE
-hi Character      guifg=#84c4ce guibg=NONE gui=NONE
-hi Comment        guifg=#4e5c66 guibg=NONE gui=NONE
-hi Conditional    guifg=#d4856a guibg=NONE gui=NONE
-hi Constant       guifg=NONE guibg=NONE gui=NONE
-hi Define         guifg=#5298c4 guibg=NONE gui=NONE
-hi DiffAdd        guifg=#495761 guibg=#a7da1e gui=bold
-hi DiffDelete     guifg=#495761 guibg=#e61f44 gui=NONE
-hi DiffChange     guifg=#495761 guibg=#f7b83d gui=NONE
-hi DiffText       guifg=#495761 guibg=#f7b83d gui=bold
-hi ErrorMsg       guifg=#495761 guibg=#e61f44 gui=NONE
-hi WarningMsg     guifg=#495761 guibg=#f7b83d gui=NONE
-hi Float          guifg=#529ca8 guibg=NONE gui=NONE
-hi Function       guifg=#5298c4 guibg=NONE gui=NONE
-hi Identifier     guifg=#ffffff guibg=NONE gui=NONE
-hi Keyword        guifg=#5298c4 guibg=NONE gui=NONE
-hi Label          guifg=#84c4ce guibg=NONE gui=NONE
-hi NonText        guifg=#4b6484 guibg=#242b2f gui=NONE
-hi Number         guifg=#529ca8 guibg=NONE gui=NONE
-hi Operator       guifg=#c0ccdb guibg=NONE gui=NONE
-hi PreProc        guifg=#6f8391 guibg=NONE gui=NONE
-hi Special        guifg=#c0ccdb guibg=NONE gui=NONE
-hi SpecialKey     guifg=#c0ccdb guibg=#5298c4 gui=NONE
-hi Statement      guifg=#d4856a guibg=NONE gui=NONE
-hi StorageClass   guifg=#d4856a guibg=NONE gui=NONE
-hi String         guifg=#84c4ce guibg=NONE gui=NONE
-hi Tag            guifg=#5298c4 guibg=NONE gui=NONE
-hi Title          guifg=#5298c4 guibg=NONE gui=bold
-hi Todo           guifg=#6f8391 guibg=NONE gui=inverse,bold
-hi Type           guifg=NONE guibg=NONE gui=NONE
-hi Underlined     guifg=NONE guibg=NONE gui=underline
+" Vim colors (reverse for highlighting, red for errors, brown for special)
+hi Cursor term=reverse cterm=reverse
+hi CursorIME term=reverse cterm=reverse
+hi CursorColumn term=reverse cterm=reverse
+hi CursorLine term=reverse cterm=reverse
+hi ErrorMsg term=reverse ctermfg=Red ctermbg=Black guifg=Red guibg=Black
+hi ModeMsg term=reverse cterm=reverse
+hi NonText term=bold ctermfg=DarkBlue guifg=#0000c0
+hi SpecialKey term=NONE ctermfg=Brown guifg=#c0c000
+hi StatusLine term=reverse cterm=reverse
+hi Visual term=reverse cterm=reverse gui=NONE guifg=bg guibg=fg
+hi WarningMsg term=reverse ctermfg=Brown guifg=#c0c000
 
-"########################################
-"# Language Overrides                   #
-"########################################
+" Syntax Colors, General
+hi Comment term=reverse ctermfg=Black ctermbg=DarkCyan guifg=Black guibg=#00c0c0
+hi Underlined term=underline cterm=underline gui=underline
+hi Ignore term=NONE cterm=NONE gui=NONE
+hi Error term=bold ctermfg=Red ctermbg=Black guifg=Red guibg=Black
+hi Todo term=reverse cterm=reverse gui=reverse
 
-hi phpIdentifier     guifg=#ffffff
-hi phpMethodsVar     guifg=#dde2e5
-hi xmlTag            guifg=#5298c4 guibg=NONE gui=NONE
-hi xmlTagName        guifg=#5298c4 guibg=NONE gui=NONE
-hi xmlEndTag         guifg=#5298c4 guibg=NONE gui=NONE
+" Constants (plain data)
+hi Constant term=bold cterm=bold ctermfg=Brown ctermbg=Black gui=bold guifg=#c0c000 guibg=Black
+hi def link Boolean Constant
+hi def link Character Constant
+hi def link String Constant
+hi def link Number Constant
+hi def link Float Constant
 
-"########################################
-"# Light Theme Overrides                #
-"########################################
+" Identifiers (are things)
+hi Identifier term=NONE cterm=NONE ctermfg=DarkCyan ctermbg=Black gui=NONE guifg=#00c0c0 ctermbg=Black
+hi def link Function Identifier
 
+" Statements (do things)
+hi Statement term=bold ctermfg=DarkGreen ctermbg=Black guifg=#00c000 ctermbg=Black
+hi def link Conditional Statement
+hi def link Repeat Statement
+hi def link Label Statement
+hi def link Operator Statement
+hi def link Keyword Statement
+hi def link Exception Statement
+
+" Preprocessing (meta)
+hi PreProc term=bold cterm=NONE ctermfg=DarkGreen ctermbg=Black gui=NONE guifg=#00c000 guibg=Black
+hi def link Include PreProc
+hi def link Define PreProc
+hi def link Macro PreProc
+hi def link PreCondit PreProc
+
+" Types (define things)
+hi Type term=NONE cterm=bold ctermfg=DarkCyan ctermbg=Black gui=Bold guifg=#00c0c0 guibg=Black
+hi def link StorageClass Type
+hi def link Structure Type
+hi def link Typedef Type
+
+" Special (undef)
+hi Special term=NONE cterm=NONE ctermfg=Brown ctermbg=Black gui=NONE guifg=#c0c000 guibg=Black
+hi def link Tag Special
+hi def link SpecialChar Special
+hi def link Delimiter Special
+hi def link SpecialComment Special
+hi def link Debug Special
+
+" vim: sw=2

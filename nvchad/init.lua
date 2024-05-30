@@ -83,8 +83,9 @@ end
 require("misc.open_buffer_by_number")
 -- Colorscheme and misc settings
 -- Uncomment to use additional colorschemes
-vim.cmd.colorscheme("catppuccin_macchiato")
--- vim.cmd.colorscheme("molokayo")
+-- vim.cmd.colorscheme("catppuccin_macchiato")
+-- vim.cmd.colorscheme("retrobox")
+vim.cmd.colorscheme("Monokai")
 
 -- require("misc.pax").load()
 -- require("misc.neofusion").load()

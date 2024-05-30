@@ -1,92 +1,50 @@
-"########################################
-"########################################
-" Mud (rainglow)
-"
-" https://github.com/rainglow/vim
-"
-" Copyright (c) Dayle Rees.
-"########################################
-"########################################
+" Vim color file
+" Maintainer: iyerns <iyerns AT gmail DOT com>
+" Last Change: 25 August 2005
+" Version:1.0
 
 
-"########################################
-"# Settings.                            #
-"########################################
-
-set background=dark
-highlight clear
-
+set background=light
+hi clear
 if exists("syntax_on")
-  syntax reset
+	syntax reset
 endif
+let g:colors_name="mud"
 
-let g:colors_name = "mud"
+hi Normal   guifg=#ffffcc	 guibg=#330000 
+hi LineNr   guifg=white guibg=#330000 
+hi Statusline    gui=none guibg=#993300 guifg=#ffffff
+hi StatuslineNC    gui=none guibg=#660000 guifg=#ffffff
+hi VertSplit    gui=none guibg=#330000 guifg=#ffffff
+hi Cursor    gui=none guibg=DodgerBlue guifg=#ffffff
 
-"########################################
-"# Base Colors.                         #
-"########################################
+hi Title    guifg=black	 guibg=white gui=BOLD
+hi lCursor  guibg=Cyan   guifg=NONE
 
-hi Cursor         guifg=#403635 guibg=#f8f8f0 gui=NONE
-hi Visual         guifg=#4e653d guibg=#b5db99 gui=NONE
-hi CursorLine     guifg=NONE guibg=#483d3c gui=NONE
-hi CursorLineNr   guifg=#927e7c guibg=#2c2625 gui=NONE
-hi CursorColumn   guifg=NONE guibg=#2c2625 gui=NONE
-hi ColorColumn    guifg=NONE guibg=#241e1e gui=NONE
-hi LineNr         guifg=#5c4e4c guibg=#322a29 gui=NONE
-hi VertSplit      guifg=#5c4e4c guibg=#5c4e4c gui=NONE
-hi MatchParen     guifg=#ff9787 guibg=NONE gui=underline
-hi StatusLine     guifg=#ffffff guibg=#322a29 gui=bold
-hi StatusLineNC   guifg=#ffffff guibg=#322a29 gui=NONE
-hi Pmenu          guifg=#ffffff guibg=#322a29 gui=NONE
-hi PmenuSel       guifg=NONE guibg=#e9c865 gui=NONE
-hi IncSearch      guifg=#ffffff guibg=#b5db99 gui=NONE
-hi Search         guifg=NONE guibg=NONE gui=underline
-hi Directory      guifg=#e9c865 guibg=NONE gui=NONE
-hi Folded         guifg=#f2f2f2 guibg=#241e1e gui=NONE
-hi Normal         guifg=#b5db99 guibg=#403635 gui=NONE
-hi Boolean        guifg=#b5db99 guibg=NONE gui=NONE
-hi Character      guifg=#b5db99 guibg=NONE gui=NONE
-hi Comment        guifg=#c3b8b7 guibg=NONE gui=NONE
-hi Conditional    guifg=#ff9787 guibg=NONE gui=NONE
-hi Constant       guifg=NONE guibg=NONE gui=NONE
-hi Define         guifg=#e9c865 guibg=NONE gui=NONE
-hi DiffAdd        guifg=#6a5958 guibg=#a7da1e gui=bold
-hi DiffDelete     guifg=#6a5958 guibg=#e61f44 gui=NONE
-hi DiffChange     guifg=#6a5958 guibg=#f7b83d gui=NONE
-hi DiffText       guifg=#6a5958 guibg=#f7b83d gui=bold
-hi ErrorMsg       guifg=#6a5958 guibg=#e61f44 gui=NONE
-hi WarningMsg     guifg=#6a5958 guibg=#f7b83d gui=NONE
-hi Float          guifg=#b5db99 guibg=NONE gui=NONE
-hi Function       guifg=#e9c865 guibg=NONE gui=NONE
-hi Identifier     guifg=#ffffff guibg=NONE gui=NONE
-hi Keyword        guifg=#e9c865 guibg=NONE gui=NONE
-hi Label          guifg=#b5db99 guibg=NONE gui=NONE
-hi NonText        guifg=#999999 guibg=#3a3130 gui=NONE
-hi Number         guifg=#b5db99 guibg=NONE gui=NONE
-hi Operator       guifg=#ffffff guibg=NONE gui=NONE
-hi PreProc        guifg=#e6e1e1 guibg=NONE gui=NONE
-hi Special        guifg=#ffffff guibg=NONE gui=NONE
-hi SpecialKey     guifg=#ffffff guibg=#e9c865 gui=NONE
-hi Statement      guifg=#ff9787 guibg=NONE gui=NONE
-hi StorageClass   guifg=#ff9787 guibg=NONE gui=NONE
-hi String         guifg=#b5db99 guibg=NONE gui=NONE
-hi Tag            guifg=#e9c865 guibg=NONE gui=NONE
-hi Title          guifg=#e9c865 guibg=NONE gui=bold
-hi Todo           guifg=#e6e1e1 guibg=NONE gui=inverse,bold
-hi Type           guifg=NONE guibg=NONE gui=NONE
-hi Underlined     guifg=NONE guibg=NONE gui=underline
+" syntax highlighting groups
+hi Comment    gui=NONE guifg=#996666
+hi Operator   guifg=#ff0000
 
-"########################################
-"# Language Overrides                   #
-"########################################
+hi Identifier    guifg=#33ff99 gui=NONE
 
-hi phpIdentifier     guifg=#ffffff
-hi phpMethodsVar     guifg=#efeceb
-hi xmlTag            guifg=#e9c865 guibg=NONE gui=NONE
-hi xmlTagName        guifg=#e9c865 guibg=NONE gui=NONE
-hi xmlEndTag         guifg=#e9c865 guibg=NONE gui=NONE
+hi Statement	 guifg=#cc9966 gui=NONE
+hi TypeDef       guifg=#c000c8 gui=NONE
+hi Type          guifg=#ccffff gui=NONE
+hi Boolean       guifg=#ff00aa gui=NONE
 
-"########################################
-"# Light Theme Overrides                #
-"########################################
+hi String        guifg=#99ccff gui=NONE
+hi Number        guifg=#66ff66 gui=NONE
+hi Constant      guifg=#f0f000 gui=NONE
 
+hi Function      gui=NONE      guifg=#fffcfc 
+hi PreProc       guifg=#cc6600 gui=NONE
+hi Define        gui=bold guifg=#f0f0f0 
+hi Special       gui=none guifg=#cccccc 
+hi BrowseDirectory  gui=none guifg=#FFFF00 
+
+hi Keyword       guifg=#ff8088 gui=NONE
+hi Search        gui=NONE guibg=#ffff00 guifg=#330000 
+hi IncSearch     gui=NONE guifg=#fcfcfc guibg=#8888ff
+hi SpecialKey    gui=NONE guifg=#fcfcfc guibg=#8888ff
+hi NonText       gui=NONE guifg=#fcfcfc 
+hi Directory     gui=NONE guifg=#999900
