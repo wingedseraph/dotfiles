@@ -58,7 +58,7 @@ local options = {
 		completion = {
 			-- side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
 			-- winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
-			winblend = 10,
+			-- winblend = 10,
 			scrollbar = false,
 		},
 		documentation = {

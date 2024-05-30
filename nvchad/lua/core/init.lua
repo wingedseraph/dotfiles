@@ -21,12 +21,15 @@ opt.shiftwidth = 2
 opt.smartindent = true
 opt.tabstop = 2
 opt.softtabstop = 2
+opt.linebreak = true
+opt.breakindent = true
+opt.breakindentopt = { shift = 2 }
 
 -- Mine
-opt.breakindent = true -- break indentation for long lines
-opt.breakindentopt = { shift = 2 }
 -- opt.showbreak = "↳" -- character for line break
-opt.showbreak = "↪"
+opt.showbreak = "" -- ↪	⤷ ↳
+
+opt.listchars = { tab = "ᐧᐧᐧ", multispace = " ", trail = "·", extends = "⟩", precedes = "⟨" } -- Make whitespace more informative in your buffer
 -- opt.listchars = { eol = "↩", space = "·", tab = "→ " }
 opt.fillchars = {
 	-- Characters to be used in various user-interface elements.
@@ -38,7 +41,6 @@ opt.fillchars = {
 	msgsep = "─", -- Message separator for 'display' option.
 	eob = " ", -- Empty lines at the end of a buffer.
 }
-opt.listchars = { tab = "-->", multispace = " ", trail = "", extends = "⟩", precedes = "⟨" } -- Make whitespace more informative in your buffer
 
 -- opt.scrolloff = 2 -- NOTE: перемещение экрана при перемещении курсора, невозможность пользоваться курсором, дерганное перемещение TESTING
 -- vim.o.guicursor = "n-v-c-i:block" -- NOTE: bold caret in insert mode TESTING

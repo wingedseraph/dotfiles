@@ -84,6 +84,8 @@ require("misc.open_buffer_by_number")
 -- Colorscheme and misc settings
 -- Uncomment to use additional colorschemes
 vim.cmd.colorscheme("catppuccin_macchiato")
+-- vim.cmd.colorscheme("molokayo")
+
 -- require("misc.pax").load()
 -- require("misc.neofusion").load()
 -- require("misc.base16").setup() -- mini colorscheme
@@ -91,8 +93,6 @@ require("misc.default_colorschemes_fix")
 
 -- Uncomment if using misc.status
 -- vim.opt.statusline = "%{mode()} %{expand('%:~:.')}"
---
---
---
+
 -- TODO: write config in typescript haha)
 -- https://www.reddit.com/r/neovim/comments/19bhncv/configure_neovim_using_typescript/

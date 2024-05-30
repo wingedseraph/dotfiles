@@ -22,6 +22,7 @@ local plugins = {
 		end, -- Override to setup mason-lspconfig
 	},
 	{ "echasnovski/mini.diff", version = false, event = "VeryLazy", opts = {} },
+
 	{
 		"folke/zen-mode.nvim",
 		cmd = "ZenMode",
