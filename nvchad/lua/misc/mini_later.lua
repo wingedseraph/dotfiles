@@ -63,7 +63,7 @@ mini_hi()
 ---------------require---------------
 -------------------------------------
 -- require("mini.hues").setup({ background = "#10262c", foreground = "#c0c8cb", saturation = "high" }) -- green
--- require("mini.move").setup()
+require("mini.move").setup()
 -- local current_hl = vim.api.nvim_get_hl_by_name("MiniTablineCurrent", true)
 -- local modified_current_hl = vim.api.nvim_get_hl_by_name("MiniTablineModifiedCurrent", true)
 -- vim.api.nvim_set_hl(0, "MiniTablineCurrent", modified_current_hl)

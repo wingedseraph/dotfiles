@@ -240,9 +240,8 @@ local plugins = {
 			end, { expr = true })
 		end,
 	},
-	{ "kdheepak/lazygit.nvim" },
+	{ "kdheepak/lazygit.nvim", "ThePrimeagen/vim-be-good", "Mofiqul/vscode.nvim", "jghauser/mkdir.nvim" },
 
-	{ "ThePrimeagen/vim-be-good" },
 	{ "mg979/vim-visual-multi", event = "VeryLazy", enabled = true },
 	{
 		"folke/flash.nvim",
@@ -280,7 +279,6 @@ local plugins = {
 			vim.cmd.colorscheme("randomhue")
 		end,
 	},
-	{ "Mofiqul/vscode.nvim" },
 	{
 		"declancm/cinnamon.nvim",
 		enabled = false,
@@ -525,7 +523,12 @@ local plugins = {
 			keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
 		},
 	},
-	{ "echasnovski/mini.ai", version = "*", event = "VeryLazy", opts = {} },
+	{
+		"echasnovski/mini.ai",
+		"echasnovski/mini.move",
+		version = "*",
+		opts = {},
+	},
 	{
 		"junegunn/fzf.vim",
 		enabled = false,
@@ -533,10 +536,6 @@ local plugins = {
 		-- event = "VeryLazy",
 		dependencies = "junegunn/fzf",
 		opts = require("custom.configs.fzf_vim"),
-	},
-	{ "echasnovski/mini.move", version = "*" },
-	{
-		"jghauser/mkdir.nvim",
 	},
 
 	{

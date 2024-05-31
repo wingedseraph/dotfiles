@@ -15,7 +15,7 @@ local formatting_style = {
 	-- fields = field_arrangement[cmp_style] or { "kind", "menu" },
 
 	format = function(_, item)
-		local icon = (cmp_ui.icons and icons[item.kind]) or ""
+		-- local icon = (cmp_ui.icons and icons[item.kind]) or ""
 
 		if cmp_style == "atom" or cmp_style == "atom_colored" then
 			-- icon = " " .. icon .. " "
@@ -42,7 +42,13 @@ local function border(hl_name)
 		{ "│", hl_name },
 	}
 end
-
+cmp.setup.cmdline("/", {
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp_document_symbol" },
+	}, {
+		{ name = "buffer" },
+	}),
+})
 local options = {
 	-- help cmp for documentation
 	completion = {
@@ -86,6 +92,8 @@ local options = {
 				luasnip = "[Snippet]",
 				buffer = "[Buffer]",
 				path = "[Path]",
+				rg = "[Ripgrep]",
+				nvim_lsp_document_symbol = "symbol",
 			})[entry.source.name]
 			return vim_item
 		end,
@@ -153,7 +161,13 @@ local options = {
 		-- {
 		-- 	name = "rg",
 		-- 	keyword_length = 3,
-		-- 	option = { additional_arguments = "--max-depth 3", debug = true },
+		-- 	option = {
+		-- 		enable_on = {
+		-- 			"html",
+		-- 			"css",
+		-- 		},
+		-- 		additional_arguments = "-g '*.html' -g '*.css' -g '*.js'",
+		-- 	},
 		-- },
 		{ name = "nvim_lsp_signature_help" },
 	},
@@ -169,4 +183,29 @@ local options = {
 -- 	options.window.completion.border = border("CmpBorder")
 -- end
 -- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+cmp.setup.cmdline({ "/", "?" }, {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = "nvim_lsp_document_symbol" },
+		{ name = "buffer" },
+	},
+})
+-- auto_import
+-- $HOME/.local/share/nvim/lazy/cmp-nvim-lsp/lua/cmp_nvim_lsp
+-- self:_request("completionItem/resolve", completion_item, function(_, response)
+-- 	callback(response or completion_item)
+-- 	response.documentation = response.documentation or {
+-- 		kind = "markdown",
+-- 		value = "",
+-- 	}
+-- 	-- NOTE: careful with this part of the code
+-- 	if type(response.detail) == "string" then
+-- 		local auto_import, rest = string.match(response.detail, "(Auto import from '[^']+')\n(.*)")
+-- 		if auto_import and rest then
+-- 			response.documentation.value = auto_import .. "\n\n" .. rest .. "\n\n" .. response.documentation.value
+-- 		end
+-- 	end
+-- 	callback(response or completion_item)
+-- end)
+
 return options

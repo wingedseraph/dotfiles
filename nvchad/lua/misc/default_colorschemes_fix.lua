@@ -10,6 +10,11 @@ highlight TabLineSel ctermfg=White ctermbg=none
 highlight Visual ctermfg=none ctermbg=Black
 hi LineNr guifg=NONE guibg=NONE
 hi clear Float
+hi clear DiagnosticFloatingOk
+hi clear DiagnosticFloatingHint
+hi clear DiagnosticFloatingInfo
+hi clear DiagnosticFloatingWarn
+hi clear DiagnosticFloatingError
 hi clear NonText
 hi clear NormalFloat
 hi link NonText Normal
