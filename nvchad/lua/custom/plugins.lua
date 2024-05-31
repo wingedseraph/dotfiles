@@ -523,6 +523,12 @@ local plugins = {
 			keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
 		},
 	},
+
+	{
+		"folke/trouble.nvim",
+		cmd = "Trouble",
+		opts = {},
+	},
 	{
 		"echasnovski/mini.ai",
 		"echasnovski/mini.move",

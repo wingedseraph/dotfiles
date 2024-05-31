@@ -181,6 +181,7 @@ local default_plugins = {
 				"may-uri/cmp-nvim-lsp-signature-help",
 				-- "Exafunction/codeium.nvim",
 				-- "capaj/vscode-standardjs-snippets",
+				"hrsh7th/cmp-cmdline",
 				"hrsh7th/cmp-nvim-lsp-document-symbol",
 			},
 		},

@@ -90,7 +90,10 @@ require("misc.open_buffer_by_number")
 
 -- require("misc.pax").load()
 -- require("misc.neofusion").load()
-require("misc.base16").setup() -- mini colorscheme
+-- require("oldworld").colorscheme() -- jsx good palette
+require("mellow").colorscheme()
+-- require("misc.base16").setup() -- mini colorscheme
+
 require("misc.default_colorschemes_fix")
 
 -- Uncomment if using misc.status
