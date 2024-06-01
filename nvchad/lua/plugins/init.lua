@@ -6,6 +6,7 @@ local default_plugins = {
 
 	{
 		"NvChad/base46",
+		enabled = false,
 		branch = "v2.0",
 		build = function()
 			require("base46").load_all_highlights()

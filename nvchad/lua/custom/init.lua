@@ -124,7 +124,7 @@ vim.cmd([[autocmd VimLeave *.c silent! !rm -f a.out]])
 vim.api.nvim_set_keymap("n", "<M-k>", "<cmd>bnext<cr>", {
 	desc = "previous buffer",
 })
-vim.api.nvim_set_keymap("n", "<leader>rc", "<cmd>lua require('base46').load_all_highlights()<cr>", {
+vim.api.nvim_set_keymap("n", "<leader>rc", "<cmd> lua require('misc.base46.init').load_all_highlights()<cr>", {
 	desc = "reload nvchad/base46 colorscheme",
 })
 -- vim.api.nvim_exec(
@@ -167,16 +167,28 @@ if vim.fn.has("nvim-0.10") == 1 then
 	vim.opt.foldtext = "v:lua.foldtext()"
 end
 vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>copen<cr>", { noremap = true, silent = true })
+-- vim.o.fillchars = table.concat({
+-- 	"fold: ",
+-- 	"eob: ",
+-- "horiz:═",
+-- "horizdown:╦",
+-- "horizup:╩",
+-- "vert:║",
+-- "verthoriz:╬",
+-- "vertleft:╣",
+-- "vertright:╠",
+-- }, ",")
+
 vim.o.fillchars = table.concat({
 	"fold: ",
 	"eob: ",
-	"horiz:═",
-	"horizdown:╦",
-	"horizup:╩",
-	"vert:║",
-	"verthoriz:╬",
-	"vertleft:╣",
-	"vertright:╠",
+	"horiz: ",
+	"horizdown: ",
+	"horizup: ",
+	"vert: ",
+	"verthoriz: ",
+	"vertleft: ",
+	"vertright: ",
 }, ",")
 
 -- @function
@@ -296,3 +308,5 @@ end
 vim.api.nvim_set_keymap("n", "sj", ":lua toggle_splits()<CR>", { noremap = true, silent = true })
 -- Map Ctrl+n to exit terminal insert mode
 vim.api.nvim_set_keymap("t", "<C-n>", [[<C-\><C-n>]], { noremap = true, silent = true })
+-- try lint
+vim.api.nvim_set_keymap("n", "<leader>ty", ":lua require('lint').try_lint()<CR>", { noremap = true, silent = true })

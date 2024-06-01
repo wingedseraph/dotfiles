@@ -543,7 +543,6 @@ local plugins = {
 		dependencies = "junegunn/fzf",
 		opts = require("custom.configs.fzf_vim"),
 	},
-
 	{
 		"zeioth/garbage-day.nvim",
 		enabled = true,
@@ -592,7 +591,19 @@ local plugins = {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
 	{
+		"myypo/borrowed.nvim",
+		enabled = false,
+		lazy = false,
+		priority = 1000,
+		version = "^0", -- Optional: avoid upgrading to breaking versions
+		config = function()
+			-- vim.cmd("colorscheme mayu") -- OR vim.cmd("colorscheme shin")
+			vim.cmd("colorscheme shin") -- OR vim.cmd("colorscheme shin")
+		end,
+	},
+	{
 		"catppuccin/nvim",
+		enabled = false,
 		lazy = false,
 		name = "catppuccin",
 		build = ":CatppuccinCompile",
@@ -606,11 +617,20 @@ local plugins = {
 			vim.cmd("colorscheme catppuccin")
 
 			vim.cmd([[
-      " Change colors for Float window
-      highlight NormalFloat guifg=#89b4fa guibg=NONE
-      highlight FloatBorder guifg=#89b4fa guibg=NONE
-      highlight LspFloatWinNormal guibg=NONE
-      highlight TelescopeNormal guifg=#89b4fa guibg=NONE
+
+      hi clear DiagnosticVirtualTextOk
+      hi clear DiagnosticVirtualTextHint
+      hi clear DiagnosticVirtualTextInfo
+      hi clear DiagnosticVirtualTextWarn
+      hi clear DiagnosticVirtualTextError
+
+      hi clear Float
+      hi clear NonText
+      hi clear NormalFloat
+      hi link NonText Normal
+      hi link Float Normal
+      hi link NormalFloat Normal
+
     ]])
 		end,
 	},

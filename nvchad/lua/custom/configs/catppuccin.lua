@@ -1,4 +1,10 @@
 return {
+	dim_inactive = {
+		enabled = true,
+		shade = "dark",
+		percentage = 0.05,
+	},
+	show_end_of_buffer = true,
 	compile = {
 		enabled = true,
 		path = vim.fn.stdpath("cache") .. "/catppuccin",
