@@ -18,6 +18,7 @@ hi clear DiagnosticFloatingError
 hi clear NonText
 hi clear NormalFloat
 hi link NonText Normal
+"hi FloatBorder guifg=NONE guibg=NONE
 ]])
 -- vim.cmd("hi LineNr guifg=NONE guibg=NONE")
 

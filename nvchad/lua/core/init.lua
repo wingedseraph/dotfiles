@@ -31,16 +31,6 @@ opt.showbreak = "" -- ↪	⤷ ↳
 
 opt.listchars = { tab = "ᐧᐧᐧ", multispace = " ", trail = "·", extends = "⟩", precedes = "⟨" } -- Make whitespace more informative in your buffer
 -- opt.listchars = { eol = "↩", space = "·", tab = "→ " }
-opt.fillchars = {
-	-- Characters to be used in various user-interface elements.
-	stl = " ", -- Status-line of the current window.
-	stlnc = " ", -- Status-line of the non-current windows.
-	vert = " ", -- Vertical separator to be used with :vsplit.
-	fold = " ", -- Character to be used with 'foldtext'.
-	diff = "╱", -- Deleted lines of the 'diff' option.
-	msgsep = "─", -- Message separator for 'display' option.
-	eob = " ", -- Empty lines at the end of a buffer.
-}
 
 -- opt.scrolloff = 2 -- NOTE: перемещение экрана при перемещении курсора, невозможность пользоваться курсором, дерганное перемещение TESTING
 -- vim.o.guicursor = "n-v-c-i:block" -- NOTE: bold caret in insert mode TESTING

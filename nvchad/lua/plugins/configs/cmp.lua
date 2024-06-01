@@ -1,4 +1,5 @@
 local cmp = require("cmp")
+local cmp_compare = require("cmp.config.compare")
 dofile(vim.g.base46_cache .. "cmp")
 
 local cmp_ui = require("core.utils").load_config().ui.cmp
@@ -42,13 +43,6 @@ local function border(hl_name)
 		{ "│", hl_name },
 	}
 end
-cmp.setup.cmdline("/", {
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp_document_symbol" },
-	}, {
-		{ name = "buffer" },
-	}),
-})
 local options = {
 	-- help cmp for documentation
 	completion = {
@@ -183,6 +177,7 @@ local options = {
 -- 	options.window.completion.border = border("CmpBorder")
 -- end
 -- vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
 cmp.setup.cmdline({ "/", "?" }, {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = {
@@ -190,6 +185,7 @@ cmp.setup.cmdline({ "/", "?" }, {
 		{ name = "buffer" },
 	},
 })
+
 -- auto_import
 -- $HOME/.local/share/nvim/lazy/cmp-nvim-lsp/lua/cmp_nvim_lsp
 -- self:_request("completionItem/resolve", completion_item, function(_, response)
@@ -207,8 +203,15 @@ cmp.setup.cmdline({ "/", "?" }, {
 -- 	end
 -- 	callback(response or completion_item)
 -- end)
+
 -- `:` cmdline setup.
 cmp.setup.cmdline(":", {
+	sorting = {
+		comparators = {
+			-- cmp_compare.recently_used,
+			cmp_compare.order,
+		},
+	},
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "path" },

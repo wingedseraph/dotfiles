@@ -76,7 +76,7 @@ local set_groups = function()
 		["ErrorMsg"] = { fg = c.red }, -- error messages on the command line
 		["VertSplit"] = { fg = c.gray02 }, -- the column separating vertically split windows
 		["WinSeparator"] = { fg = c.gray02 }, -- the column separating vertically split windows
-		["Folded"] = { fg = c.gray04 }, -- line used for closed folds
+		["Folded"] = { bg = c.gray01 }, -- line used for closed folds
 		["FoldColumn"] = { bg = cfg.transparent and c.none or c.bg, fg = c.gray05 }, -- column where folds are displayed
 		["SignColumn"] = { bg = cfg.transparent and c.none or c.bg, fg = c.gray05 }, -- column where signs are displayed
 		["IncSearch"] = { fg = c.black, bg = c.yellow }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
@@ -90,7 +90,7 @@ local set_groups = function()
 		["Normal"] = { fg = c.fg, bg = cfg.transparent and c.none or c.bg }, -- normal text
 		["NormalNC"] = { fg = c.fg, bg = cfg.transparent and c.none or c.bg_dark }, -- normal text
 		["NormalFloat"] = { fg = c.white, bg = c.gray00 }, -- Normal text in floating windows.
-		["FloatBorder"] = { fg = c.gray03, bg = c.bg }, -- Border of floating windows.
+		-- ["FloatBorder"] = { fg = c.gray03, bg = c.bg }, -- Border of floating windows.
 		["Pmenu"] = { fg = c.white, bg = c.black }, -- Popup menu: normal item.
 		["PmenuSel"] = { fg = c.bright_white, bg = c.gray03 }, -- Popup menu: selected item.
 		["PmenuSbar"] = { bg = c.gray02 }, -- Popup menu: scrollbar.
