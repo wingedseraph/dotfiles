@@ -592,6 +592,29 @@ local plugins = {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
 	{
+		"catppuccin/nvim",
+		lazy = false,
+		name = "catppuccin",
+		build = ":CatppuccinCompile",
+		priority = 1000,
+		config = function()
+			local opts = require("custom.configs.catppuccin")
+			---@diagnostic disable-next-line: different-requires
+			require("catppuccin").setup(opts)
+
+			vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
+			vim.cmd("colorscheme catppuccin")
+
+			vim.cmd([[
+      " Change colors for Float window
+      highlight NormalFloat guifg=#89b4fa guibg=NONE
+      highlight FloatBorder guifg=#89b4fa guibg=NONE
+      highlight LspFloatWinNormal guibg=NONE
+      highlight TelescopeNormal guifg=#89b4fa guibg=NONE
+    ]])
+		end,
+	},
+	{
 		"potamides/pantran.nvim",
 		event = "VeryLazy",
 		keys = {

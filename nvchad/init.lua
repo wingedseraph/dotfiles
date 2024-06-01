@@ -91,7 +91,7 @@ require("misc.open_buffer_by_number")
 -- require("misc.pax").load()
 -- require("misc.neofusion").load()
 -- require("oldworld").colorscheme() -- jsx good palette
-require("mellow").colorscheme()
+-- require("mellow").colorscheme()
 -- require("misc.base16").setup() -- mini colorscheme
 
 require("misc.default_colorschemes_fix")
