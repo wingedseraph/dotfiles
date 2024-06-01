@@ -294,3 +294,5 @@ end
 
 -- Map the function to a key combination
 vim.api.nvim_set_keymap("n", "sj", ":lua toggle_splits()<CR>", { noremap = true, silent = true })
+-- Map Ctrl+n to exit terminal insert mode
+vim.api.nvim_set_keymap("t", "<C-n>", [[<C-\><C-n>]], { noremap = true, silent = true })

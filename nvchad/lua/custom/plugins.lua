@@ -545,27 +545,6 @@ local plugins = {
 	},
 
 	{
-		"uga-rosa/translate.nvim",
-		cmd = "Translate",
-		keys = {
-			{ "<leader>tr", "<cmd>Translate ru <CR>", mode = { "n", "v" } },
-			{ "<leader>tR", "<cmd>Translate ru -output=replace<CR>", mode = { "n", "v" } },
-		},
-		opts = {
-			silent = true,
-			preset = {
-				output = {
-					split = {
-						append = true,
-					},
-				},
-			},
-			default = {
-				command = "translate_shell",
-			},
-		},
-	},
-	{
 		"zeioth/garbage-day.nvim",
 		enabled = true,
 		-- event = "VeryLazy",
@@ -611,6 +590,26 @@ local plugins = {
 
 		name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
+	},
+	{
+		"potamides/pantran.nvim",
+		event = "VeryLazy",
+		keys = {
+			{ "<leader>tr", "<cmd>Pantran mode=hover target=ru <CR>", mode = { "n", "v" } },
+			{ "<leader>tR", "<cmd>Pantran mode=replace target=ru<CR>", mode = { "n", "v" } },
+		},
+		config = function()
+			require("pantran").setup({
+				default_engine = "google",
+				engines = {
+					google = {
+						default_source = "auto",
+						default_target = "ru-RU",
+						format = "html",
+					},
+				},
+			})
+		end,
 	},
 	{
 		"nvim-neorg/neorg",

@@ -62,7 +62,26 @@ local default_plugins = {
 			},
 		},
 	},
-
+	{
+		"potamides/pantran.nvim",
+		event = "VeryLazy",
+		keys = {
+			{ "<leader>tr", "<cmd>Pantran mode=hover target=ru <CR>", mode = { "n", "v" } },
+			{ "<leader>tR", "<cmd>Pantran mode=replace target=ru<CR>", mode = { "n", "v" } },
+		},
+		config = function()
+			require("pantran").setup({
+				default_engine = "google",
+				engines = {
+					google = {
+						default_source = "auto",
+						default_target = "ru-RU",
+						format = "html",
+					},
+				},
+			})
+		end,
+	},
 	{
 		"junegunn/fzf.vim",
 		lazy = false,

@@ -43,6 +43,7 @@
   "nvim-treesitter-context": { "branch": "master", "commit": "55e29081e73d2e4b2d62fb4dc3eebe21bf66a1e2" },
   "nvim-unception": { "branch": "main", "commit": "a0af21a27e2ba19ce6004d57d34006d18bc6bad4" },
   "outline.nvim": { "branch": "main", "commit": "139e363dd5a44f66a51041264aabe3884df4dd98" },
+  "pantran.nvim": { "branch": "main", "commit": "250b1d8e81f83e6aff061f4c75db008c684f5971" },
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "render-markdown": { "branch": "main", "commit": "966472e123195cb195e7af49d7db248ce104bee8" },
   "sniprun": { "branch": "master", "commit": "9006d4af4f7016523f8619ae1526ab4e7f0df785" },
