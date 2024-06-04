@@ -7,9 +7,10 @@ g.nvchad_theme = config.ui.theme
 g.base46_cache = vim.fn.stdpath("data") .. "/nvchad/base46/"
 g.toggle_theme_icon = ""
 -- g.toggle_theme_icon = "   "
-g.transparency = config.ui.transparency
+g.transparency = true
 
 -------------------------------------- options ------------------------------------------
+vim.cmd([[set nocompatible]])
 opt.laststatus = 2 -- global statusline
 opt.showmode = true
 
@@ -35,7 +36,7 @@ opt.listchars = { tab = "ᐧᐧᐧ", multispace = " ", trail = "·", extends = "
 -- opt.scrolloff = 2 -- NOTE: перемещение экрана при перемещении курсора, невозможность пользоваться курсором, дерганное перемещение TESTING
 -- vim.o.guicursor = "n-v-c-i:block" -- NOTE: bold caret in insert mode TESTING
 opt.wrap = false
-opt.list = false -- display trailing space
+-- opt.list = true -- display trailing space
 -- opt.sidescrolloff = 30
 opt.swapfile = false
 opt.backup = false

@@ -62,7 +62,7 @@ hi! ReplaceMode ctermfg=9 guifg=#cb4b16 ctermbg=15 guibg=#fdf6e3 cterm=NONE,reve
 hi! VisualMode ctermfg=5 guifg=#d33682 ctermbg=15 guibg=#fdf6e3 cterm=NONE,reverse gui=NONE,reverse
 hi! CommandMode ctermfg=5 guifg=#d33682 ctermbg=15 guibg=#fdf6e3 cterm=NONE,reverse gui=NONE,reverse
 if get(g:, "solarized_statusline", "") == "low"
-  hi! StatusLine ctermfg=11 guifg=#657b83 ctermbg=15 guibg=#fdf6e3 cterm=NONE,reverse gui=NONE,reverse
+  hi! StatusLine ctermfg=11 guifg=#657b83 ctermbg=15 guibg=#204a55 cterm=NONE,reverse gui=NONE,reverse
   hi! StatusLineNC ctermfg=11 guifg=#657b83 ctermbg=0 guibg=#073642 cterm=NONE,reverse gui=NONE,reverse
   hi! TabLine ctermfg=11 guifg=#657b83 ctermbg=0 guibg=#073642 cterm=NONE,reverse gui=NONE,reverse
   hi! TabLineFill ctermfg=11 guifg=#657b83 ctermbg=0 guibg=#073642 cterm=NONE,reverse gui=NONE,reverse

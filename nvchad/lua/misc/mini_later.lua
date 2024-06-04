@@ -53,11 +53,23 @@ local function mini_hi()
 		},
 	})
 end
+local function mini_indent()
+	require("mini.indentscope").setup({
+		draw = {
+			animation = require("mini.indentscope").gen_animation.none(),
+		},
+		symbol = "▎", -- default ╎, -- alts: ┊│┆ ┊  ▎││ ▏▏
+		options = { try_as_border = true, border = "top" },
+	})
+end
 -------------------------------------
 -----------function_call-------------
 -------------------------------------
 mini_ai()
 mini_hi()
+-- if vim.bo.filetype == "html" then
+-- 	mini_indent()
+-- end
 
 -------------------------------------
 ---------------require---------------

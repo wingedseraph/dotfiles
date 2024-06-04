@@ -51,11 +51,17 @@ function BOOT()
 		require("book_plugins")
 	else
 		require("core.utils").load_mappings()
+		-- vim.defer_fn(function()
 		require("plugins")
-		require("misc.base46.init").load_all_highlights()
+		-- end, 0)
+		-- vim.defer_fn(function()
+		-- require("misc.base46.init").load_all_highlights()
+		-- end, 253)
 
+		-- vim.defer_fn(function()
 		require("misc.status")
 		vim.opt_local.statusline = [[%{%v:lua.statusline()%}]]
+		-- end, 0)
 
 		vim.api.nvim_exec(
 			[[
@@ -88,12 +94,12 @@ require("misc.open_buffer_by_number")
 -- vim.cmd.colorscheme("catppuccin_macchiato")
 -- vim.cmd.colorscheme("retrobox") -- or default
 
-vim.cmd.colorscheme("Revolution")
-vim.cmd.hi("clear Folded") -- only with Revolution theme
+-- vim.cmd.colorscheme("Spink")
+-- vim.cmd.hi("clear Folded") -- only with Revolution theme
 -- vim.cmd.colorscheme("tokyonight")
 -- require("misc.colorscheme.pax").load()
 -- require("misc.colorscheme.neofusion").load()
--- require("misc.colorscheme.oldworld").colorscheme() -- jsx good palette
+require("oldworld").colorscheme() -- jsx good palette
 -- require("misc.colorscheme.mellow").colorscheme()
 -- require("misc.colorscheme.base16").setup() -- mini colorscheme
 

@@ -8,9 +8,9 @@ M.ui = {
 	-- new themes only with files on windows:
 	-- jabuti, flexoki,  mito-laser, chadracula-evondev, nano-light, flexoki-light, material-darker, material-lighter
 	-- rosepine-dawn, solarized_osaka,
-	theme = "kanagawa",
+	---@diagnostic disable-next-line: assign-type-mismatch
+	theme = "obsidian",
 	theme_toggle = { "solarized_dark", "solarized_dark" },
-
 	hl_override = highlights.override,
 	hl_add = highlights.add,
 }

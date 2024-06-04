@@ -4,10 +4,6 @@ if vim.bo.filetype ~= "markdown" then
 	vim.cmd("silent TSEnable highlight")
 end
 
-if vim.bo.filetype == "html" then
-	vim.cmd("IlluminateResume")
-end
-
 if vim.bo.filetype == "markdown" then
 	require("render-markdown").setup({})
 end

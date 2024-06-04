@@ -63,14 +63,14 @@ hi MoreMsg         guifg=#E6DB74
 hi Operator        guifg=#F92672
 
 " complete menu
-hi Pmenu           guifg=#66D9EF guibg=#000000
+hi Pmenu           guifg=#F8F8F0 guibg=272822
 hi PmenuSel                      guibg=#808080
 hi PmenuSbar                     guibg=#080808
-hi PmenuThumb      guifg=#66D9EF
+hi PmenuThumb      guifg=#F8F8F0
 
 hi PreCondit       guifg=#A6E22E               gui=bold
 hi PreProc         guifg=#A6E22E
-hi Question        guifg=#66D9EF
+hi Question        guifg=#F8F8F0
 hi Repeat          guifg=#F92672               gui=bold
 hi Search          guifg=#FFFFFF guibg=#455354
 " marks column
@@ -102,23 +102,23 @@ hi VertSplit       guifg=#808080 guibg=#080808 gui=bold
 hi VisualNOS                     guibg=#403D3D
 hi Visual                        guibg=#403D3D
 hi WarningMsg      guifg=#FFFFFF guibg=#333333 gui=bold
-hi WildMenu        guifg=#66D9EF guibg=#000000
+hi WildMenu        guifg=#66D9EF guibg=272822
 
-if s:monokain_original == 1
+"if s:monokain_original == 1
 	hi Normal          guifg=#F8F8F2 guibg=#272822
 	hi Comment         guifg=#75715E
 	hi CursorLine                    guibg=#3E3D32
 	hi CursorColumn                  guibg=#3E3D32
 	hi LineNr          guifg=#BCBCBC guibg=#3B3A32
 	hi NonText         guifg=#BCBCBC guibg=#3B3A32
-else
-	hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
-	hi Comment         guifg=#465457
-	hi CursorLine                    guibg=#293739
-	hi CursorColumn                  guibg=#293739
-	hi LineNr          guifg=#BCBCBC guibg=#232526
-	hi NonText         guifg=#BCBCBC guibg=#232526
-end
+"else
+"	hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
+"	hi Comment         guifg=#465457
+"	hi CursorLine                    guibg=#293739
+"	hi CursorColumn                  guibg=#293739
+"	hi LineNr          guifg=#BCBCBC guibg=#232526
+"	hi NonText         guifg=#BCBCBC guibg=#232526
+"end
 
 "
 " Support for 256-color terminal

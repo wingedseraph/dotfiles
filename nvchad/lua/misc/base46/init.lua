@@ -172,12 +172,14 @@ M.toggle_theme = function()
 end
 
 M.toggle_transparency = function()
-	config.ui.transparency = not config.ui.transparency
+	g.transparency = not g.transparency
 	M.load_all_highlights()
 
-	local old_transparency_val = dofile(vim.fn.stdpath("config") .. "/lua/chadrc.lua").ui.transparency
-	local new_transparency_val = "transparency = " .. tostring(config.ui.transparency)
-	require("nvchad.utils").replace_word("transparency = " .. tostring(old_transparency_val), new_transparency_val)
+	-- write transparency value to chadrc
+	local old_data = "transparency = " .. tostring(config.ui.transparency)
+	local new_data = "transparency = " .. tostring(g.transparency)
+
+	require("nvchad.utils").replace_word(old_data, new_data)
 end
 
 return M

@@ -53,7 +53,7 @@ execute "hi CursorColumn guifg=". s:Colors[1]  . " guibg=" . s:Colors[13] . " gu
 execute "hi Directory guifg="   . s:Colors[10] . " guibg=" . s:Colors[12] . " gui=none"
 execute "hi ErrorMsg guifg="    . s:Colors[13] . " guibg=" . s:Colors[7]  . " gui=none"
 execute "hi FoldColumn guifg="  . s:Colors[13] . " guibg=" . s:Colors[12] . " gui=none"
-execute "hi Folded guifg="      . s:Colors[12] . " guibg=" . s:Colors[0] . " gui=none"
+execute "hi Folded guifg=NONE guibg=" . s:Colors[13]
 execute "hi IncSearch guifg="   . s:Colors[1]  . " guibg=" . s:Colors[12] . " gui=none"
 execute "hi LineNr guifg="      . s:Colors[8]  . " guibg=" . s:Colors[12] . " gui=none"
 execute "hi MatchParen guifg="  . s:Colors[12] . " guibg=" . s:Colors[11] . " gui=none"

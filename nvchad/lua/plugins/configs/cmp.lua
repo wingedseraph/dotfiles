@@ -84,10 +84,10 @@ local options = {
 				nvim_lsp = "[LSP]",
 				nvim_lua = "[Lua]",
 				luasnip = "[Snippet]",
-				buffer = "[Buffer]",
+				-- buffer = "[Buffer]",
 				path = "[Path]",
 				rg = "[Ripgrep]",
-				nvim_lsp_document_symbol = "symbol",
+				nvim_lsp_document_symbol = "[symbol]",
 			})[entry.source.name]
 			return vim_item
 		end,

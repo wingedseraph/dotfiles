@@ -1,43 +1,73 @@
 [font]
-size=18
-[font.italic]
-family = "JetBrainsMono Nerd Font"
-style = "Italic"
+size=16
+# [font.italic]
+# family = "JetBrainsMono Nerd Font"
+# family = "IosevkaTerm Nerd Font"
+# style = "Italic"
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
+# family = "Maple Mono NF"
+# family = "IosevkaTerm Nerd Font"
+# family = "Iosevka Comfy"
+# family = "BlexMono Nerd Font"
+# family = "Monaspace Krypton"
 style = "Regular"
-
-[font.bold]
-family = "JetBrainsMono Nerd Font"
-style = "Bold"
+# [font.bold]
+# # family = "JetBrainsMono Nerd Font"
+# family = "IosevkaTerm Nerd Font"
+# style = "Bold"
 
 [[keyboard.bindings]]
 action = "Paste"
 key = "V"
 mods = "Control"
 
-# [[keyboard.bindings]]
-# action = "Copy"
-# key = "c"
-# mods = "Control"
-
 [colors]
-draw_bold_text_with_bright_colors = true
+draw_bold_text_with_bright_colors = false
 [colors.primary]
-background = "#1e1e1e"
-
+# background = "#1e1e1e" # vscode
+# background = "#101010" # book
+# background = "#272822" # monokai
+# background = "#282828" # gruvbox-dark
+# background = "#1c1c1c" # retrobox
+# background = "#002b36" # solarized
+# background = "#10262c" # hue
+# background = "#1e1d2d" # catputti mocha
+# background = "#24273a"  # catputti macchiato
+# background = "#112641" # mini
+# background = "#202020" # molokayo
+# background = "#272822" # Monokai
+# background = '#161617' # mellow
+# background = "#14161b" # tokyonight
+# background = "#192224" # Revolution vim theme
+# background = "#3f3f3f" # zenburn theme neovim
+# background ="#000000" # black
+# background = "#002b36" # solarized8 high
+background = "#161617" # mellow vim theme
+# background = "#272822" # monokain vim
+[colors.cursor]
+# cursor="#e77954"
+# cursor="#5f3f7b"
 [cursor]
 style = "Block"
 unfocused_hollow = true
 
 [window]
-dimensions = { columns = 80, lines = 30 }
+dimensions = { columns = 120, lines = 30 }
 decorations = "None" # "Full" | "None"
+opacity = 0.9
+padding = { x = 20, y = 20 }
+dynamic_padding = true
+
 [mouse]
 hide_when_typing=true
 
-# [debug]
+[selection]
+save_to_clipboard=true
+
+[debug]
 # render_timer=true
+# highlight_damage=true
 # "C:\Program Files\Alacritty\alacritty.exe" --command wsl --cd ~
 

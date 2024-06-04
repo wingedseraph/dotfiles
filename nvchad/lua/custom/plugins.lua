@@ -41,6 +41,8 @@ local plugins = {
 			},
 		},
 	},
+	{ "tpope/vim-sleuth", event = "VeryLazy" },
+
 	{
 		"stevearc/conform.nvim",
 		enabled = true,
@@ -112,13 +114,22 @@ local plugins = {
 			centered_peeking = true, -- Peeked line will be centered relative to window
 		},
 	},
+	-- Lua
+	{
+		"folke/twilight.nvim",
+		cmd = "Twilight",
+		opts = {
+			dimming = {
+				alpha = 0.15, -- amount of dimming
+				inactive = true, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
+			},
+		},
+	},
 	{
 		"echasnovski/mini.indentscope",
+		enabled = false,
 		version = "*",
-		ft = "python",
-		opts = {
-			options = { try_as_border = true },
-		},
+		ft = "html",
 	},
 	{ "dstein64/vim-startuptime", cmd = "StartupTime" },
 	-- { "rockerBOO/boo-colorscheme-nvim", event = "VeryLazy" },
@@ -194,7 +205,8 @@ local plugins = {
 	},
 	{
 		"RRethy/vim-illuminate",
-		cmd = "IlluminateResume",
+		enabled = false,
+		ft = "html",
 		config = function()
 			require("illuminate").configure({
 				providers = {
