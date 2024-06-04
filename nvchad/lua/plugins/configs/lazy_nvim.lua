@@ -1,12 +1,12 @@
 return {
 	defaults = { lazy = true },
-	-- install = { colorscheme = { "nvchad" } },
+	install = { colorscheme = { "oldworld" } },
 	change_detection = {
 		notify = false,
 	},
 	ui = {
 		icons = {
-			ft = "",
+			-- ft = "",
 			-- lazy = "󰂠 ",
 			-- loaded = "",
 			-- not_loaded = "",
