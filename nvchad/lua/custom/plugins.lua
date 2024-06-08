@@ -26,6 +26,7 @@ local plugins = {
 	{
 		"Jezda1337/nvim-html-css",
 		event = "VeryLazy",
+		-- NOTE: fix source name html-css to html_css
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-lua/plenary.nvim",
