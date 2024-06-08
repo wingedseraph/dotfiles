@@ -24,6 +24,17 @@ local plugins = {
 	{ "echasnovski/mini.diff", version = false, event = "VeryLazy", opts = {} },
 
 	{
+		"Jezda1337/nvim-html-css",
+		lazy = false,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-lua/plenary.nvim",
+		},
+		config = function()
+			require("html-css"):setup()
+		end,
+	},
+	{
 		"folke/zen-mode.nvim",
 		cmd = "ZenMode",
 		opts = {
