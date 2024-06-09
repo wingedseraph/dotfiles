@@ -365,6 +365,7 @@ hi! link htmlSpecialChar SpecialChar
 hi! link htmlTag Keyword
 hi! link htmlTagN htmlTag
 hi! link @tag.attribute.html htmlBoldItalic
+hi! link @tag.html Statement
 
 call s:hi("javaDocTags", g:kyotonight#teal, "", "", "")
 hi! link javaCommentTitle Comment
@@ -846,3 +847,6 @@ function! KyotoNightPalette() abort
     endfor
     return ret
 endfunction
+
+
+hi! MiniTablineModifiedHidden gui=bold,reverse
