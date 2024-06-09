@@ -33,7 +33,7 @@ opt.showbreak = "" -- ↪	⤷ ↳
 opt.listchars = { tab = "ᐧᐧᐧ", multispace = " ", trail = "·", extends = "⟩", precedes = "⟨" } -- Make whitespace more informative in your buffer
 -- opt.listchars = { eol = "↩", space = "·", tab = "→ " }
 
--- opt.scrolloff = 2 -- NOTE: перемещение экрана при перемещении курсора, невозможность пользоваться курсором, дерганное перемещение TESTING
+opt.scrolloff = 8
 -- vim.o.guicursor = "n-v-c-i:block" -- NOTE: bold caret in insert mode TESTING
 opt.wrap = false
 -- opt.list = true -- display trailing space
@@ -108,6 +108,7 @@ opt.foldopen = { -- Specifies for which type of commands folds will be opened.
 }
 opt.confirm = true
 opt.signcolumn = "no"
+-- opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true

@@ -43,3 +43,12 @@ vim.opt.clipboard = "unnamedplus"
 
 -- @vim.notify
 -- vim.notify("古池や蛙飛び込む水の音 ふるいけやかわずとびこむみずのおと")
+
+-- if vim.fn.has("nvim-0.10") == 1 then
+-- 	vim.opt.smoothscroll = true
+-- 	vim.opt.foldexpr = "v:lua.require'misc.lazy_ui'.foldexpr()"
+-- 	vim.opt.foldmethod = "expr"
+-- else
+-- 	vim.opt.foldmethod = "indent"
+-- 	vim.opt.foldtext = "v:lua.require'misc.lazy_ui'.foldtext()"
+-- end

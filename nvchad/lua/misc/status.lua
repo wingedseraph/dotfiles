@@ -1,6 +1,4 @@
--- local diagnostics = require("lsp-status/diagnostics")
--- local redraw = require("lsp-status/redraw")
-
+-- TODO: rewrite statusline removing unused features and improving smooth loading and animations
 local levels = {
 	errors = vim.diagnostic.severity.ERROR,
 	warnings = vim.diagnostic.severity.WARN,
@@ -141,7 +139,10 @@ local function start_timer()
 					vim.cmd("redrawstatus!")
 				elseif timer then
 					spinner_index = 1
-					timer:close()
+					-- TODO buggy timer
+					if timer ~= nil then
+						timer:close()
+					end
 					local function redraw_after_delay()
 						vim.defer_fn(function()
 							vim.cmd("redrawstatus!")

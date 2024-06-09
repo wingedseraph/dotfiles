@@ -12,6 +12,15 @@ vim.api.nvim_exec(
 -- Neovide --
 -------------
 if vim.g.neovide then
+	vim.g.neovide_cursor_trail_size = 0.1
+	vim.g.neovide_scroll_animation_length = 0 -- disable animation of change buffers
+	-- FIXME not sure what to pick - with/without padding
+	vim.g.neovide_padding_top = 40
+	vim.g.neovide_padding_bottom = 40
+	vim.g.neovide_padding_right = 40
+	vim.g.neovide_padding_left = 40
+
+	vim.g.neovide_cursor_animation_length = 0.13
 	vim.api.nvim_set_keymap(
 		"n",
 		"<C-=>",
@@ -40,14 +49,12 @@ if vim.g.neovide then
 	-- }
 
 	vim.g.neovide_theme = "default"
-	vim.g.neovide_padding_left = 10
-	vim.g.neovide_scroll_animation_length = 0.3
 	vim.g.neovide_hide_mouse_when_typing = true
 	vim.g.neovide_underline_stroke_scale = 0.9
-	vim.g.neovide_padding_top = 0
-	vim.g.neovide_padding_bottom = 0
-	vim.g.neovide_padding_right = 0
 	vim.g.neovide_no_custom_clipboard = true
+	vim.g.neovide_refresh_rate = 60
+
+	vim.g.neovide_confirm_quit = true
 	vim.keymap.set("v", "<C-c>", "y") -- Copy
 	vim.keymap.set("n", "<C-v>", "P") -- Paste normal mode
 	vim.keymap.set("v", "<C-v>", "P") -- Paste visual mode
@@ -280,33 +287,47 @@ vim.keymap.set("n", "J", "mzJ`z", { silent = true }) -- Don't move the cursor wh
 vim.keymap.set("i", "<C-j>", "<C-x><C-o>", { silent = true }) -- Lsp completion
 vim.keymap.set("i", "<C-f>", "<C-x><C-f>", { silent = true }) -- Filepath completion
 
--- Function to toggle between active splits
 function toggle_splits()
-	-- Get the list of all windows
-	local windows = vim.api.nvim_tabpage_list_wins(0)
+	local status, err = pcall(function()
+		-- Get the list of all windows
+		local windows = vim.api.nvim_tabpage_list_wins(0)
 
-	-- Get the current window ID
-	local current_window = vim.api.nvim_get_current_win()
+		-- Get the current window ID
+		local current_window = vim.api.nvim_get_current_win()
 
-	-- Find the index of the current window
-	local current_index = nil
-	for i, win in ipairs(windows) do
-		if win == current_window then
-			current_index = i
-			break
+		-- Find the index of the current window
+		local current_index = nil
+		for i, win in ipairs(windows) do
+			if win == current_window then
+				current_index = i
+				break
+			end
 		end
+
+		-- If the current window is not found, exit the function
+		if not current_index then
+			return
+		end
+
+		-- Calculate the index of the next window
+		local next_index = current_index % #windows + 1
+
+		-- Switch to the next window
+		vim.api.nvim_set_current_win(windows[next_index])
+	end)
+
+	if not status then
+		return nil
+		-- Handle the error silently
+		-- vim.api.nvim_err_writeln("Error occurred in toggle_splits: " .. err)
 	end
-
-	-- Calculate the index of the next window
-	local next_index = current_index % #windows + 1
-
-	-- Switch to the next window
-	vim.api.nvim_set_current_win(windows[next_index])
 end
 
--- Map the function to a key combination
-vim.api.nvim_set_keymap("n", "sj", ":lua toggle_splits()<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "sj", ":lua toggle_splits()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "sj", "<C-w>w", { noremap = true, silent = true })
 -- Map Ctrl+n to exit terminal insert mode
 vim.api.nvim_set_keymap("t", "<C-n>", [[<C-\><C-n>]], { noremap = true, silent = true })
 -- try lint
 vim.api.nvim_set_keymap("n", "<leader>ty", ":lua require('lint').try_lint()<CR>", { noremap = true, silent = true })
+
+require("misc.prevent_exit") -- do not let leave neovim

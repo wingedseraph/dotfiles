@@ -6,7 +6,8 @@ local lspconfig = require("lspconfig")
 -- if you just want default config for the servers then put them in a table
 
 local servers = {
-	"emmet_ls",
+	-- "emmet_ls",
+	-- "emmet-language-server",
 	"html",
 	"cssls",
 	-- "pylsp",
@@ -30,6 +31,21 @@ lspconfig.tsserver.setup({
 	},
 })
 
+lspconfig.emmet_ls.setup({
+	cmd = { "emmet-language-server", "--stdio" },
+	capabilities = capabilities,
+	on_attach = on_attach,
+	filetypes = {
+		"html",
+		"typescript",
+		"typescriptreact",
+		"javascriptreact",
+		"css",
+		"sass",
+		"scss",
+		"less",
+	},
+})
 -- @lua
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({

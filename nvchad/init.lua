@@ -51,22 +51,15 @@ function BOOT()
 		require("book_plugins")
 	else
 		require("core.utils").load_mappings()
-		-- vim.defer_fn(function()
 		require("plugins")
-		-- end, 0)
-		-- vim.defer_fn(function()
 		-- require("misc.base46.init").load_all_highlights()
-		-- end, 253)
-
-		-- vim.defer_fn(function()
 		require("misc.status")
 		vim.opt_local.statusline = [[%{%v:lua.statusline()%}]]
-		-- end, 0)
 
 		vim.api.nvim_exec(
 			[[
-      autocmd UIEnter * silent lua vim.defer_fn(function() require('misc.enable_after_delay') end, 253)
-    ]],
+	      autocmd UIEnter * silent lua vim.defer_fn(function() require('misc.enable_after_delay') end, 253)
+	    ]],
 			false
 		)
 	end
@@ -94,12 +87,13 @@ require("misc.open_buffer_by_number")
 -- vim.cmd.colorscheme("catppuccin_macchiato")
 -- vim.cmd.colorscheme("retrobox") -- or default
 
--- vim.cmd.colorscheme("Spink")
+vim.cmd.colorscheme("kyotonight")
+-- vim.cmd("set background=light")
 -- vim.cmd.hi("clear Folded") -- only with Revolution theme
 -- vim.cmd.colorscheme("tokyonight")
 -- require("misc.colorscheme.pax").load()
 -- require("misc.colorscheme.neofusion").load()
-require("oldworld").colorscheme() -- jsx good palette
+-- require("oldworld").colorscheme() -- jsx good palette
 -- require("misc.colorscheme.mellow").colorscheme()
 -- require("misc.colorscheme.base16").setup() -- mini colorscheme
 
@@ -109,3 +103,21 @@ require("misc.colorscheme.default_colorschemes_fix")
 -- vim.opt.statusline = "%{mode()} %{expand('%:~:.')}"
 -- TODO: write config in typescript haha)
 -- https://www.reddit.com/r/neovim/comments/19bhncv/configure_neovim_using_typescript/
+
+-- TODO
+-- laggy select item in cmp menu with emmetls in html/css
+--  - remove snippets?
+--  - rewrite sort of cmp emmetls and other sources?
+--  - may be dont auto-activate cmp in html/css? (will work emmetls in this condition?)
+
+-- TODO
+-- errors:
+--
+-- Error executing vim.schedule lua callback: /home/genie/.config/nvim/lua/misc/status.lua:141: handle 0x7fffcd29d8e0 is already closing
+-- stack traceback:
+--         [C]: in function 'close'
+--         /home/genie/.config/nvim/lua/misc/status.lua:141: in function ''
+--         vim/_editor.lua: in function <vim/_editor.lua:0>
+
+-- not sure do I wanna it?
+-- vim.opt.statuscolumn = [[%!v:lua.require'misc.lazy_ui'.statuscolumn()]]

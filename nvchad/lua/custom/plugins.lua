@@ -200,7 +200,7 @@ local plugins = {
 				width = 0.9, -- maximally available columns
 				height = 0.8, -- maximally available lines
 			},
-			border = "none",
+			border = "rounded",
 		},
 		keys = {
 			{
@@ -240,6 +240,9 @@ local plugins = {
 		end,
 	},
 	-- { "capaj/vscode-standardjs-snippets", ft = { "javascript" } },
+
+	{ "tzachar/highlight-undo.nvim", opts = {}, event = "VeryLazy" },
+
 	{
 		"xiyaowong/transparent.nvim",
 		cmd = "TransparentEnable",
@@ -339,12 +342,17 @@ local plugins = {
 			vim.api.nvim_set_keymap("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
 		end,
 	},
+
 	{
 		"echasnovski/mini.tabline",
-		opts = {},
 		lazy = false,
 		priority = 9,
 		version = "*",
+		config = function()
+			require("mini.tabline").setup()
+			vim.cmd.hi("clear MiniTablineModifiedHidden")
+			vim.cmd.hi("link MiniTablineModifiedHidden Search")
+		end,
 	},
 	{
 		"folke/noice.nvim",
@@ -416,6 +424,14 @@ local plugins = {
 		opts = {},
 	},
 	{
+		"xiantang/darcula-dark.nvim",
+		enabled = false,
+		lazy = false,
+		config = function()
+			vim.cmd.colorscheme("darcula-dark")
+		end,
+	},
+	{
 		"echasnovski/mini.statusline",
 		enabled = false,
 		version = "*",
@@ -425,38 +441,38 @@ local plugins = {
 			vim.opt.showmode = false
 
 			local statusline = require("mini.statusline")
-    --stylua: ignore
-    local active = function()
-      local mode, mode_hl = statusline.section_mode({ trunc_width = 120 })
-      -- Try out 'mini.git'
-      local git_summary  = vim.b.minigit_summary or {}
-      local git_head = git_summary.head_name or ''
-      if git_head ~= '' then
-        git_head = ' ' .. (git_head == 'HEAD' and git_summary.head:sub(1, 7) or git_head)
-      end
-      local git_status = git_summary.status or ''
-      if git_status ~= '' then
-        git_status = git_status == '  ' and '' or string.format('(%s)', git_status)
-      end
-      -- Try out 'mini.diff'
-      local diff_summary  = vim.b.minidiff_summary_string
-      local diff          = diff_summary ~= nil and string.format(' %s', diff_summary == '' and '-' or diff_summary) or ''
-      local diagnostics   = statusline.section_diagnostics({ trunc_width = 75 })
-      local filename      = statusline.section_filename({ trunc_width = 140 })
-      local fileinfo      = statusline.section_fileinfo({ trunc_width = 120 })
-      local location      = statusline.section_location({ trunc_width = 75 })
-      local search        = statusline.section_searchcount({ trunc_width = 75 })
+			--stylua: ignore
+			local active = function()
+				local mode, mode_hl = statusline.section_mode({ trunc_width = 120 })
+				-- Try out 'mini.git'
+				local git_summary  = vim.b.minigit_summary or {}
+				local git_head = git_summary.head_name or ''
+				if git_head ~= '' then
+					git_head = ' ' .. (git_head == 'HEAD' and git_summary.head:sub(1, 7) or git_head)
+				end
+				local git_status = git_summary.status or ''
+				if git_status ~= '' then
+					git_status = git_status == '  ' and '' or string.format('(%s)', git_status)
+				end
+				-- Try out 'mini.diff'
+				local diff_summary  = vim.b.minidiff_summary_string
+				local diff          = diff_summary ~= nil and string.format(' %s', diff_summary == '' and '-' or diff_summary) or ''
+				local diagnostics   = statusline.section_diagnostics({ trunc_width = 75 })
+				local filename      = statusline.section_filename({ trunc_width = 140 })
+				local fileinfo      = statusline.section_fileinfo({ trunc_width = 120 })
+				local location      = statusline.section_location({ trunc_width = 75 })
+				local search        = statusline.section_searchcount({ trunc_width = 75 })
 
-      return statusline.combine_groups({
-        { hl = mode_hl,                  strings = { mode } },
-        { hl = 'MiniStatuslineDevinfo',  strings = { git_head, diff, diagnostics } },
-        '%<', -- Mark general truncate point
-        { hl = 'MiniStatuslineFileinfo', strings = { filename } },
-        '%=', -- End left alignment
-        { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
-        { hl = mode_hl,                  strings = { search, location } },
-      })
-    end
+				return statusline.combine_groups({
+					{ hl = mode_hl,                  strings = { mode } },
+					{ hl = 'MiniStatuslineDevinfo',  strings = { git_head, diff, diagnostics } },
+					'%<', -- Mark general truncate point
+					{ hl = 'MiniStatuslineFileinfo', strings = { filename } },
+					'%=', -- End left alignment
+					{ hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+					{ hl = mode_hl,                  strings = { search, location } },
+				})
+			end
 			statusline.setup({ content = { active = active } })
 
 			-- require("mini.statusline").setup({
@@ -547,7 +563,44 @@ local plugins = {
 			keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
 		},
 	},
-
+	{
+		"rose-pine/neovim",
+		enabled = false,
+		name = "rose-pine",
+		lazy = false,
+		config = function()
+			vim.cmd.colorscheme("rose-pine")
+		end,
+	},
+	{
+		"loctvl842/monokai-pro.nvim",
+		enabled = false,
+		opts = {},
+		config = function()
+			vim.cmd.colorscheme("monokai-pro-classic")
+		end,
+		lazy = false,
+	},
+	{
+		"uga-rosa/translate.nvim",
+		cmd = "Translate ru -output=replace",
+		keys = {
+			{ "<leader>tR", "<cmd>Translate ru -output=replace<CR>", mode = { "n", "v" } },
+		},
+		opts = {
+			silent = true,
+			preset = {
+				output = {
+					split = {
+						append = true,
+					},
+				},
+			},
+			default = {
+				command = "translate_shell",
+			},
+		},
+	},
 	{
 		"folke/trouble.nvim",
 		cmd = "Trouble",
@@ -663,7 +716,6 @@ local plugins = {
 		event = "VeryLazy",
 		keys = {
 			{ "<leader>tr", "<cmd>Pantran mode=hover target=ru <CR>", mode = { "n", "v" } },
-			{ "<leader>tR", "<cmd>Pantran mode=replace target=ru<CR>", mode = { "n", "v" } },
 		},
 		config = function()
 			require("pantran").setup({

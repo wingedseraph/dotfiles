@@ -9,7 +9,7 @@ M.ui = {
 	-- jabuti, flexoki,  mito-laser, chadracula-evondev, nano-light, flexoki-light, material-darker, material-lighter
 	-- rosepine-dawn, solarized_osaka,
 	---@diagnostic disable-next-line: assign-type-mismatch
-	theme = "obsidian",
+	theme = "gruvbox_light",
 	theme_toggle = { "solarized_dark", "solarized_dark" },
 	hl_override = highlights.override,
 	hl_add = highlights.add,
