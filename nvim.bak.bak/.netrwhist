@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/Users/oo/git/dotfiles/nvchad'
+let g:netrw_dirhist_6='/Users/oo/.local/share/nvim/lazy/mini.statusline/lua/mini'
+let g:netrw_dirhist_5='/Users/oo/.local/share/nvim/lazy/mini.statusline/lua'
+let g:netrw_dirhist_4='/Users/oo/Documents'
+let g:netrw_dirhist_3='/Users/oo/Applications'
+let g:netrw_dirhist_2='/Users/oo/workspace/learn_c'
+let g:netrw_dirhist_1='/Users/oo/workspace'
+let g:netrw_dirhist_0='/Users/oo/workspace/learn_c'
+let g:netrw_dirhist_9='/Users/oo/workspace'
+let g:netrw_dirhist_8='/Users/oo/Desktop'
