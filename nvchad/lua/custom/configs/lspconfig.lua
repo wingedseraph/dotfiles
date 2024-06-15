@@ -6,13 +6,14 @@ local lspconfig = require("lspconfig")
 -- if you just want default config for the servers then put them in a table
 
 local servers = {
+	-- "vtsls",
 	-- "emmet_ls",
 	-- "emmet-language-server",
 	"html",
 	"cssls",
 	-- "pylsp",
 	-- "basedpyright",
-	"tsserver",
+	-- "tsserver",
 	-- "pyright",
 	"basedpyright",
 	-- "denols",
@@ -20,16 +21,16 @@ local servers = {
 	"gopls",
 	-- "lua_ls",
 }
-lspconfig.tsserver.setup({
-	settings = {},
-	on_attach = require("plugins.configs.lspconfig").on_attach,
-	capabilities = require("plugins.configs.lspconfig").capabilities,
-	init_options = {
-		preferences = {
-			disableSuggestions = true,
-		},
-	},
-})
+-- lspconfig.tsserver.setup({
+-- 	settings = {},
+-- 	on_attach = require("plugins.configs.lspconfig").on_attach,
+-- 	capabilities = require("plugins.configs.lspconfig").capabilities,
+-- 	init_options = {
+-- 		preferences = {
+-- 			disableSuggestions = true,
+-- 		},
+-- 	},
+-- })
 
 lspconfig.emmet_ls.setup({
 	cmd = { "emmet-language-server", "--stdio" },
@@ -53,8 +54,6 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
-
--- lspconfig.pyright.setup { blabla}
 
 -- lspconfig.clangd.setup({
 -- 	on_attach = on_attach,
@@ -106,16 +105,6 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
--- @javascript
-lspconfig.tsserver.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	init_options = {
-		preferences = {
-			disableSuggestions = true,
-		},
-	},
-})
 -- @c++
 lspconfig.clangd.setup({
 	on_attach = on_attach,
@@ -131,8 +120,48 @@ lspconfig.clangd.setup({
 		"--offset-encoding=utf-16",
 	},
 })
--- Setup required for ufo
-capabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true,
+
+local mi_servers = {
+	vtsls = {
+		settings = {
+			complete_function_calls = true,
+			vtsls = {
+				enableMoveToFileCodeAction = true,
+				autoUseWorkspaceTsdk = true,
+				experimental = {
+					completion = {
+						enableServerSideFuzzyMatch = true,
+					},
+				},
+			},
+			typescript = {
+				updateImportsOnFileMove = { enabled = "always" },
+				suggest = {
+					completeFunctionCalls = true,
+				},
+				inlayHints = {
+					enumMemberValues = { enabled = true },
+					functionLikeReturnTypes = { enabled = true },
+					parameterNames = { enabled = "literals" },
+					parameterTypes = { enabled = true },
+					propertyDeclarationTypes = { enabled = true },
+					variableTypes = { enabled = false },
+				},
+			},
+		},
+		on_attach = function(client)
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
+		end,
+	},
 }
+for name, config in pairs(mi_servers) do
+	if config == true then
+		config = {}
+	end
+	config = vim.tbl_deep_extend("force", {}, {
+		capabilities = capabilities,
+	}, config)
+
+	lspconfig[name].setup(config)
+end

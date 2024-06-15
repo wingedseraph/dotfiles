@@ -11,6 +11,13 @@ M.on_attach = function(client, bufnr)
 	client.server_capabilities.documentFormattingProvider = false
 	client.server_capabilities.documentRangeFormattingProvider = false
 
+	if client.server_capabilities.documentSymbolProvider then
+		if vim.bo.filetype == "html" then
+			if pcall(require, "nvim-navic") then
+				require("nvim-navic").attach(client, bufnr)
+			end
+		end
+	end
 	utils.load_mappings("lspconfig", { buffer = bufnr })
 
 	if client.server_capabilities.signatureHelpProvider then
@@ -40,29 +47,6 @@ M.capabilities.textDocument.completion.completionItem = {
 		},
 	},
 }
-
--- lspconfig.lua_ls.setup({
--- 	on_attach = M.on_attach,
--- 	capabilities = M.capabilities,
---
--- 	settings = {
--- 		Lua = {
--- 			diagnostics = {
--- 				globals = { "vim" },
--- 			},
--- 			workspace = {
--- 				library = {
--- 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
--- 					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
--- 					[vim.fn.stdpath("data") .. "/lazy/ui/nvchad_types"] = true,
--- 					[vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
--- 				},
--- 				maxPreload = 100000,
--- 				preloadFileSize = 10000,
--- 			},
--- 		},
--- 	},
--- })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 	-- border = "double",

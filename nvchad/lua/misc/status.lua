@@ -271,6 +271,12 @@ local function get_left_segment(active, standard_filetype)
 	insert_item(left_segment_items, pad_item(progress_spinner()))
 	insert_item(left_segment_items, pad_item(lsp_status()))
 	insert_item(left_segment_items, pad_item(get_lines()))
+
+	-- if pcall(require, "nvim-navic") then
+	-- 	navic = require("nvim-navic")
+	-- 	insert_item(left_segment_items, navic.get_location())
+	-- end
+
 	if standard_filetype then
 		insert_item(left_segment_items, help_modified_read_only)
 	end

@@ -24,18 +24,6 @@ local plugins = {
 	{ "echasnovski/mini.diff", version = false, event = "VeryLazy", opts = {} },
 
 	{
-		"Jezda1337/nvim-html-css",
-		event = "VeryLazy",
-		-- NOTE: fix source name html-css to html_css
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-lua/plenary.nvim",
-		},
-		config = function()
-			require("html-css"):setup()
-		end,
-	},
-	{
 		"folke/zen-mode.nvim",
 		cmd = "ZenMode",
 		opts = {
@@ -54,6 +42,37 @@ local plugins = {
 		},
 	},
 	{ "tpope/vim-sleuth", event = "VeryLazy" },
+	{
+		"yioneko/nvim-vtsls",
+		event = "VeryLazy",
+		config = function()
+			if vim.bo.filetype == "javascript" then
+				function RUN_vtsls_commands()
+					require("vtsls").commands.organize_imports(0)
+					require("vtsls").commands.add_missing_imports(0)
+					require("vtsls").commands.remove_unused_imports(0)
+					require("vtsls").commands.fix_all(0)
+				end
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					callback = function()
+						RUN_vtsls_commands()
+					end,
+				})
+			end
+		end,
+	},
+	{ "kylechui/nvim-surround", event = "VeryLazy", opts = {} },
+	{
+		"SmiteshP/nvim-navic",
+		enabled = false,
+		event = "LspAttach",
+		opts = {},
+		config = function()
+			if vim.bo.filetype == "html" then
+				vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+			end
+		end,
+	},
 
 	{
 		"stevearc/conform.nvim",
@@ -78,7 +97,7 @@ local plugins = {
 					-- Use a sub-list to run only the first available formatter
 					html = { { "prettierd" } },
 					css = { { "prettierd" } },
-					javascript = { { "eslint_d", "biome", "prettierd" } },
+					javascript = { { "prettierd", "eslint_d" } },
 					c = { { "clang_format" } },
 
 					vim.api.nvim_create_autocmd("BufWritePre", {
@@ -144,7 +163,6 @@ local plugins = {
 		ft = "html",
 	},
 	{ "dstein64/vim-startuptime", cmd = "StartupTime" },
-	-- { "rockerBOO/boo-colorscheme-nvim", event = "VeryLazy" },
 
 	{
 		"SmiteshP/nvim-navbuddy",
@@ -407,13 +425,12 @@ local plugins = {
 			"MunifTanjim/nui.nvim",
 		},
 	},
-
 	{
 		"samjwill/nvim-unception",
 		event = "VeryLazy",
 		init = function()
 			-- Optional settings go here!
-			-- e.g.) vim.g.unception_open_buffer_in_new_tab = true
+			-- e.g.) vim.g.enception_open_buffer_in_new_tab = true
 		end,
 	},
 	{
@@ -423,14 +440,7 @@ local plugins = {
 		event = "VeryLazy",
 		opts = {},
 	},
-	{
-		"xiantang/darcula-dark.nvim",
-		enabled = false,
-		lazy = false,
-		config = function()
-			vim.cmd.colorscheme("darcula-dark")
-		end,
-	},
+
 	{
 		"echasnovski/mini.statusline",
 		enabled = false,
@@ -512,7 +522,7 @@ local plugins = {
 					height = 1,
 					border = "none",
 					-- @windows usage
-					preview = { hidden = "hidden" },
+					-- preview = { hidden = "hidden" },
 				},
 			})
 		end,
@@ -563,23 +573,38 @@ local plugins = {
 			keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
 		},
 	},
+
 	{
+		------------COLORSCHEMES----------------------
+		"loctvl842/monokai-pro.nvim",
 		"rose-pine/neovim",
+		"rockerBOO/boo-colorscheme-nvim",
+		"xiantang/darcula-dark.nvim",
+		"myypo/borrowed.nvim",
+
 		enabled = false,
-		name = "rose-pine",
 		lazy = false,
+		opts = {},
 		config = function()
-			vim.cmd.colorscheme("rose-pine")
+			-- vim.cmd.colorscheme("monokai-pro-classic")
+			-- 			vim.cmd.colorscheme("rose-pine")
+			-- 						vim.cmd.colorscheme("darcula-dark")
+			--
+			-- 									-- vim.cmd("colorscheme mayu") -- OR vim.cmd("colorscheme shin")
+			-- vim.cmd("colorscheme shin") -- OR vim.cmd("colorscheme shin")
 		end,
 	},
 	{
-		"loctvl842/monokai-pro.nvim",
+		"rebelot/kanagawa.nvim",
 		enabled = false,
-		opts = {},
-		config = function()
-			vim.cmd.colorscheme("monokai-pro-classic")
-		end,
 		lazy = false,
+		opts = {
+			compile = true, -- enable compiling the colorscheme
+			dimInactive = true, -- dim inactive window `:h hl-NormalNC`
+		},
+		config = function()
+			vim.cmd.colorscheme("kanagawa")
+		end,
 	},
 	{
 		"uga-rosa/translate.nvim",
@@ -667,20 +692,10 @@ local plugins = {
 		name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
-	{
-		"myypo/borrowed.nvim",
-		enabled = false,
-		lazy = false,
-		priority = 1000,
-		version = "^0", -- Optional: avoid upgrading to breaking versions
-		config = function()
-			-- vim.cmd("colorscheme mayu") -- OR vim.cmd("colorscheme shin")
-			vim.cmd("colorscheme shin") -- OR vim.cmd("colorscheme shin")
-		end,
-	},
+
 	{
 		"catppuccin/nvim",
-		enabled = false,
+		-- enabled = false,
 		lazy = false,
 		name = "catppuccin",
 		build = ":CatppuccinCompile",
@@ -707,6 +722,12 @@ local plugins = {
       hi link NonText Normal
       hi link Float Normal
       hi link NormalFloat Normal
+
+			"use background of terminal
+			"hi! Normal guibg=none 
+			"hi! StatusLine guibg=none 
+			"hi! TabLine guibg=none 
+
 
     ]])
 		end,
@@ -782,4 +803,5 @@ local plugins = {
 		end,
 	},
 }
+
 return plugins

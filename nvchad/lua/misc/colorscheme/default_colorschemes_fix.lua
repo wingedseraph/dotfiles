@@ -28,6 +28,9 @@ hi clear NormalFloat
 hi link NonText Normal
 hi link Float Normal
 hi link NormalFloat Normal
+hi! Normal guibg=none 
+hi! StatusLine guibg=none 
+hi! TabLine guibg=none 
 "hi FloatBorder guifg=NONE guibg=NONE
 ]])
 -- vim.cmd("hi LineNr guifg=NONE guibg=NONE")

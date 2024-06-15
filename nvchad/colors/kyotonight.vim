@@ -182,7 +182,7 @@ call s:hi("ModeMsg", g:kyotonight#fg, "", "", "")
 call s:hi("MoreMsg", g:kyotonight#blue0, "", "", "")
 call s:hi("Question", g:kyotonight#fg, "", "", "")
 if g:kyotonight_uniform_status_lines == 0
-  call s:hi("StatusLine", g:kyotonight#blue0, g:kyotonight#grey0, "Italic", "")
+  call s:hi("StatusLine", g:kyotonight#blue0, g:kyotonight#grey0, "Bold", "")
   call s:hi("StatusLineNC", g:kyotonight#fg, g:kyotonight#bg, "NONE", "")
   call s:hi("StatusLineTerm", g:kyotonight#blue0, g:kyotonight#grey0, "NONE", "")
   call s:hi("StatusLineTermNC", g:kyotonight#fg, g:kyotonight#bg, "NONE", "")
@@ -850,3 +850,4 @@ endfunction
 
 
 hi! MiniTablineModifiedHidden gui=bold,reverse
+hi! StatusLine guibg=#1f2335 guifg=none

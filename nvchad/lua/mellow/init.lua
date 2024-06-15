@@ -423,6 +423,7 @@ M.colorscheme = function()
 
 	set_terminal_colors()
 	set_groups()
+	vim.cmd.hi("link @function.lua @attribute.builtin")
 end
 
 return M

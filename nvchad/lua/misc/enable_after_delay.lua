@@ -11,6 +11,12 @@ end
 if vim.bo.filetype == "norg" then
 	require("neorg")
 end
+if vim.bo.filetype == "html" then
+	vim.cmd([[
+			 set foldmethod=expr
+			 set foldexpr=nvim_treesitter#foldexpr()
+	       ]])
+end
 
 -- @require
 require("cmp")
@@ -52,3 +58,45 @@ vim.opt.clipboard = "unnamedplus"
 -- 	vim.opt.foldmethod = "indent"
 -- 	vim.opt.foldtext = "v:lua.require'misc.lazy_ui'.foldtext()"
 -- end
+local function augroup(name)
+	return vim.api.nvim_create_augroup("my_augroup_" .. name, { clear = true })
+end
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = augroup("open_winbar"),
+	pattern = "*",
+	callback = function()
+		local status, winbar = pcall(require, "lspsaga.symbol.winbar")
+		if not status then
+			return
+		end
+		local curbuf = vim.api.nvim_get_current_buf()
+		local bo = vim.bo[curbuf]
+		local disallow_filetypes = {
+			"notify",
+			"NvimTree",
+			"neo-tree",
+			"neo-tree-popup",
+			"packer",
+			"qf",
+			"diff",
+			"fugitive",
+			"fugitiveblame",
+		}
+		local disallow_buftypes = {
+			"nofile",
+			"terminal",
+			"help",
+		}
+		if bo.bt == "" and bo.ft == "" then
+			return
+		end
+
+		if vim.tbl_contains(disallow_filetypes, bo.ft) or vim.tbl_contains(disallow_buftypes, bo.bt) then
+			return
+		end
+
+		if winbar.get_bar() == nil then
+			winbar.init_winbar(curbuf)
+		end
+	end,
+})

@@ -124,7 +124,6 @@ local default_plugins = {
 			vim.g.mason_binaries_list = opts.ensure_installed
 		end,
 	},
-
 	{
 		"neovim/nvim-lspconfig",
 		init = function()
@@ -277,6 +276,7 @@ local config = require("core.utils").load_config()
 
 if #config.plugins > 0 then
 	table.insert(default_plugins, { import = config.plugins })
+	table.insert(default_plugins, { import = "custom.lang.tsjs" })
 end
 
 require("lazy").setup(default_plugins, config.lazy_nvim)

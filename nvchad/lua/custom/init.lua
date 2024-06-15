@@ -161,18 +161,16 @@ vim.o.foldmethod = "indent" -- Set 'indent' folding method
 vim.o.foldlevel = 0 -- Display all folds except top ones
 vim.o.foldnestmax = 10 -- Create folds only for some number of nested levels
 vim.g.markdown_folding = 1 -- Use folding by heading in markdown files
-if vim.fn.has("nvim-0.10") == 1 then
-	-- vim.o.foldtext = "" -- Use underlying text with its highlighting
-	function _G.foldtext()
-		local line_count = vim.v.foldend - vim.v.foldstart + 1
-		local first_line = vim.trim(vim.fn.getline(vim.v.foldstart))
-		local indent_level = vim.v.foldlevel - 1
-		local indent = string.rep(" ", indent_level * 2)
-		return indent .. "  " .. first_line .. " [" .. line_count .. " lines] "
-	end
-
-	vim.opt.foldtext = "v:lua.foldtext()"
+-- vim.o.foldtext = "" -- Use underlying text with its highlighting
+function _G.foldtext()
+	local line_count = vim.v.foldend - vim.v.foldstart + 1
+	local first_line = vim.trim(vim.fn.getline(vim.v.foldstart))
+	local indent_level = vim.v.foldlevel - 1
+	local indent = string.rep(" ", indent_level * 2)
+	return indent .. "  " .. first_line .. " [" .. line_count .. " lines] "
 end
+
+vim.opt.foldtext = "v:lua.foldtext()"
 vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>copen<cr>", { noremap = true, silent = true })
 -- vim.o.fillchars = table.concat({
 -- 	"fold: ",
@@ -287,43 +285,6 @@ vim.keymap.set("n", "J", "mzJ`z", { silent = true }) -- Don't move the cursor wh
 vim.keymap.set("i", "<C-j>", "<C-x><C-o>", { silent = true }) -- Lsp completion
 vim.keymap.set("i", "<C-f>", "<C-x><C-f>", { silent = true }) -- Filepath completion
 
-function toggle_splits()
-	local status, err = pcall(function()
-		-- Get the list of all windows
-		local windows = vim.api.nvim_tabpage_list_wins(0)
-
-		-- Get the current window ID
-		local current_window = vim.api.nvim_get_current_win()
-
-		-- Find the index of the current window
-		local current_index = nil
-		for i, win in ipairs(windows) do
-			if win == current_window then
-				current_index = i
-				break
-			end
-		end
-
-		-- If the current window is not found, exit the function
-		if not current_index then
-			return
-		end
-
-		-- Calculate the index of the next window
-		local next_index = current_index % #windows + 1
-
-		-- Switch to the next window
-		vim.api.nvim_set_current_win(windows[next_index])
-	end)
-
-	if not status then
-		return nil
-		-- Handle the error silently
-		-- vim.api.nvim_err_writeln("Error occurred in toggle_splits: " .. err)
-	end
-end
-
--- vim.api.nvim_set_keymap("n", "sj", ":lua toggle_splits()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "sj", "<C-w>w", { noremap = true, silent = true })
 -- Map Ctrl+n to exit terminal insert mode
 vim.api.nvim_set_keymap("t", "<C-n>", [[<C-\><C-n>]], { noremap = true, silent = true })
@@ -331,3 +292,20 @@ vim.api.nvim_set_keymap("t", "<C-n>", [[<C-\><C-n>]], { noremap = true, silent =
 vim.api.nvim_set_keymap("n", "<leader>ty", ":lua require('lint').try_lint()<CR>", { noremap = true, silent = true })
 
 require("misc.prevent_exit") -- do not let leave neovim
+-- vim.cmd("set listchars=tab:»\\ →,leadmultispace:†\\ ·\\ ‡\\ ·\\ ,trail:▫,precedes:←,extends:◊")
+-- vim.cmd("set listchars=tab:┆\\ ,leadmultispace:†\\ ·\\ ‡\\ ·\\ ,trail:◣,precedes:←,extends:※")
+vim.opt.listchars = { leadmultispace = "│ ", multispace = "│ ", tab = "│ " }
+-- Create a function to enable or disable list based on the current mode
+local function toggle_list_on_visual_mode()
+	local mode = vim.api.nvim_get_mode().mode
+	if mode == "v" or mode == "V" then
+		vim.opt.list = true
+	else
+		vim.opt.list = false
+	end
+end
+
+-- Autocmd to check mode on entering Vim and on mode change
+vim.api.nvim_create_autocmd({ "VimEnter", "ModeChanged" }, {
+	callback = toggle_list_on_visual_mode,
+})
