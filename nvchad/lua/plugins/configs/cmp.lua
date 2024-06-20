@@ -10,27 +10,6 @@ local defaults = require("cmp.config.default")()
 -- 	atom_colored = { "kind", "abbr", "menu" },
 -- }
 
-local formatting_style = {
-	-- default fields order i.e completion word + item.kind + item.kind icons
-	fields = { "abbr", "kind", "menu" },
-	-- fields = field_arrangement[cmp_style] or { "kind", "menu" },
-
-	format = function(_, item)
-		-- local icon = (cmp_ui.icons and icons[item.kind]) or ""
-
-		if cmp_style == "atom" or cmp_style == "atom_colored" then
-			-- icon = " " .. icon .. " "
-			item.menu = cmp_ui.lspkind_text and "   (" .. item.kind .. ")" or ""
-			item.kind = icon
-		else
-			icon = cmp_ui.lspkind_text and (" " .. icon .. " ") or icon
-			item.kind = string.format("%s %s", icon, cmp_ui.lspkind_text and item.kind or "")
-		end
-
-		return item
-	end,
-}
-
 local function border(hl_name)
 	return {
 		{ "╭", hl_name },
@@ -62,8 +41,8 @@ local options = {
 			scrollbar = false,
 		},
 		documentation = {
-			-- border = border("CmpDocBorder"),
-			border = "none",
+			border = border("CmpDocBorder"),
+			-- border = "none",
 			-- winblend = 10,
 
 			-- winhighlight = "Normal:CmpDoc",
@@ -85,7 +64,6 @@ local options = {
 				nvim_lua = "[Lua]",
 				luasnip = "[Snippet]",
 				buffer = "[Buffer]",
-				html_css = "html-css",
 				path = "[Path]",
 				rg = "[Ripgrep]",
 				nvim_lsp_document_symbol = "[symbol]",
@@ -151,23 +129,8 @@ local options = {
 				end,
 			},
 		},
-		{
-			name = "html_css",
-			option = {
-				enable_on = {
-					"html",
-				}, -- set the file types you want the plugin to work on
-				file_extensions = { "css", "sass", "less" }, -- set the local filetypes from which you want to derive classes
-				style_sheets = {
-					-- example of remote styles, only css no js for now
-					"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css",
-					"https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css",
-				},
-			},
-		},
 		{ name = "nvim_lua" },
 		{ name = "path" },
-
 		-- {
 		-- 	name = "rg",
 		-- 	keyword_length = 3,

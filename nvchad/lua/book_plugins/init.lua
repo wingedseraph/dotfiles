@@ -85,6 +85,7 @@ local default_plugins = {
 	{
 		"junegunn/fzf.vim",
 		lazy = false,
+		enabled = false,
 		-- event = "VeryLazy",
 		dependencies = "junegunn/fzf",
 		config = function()

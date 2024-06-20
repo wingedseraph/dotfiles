@@ -156,11 +156,14 @@ local plugins = {
 			},
 		},
 	},
+
 	{
 		"echasnovski/mini.indentscope",
 		enabled = false,
+		opts = {},
 		version = "*",
-		ft = "html",
+		event = "VeryLazy",
+		-- ft = "html",
 	},
 	{ "dstein64/vim-startuptime", cmd = "StartupTime" },
 
@@ -259,7 +262,7 @@ local plugins = {
 	},
 	-- { "capaj/vscode-standardjs-snippets", ft = { "javascript" } },
 
-	{ "tzachar/highlight-undo.nvim", opts = {}, event = "VeryLazy" },
+	{ "tzachar/highlight-undo.nvim", opts = {}, enabled = false, event = "VeryLazy" },
 
 	{
 		"xiyaowong/transparent.nvim",
@@ -295,7 +298,7 @@ local plugins = {
 		opts = {
 			label = {
 				style = "overlay", ---@type "eol" | "overlay" | "right_align" | "inline"
-				rainbow = { enabled = true, shade = 3 },
+				rainbow = { enabled = true, shade = 4 },
 			},
 			modes = {
 				search = {
@@ -303,6 +306,7 @@ local plugins = {
 				},
 				char = {
 					multi_line = false,
+					jump_labels = true,
 				},
 			},
 		},
@@ -440,14 +444,12 @@ local plugins = {
 		event = "VeryLazy",
 		opts = {},
 	},
-
 	{
 		"echasnovski/mini.statusline",
 		enabled = false,
 		version = "*",
 		lazy = false,
 		config = function()
-			-- require("vscode").load()
 			vim.opt.showmode = false
 
 			local statusline = require("mini.statusline")
@@ -576,18 +578,26 @@ local plugins = {
 
 	{
 		------------COLORSCHEMES----------------------
-		"loctvl842/monokai-pro.nvim",
-		"rose-pine/neovim",
-		"rockerBOO/boo-colorscheme-nvim",
-		"xiantang/darcula-dark.nvim",
-		"myypo/borrowed.nvim",
-
-		enabled = false,
+		-- "loctvl842/monokai-pro.nvim",
+		-- "rose-pine/neovim",
+		-- "rockerBOO/boo-colorscheme-nvim",
+		-- "xiantang/darcula-dark.nvim",
+		-- "myypo/borrowed.nvim",
+		-- "sainnhe/sonokai",
+		"folke/tokyonight.nvim",
+		-- "ramojus/mellifluous.nvim",
+		-- enabled = false,
 		lazy = false,
-		opts = {},
+		opts = {
+			hide_inactive_statusline = true, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+			dim_inactive = true, -- dims inactive windows
+		},
 		config = function()
+			-- vim.cmd.colorscheme("sonokai")
+			-- vim.cmd.colorscheme("mellifluous")
+			vim.cmd("colorscheme tokyonight-moon")
 			-- vim.cmd.colorscheme("monokai-pro-classic")
-			-- 			vim.cmd.colorscheme("rose-pine")
+			-- vim.cmd.colorscheme("rose-pine")
 			-- 						vim.cmd.colorscheme("darcula-dark")
 			--
 			-- 									-- vim.cmd("colorscheme mayu") -- OR vim.cmd("colorscheme shin")
@@ -692,10 +702,9 @@ local plugins = {
 		name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
-
 	{
 		"catppuccin/nvim",
-		-- enabled = false,
+		enabled = false,
 		lazy = false,
 		name = "catppuccin",
 		build = ":CatppuccinCompile",
@@ -727,11 +736,10 @@ local plugins = {
 			"hi! Normal guibg=none 
 			"hi! StatusLine guibg=none 
 			"hi! TabLine guibg=none 
-
-
     ]])
 		end,
 	},
+
 	{
 		"potamides/pantran.nvim",
 		event = "VeryLazy",

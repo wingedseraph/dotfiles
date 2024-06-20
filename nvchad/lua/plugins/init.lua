@@ -54,11 +54,13 @@ local default_plugins = {
 
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		enabled = false,
+		-- enabled = false,
+		event = "VeryLazy",
 		version = "2.20.7",
-		init = function()
-			require("core.utils").lazy_load("indent-blankline.nvim")
-		end,
+
+		-- init = function()
+		-- 	require("core.utils").lazy_load("indent-blankline.nvim")
+		-- end,
 		opts = function()
 			return require("plugins.configs.others").blankline
 		end,
@@ -66,6 +68,13 @@ local default_plugins = {
 			require("core.utils").load_mappings("blankline")
 			dofile(vim.g.base46_cache .. "blankline")
 			require("indent_blankline").setup(opts)
+
+			-- vim.cmd("IndentBlanklineDisable")
+			-- vim.api.nvim_create_autocmd({ "ModeChanged" }, {
+			-- 	callback = function()
+			-- 		vim.cmd("IndentBlanklineToggle")
+			-- 	end,
+			-- })
 		end,
 	},
 
@@ -276,7 +285,7 @@ local config = require("core.utils").load_config()
 
 if #config.plugins > 0 then
 	table.insert(default_plugins, { import = config.plugins })
-	table.insert(default_plugins, { import = "custom.lang.tsjs" })
+	-- table.insert(default_plugins, { import = "custom.lang.tsjs" })
 end
 
 require("lazy").setup(default_plugins, config.lazy_nvim)

@@ -174,8 +174,12 @@ vim.lsp.handlers["$/progress"] = function(_, msg, info)
 		progress_status[client_id][token] = nil
 	else
 		progress_status[client_id][token] = true
-		start_timer()
+		-- TODO working bad need to rewrite
+		-- start_timer()
 	end
+	vim.defer_fn(function()
+		vim.cmd("redrawstatus!")
+	end, 200)
 end
 
 -- Templated off of https://github.com/sorbet/sorbet/blob/23836cbded86135219da1b204d79675a1615cc49/vscode_extension/src/SorbetStatusBarEntry.ts#L119
@@ -268,7 +272,7 @@ local function get_left_segment(active, standard_filetype)
 	local highlighted_filename = active and highlight_item(filename, highlights.active) or filename
 	insert_item(left_segment_items, mode)
 	insert_item(left_segment_items, highlighted_filename)
-	insert_item(left_segment_items, pad_item(progress_spinner()))
+	-- insert_item(left_segment_items, pad_item(progress_spinner()))
 	insert_item(left_segment_items, pad_item(lsp_status()))
 	insert_item(left_segment_items, pad_item(get_lines()))
 

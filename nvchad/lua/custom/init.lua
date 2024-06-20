@@ -286,6 +286,8 @@ vim.keymap.set("i", "<C-j>", "<C-x><C-o>", { silent = true }) -- Lsp completion
 vim.keymap.set("i", "<C-f>", "<C-x><C-f>", { silent = true }) -- Filepath completion
 
 vim.api.nvim_set_keymap("n", "sj", "<C-w>w", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>i", "<cmd>Inspect<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>s", "<cmd>so%<cr>", { noremap = true, silent = true })
 -- Map Ctrl+n to exit terminal insert mode
 vim.api.nvim_set_keymap("t", "<C-n>", [[<C-\><C-n>]], { noremap = true, silent = true })
 -- try lint
@@ -306,6 +308,7 @@ local function toggle_list_on_visual_mode()
 end
 
 -- Autocmd to check mode on entering Vim and on mode change
-vim.api.nvim_create_autocmd({ "VimEnter", "ModeChanged" }, {
-	callback = toggle_list_on_visual_mode,
-})
+-- vim.api.nvim_create_autocmd({ "VimEnter", "ModeChanged" }, {
+-- callback = toggle_list_on_visual_mode,
+-- callback = vim.cmd("IndentBlanklineToggle"),
+-- })
