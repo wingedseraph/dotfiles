@@ -58,6 +58,11 @@ MiniBase16.setup = function(config)
 
 	-- Setup config
 	config = H.setup_config(config)
+	-- vim.cmd(" hi link @tag.attribute.html @attribute")
+	vim.cmd.hi("@tag.attribute.html gui=italic guifg=#ca6ecf")
+	vim.cmd.hi("link @markup.link.label.markdown_inline Boolean")
+	vim.cmd.hi("@property.css gui=italic guifg=#e2e98f")
+	vim.cmd.hi("link @tag.css Special")
 
 	-- Apply config
 	H.apply_config(config)
