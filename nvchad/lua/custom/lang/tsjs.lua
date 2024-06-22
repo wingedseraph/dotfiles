@@ -44,21 +44,6 @@ return {
 							},
 						},
 					},
-					function()
-						local function run_vtsls_commands()
-							require("vtsls").commands.organize_imports(0)
-							require("vtsls").commands.add_missing_imports(0)
-							require("vtsls").commands.remove_unused_imports(0)
-							require("vtsls").commands.fix_all(0)
-						end
-
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							pattern = { "*.js", "*.ts", "*.jsx" },
-							callback = function()
-								run_vtsls_commands()
-							end,
-						})
-					end,
 				},
 			},
 			setup = {

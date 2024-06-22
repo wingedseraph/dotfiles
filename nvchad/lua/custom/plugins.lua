@@ -21,7 +21,7 @@ local plugins = {
 			require("custom.configs.lspconfig")
 		end, -- Override to setup mason-lspconfig
 	},
-	{ "echasnovski/mini.diff", version = false, event = "VeryLazy", opts = {} },
+	-- { "echasnovski/mini.diff", version = false, event = "VeryLazy", opts = {} },
 
 	{
 		"folke/zen-mode.nvim",
@@ -79,6 +79,8 @@ local plugins = {
 		enabled = true,
 		event = "VeryLazy",
 		config = function()
+			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
 			require("conform").setup({
 				notify_on_error = true,
 				formatters_by_ft = {
@@ -514,11 +516,6 @@ local plugins = {
 			vim.api.nvim_set_keymap("n", "<leader>fz", "<cmd>FzfLua<cr>", { noremap = true, silent = true })
 
 			require("fzf-lua").setup({
-				keymap = {
-					-- These override the default tables completely
-					-- no need to set to `false` to disable a bind
-					-- delete or modify is sufficient
-				},
 				winopts = {
 					width = 1,
 					height = 1,

@@ -111,6 +111,7 @@ local default_plugins = {
 	{
 		"uga-rosa/translate.nvim",
 		event = "VeryLazy",
+		enabled = false,
 
 		keys = {
 			{ "<leader>tr", "<cmd>Translate ru -output=split<CR>", mode = { "n", "v" } },

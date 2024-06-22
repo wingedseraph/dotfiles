@@ -34,7 +34,7 @@ function toggle_exit_state()
 			':echo "Exiting Neovim is currently disabled"<CR>',
 			{ noremap = true, silent = true }
 		)
-		vim.api.nvim_set_keymap("n", "<C-q>", "<Nop>", { noremap = true, silent = true })
+		-- vim.api.nvim_set_keymap("n", "<C-q>", "<Nop>", { noremap = true, silent = true })
 		-- vim.api.nvim_echo({ { "Exiting Neovim is disabled", "WarningMsg" } }, false, {})
 	end
 end

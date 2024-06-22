@@ -53,8 +53,10 @@ function BOOT()
 		require("core.utils").load_mappings()
 		require("plugins")
 		-- require("misc.base46.init").load_all_highlights()
-		require("misc.status")
-		vim.opt_local.statusline = [[%{%v:lua.statusline()%}]]
+		-- require("misc.status")
+		-- vim.opt_local.statusline = [[%{%v:lua.statusline()%}]]
+		-- require("misc.status.test_status")
+		vim.o.statusline = "%!v:lua.require('misc.status.github_status').render()"
 
 		vim.api.nvim_exec(
 			[[
@@ -69,11 +71,11 @@ end
 vim.api.nvim_exec(
 	[[
   autocmd VimEnter * silent lua BOOT()
-  au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 ]],
 	false
 )
-
+-- au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+require("misc.save_cursor_location")
 -- Setup history
 function SetupHistory()
 	vim.defer_fn(function()
@@ -99,3 +101,5 @@ require("misc.open_buffer_by_number")
 
 -- Uncomment if using misc.status
 -- vim.opt.statusline = "%{mode()} %{expand('%:~:.')}"
+-- TODO
+-- prevent close folds when format file

@@ -65,7 +65,7 @@ end
 -------------------------------------
 -----------function_call-------------
 -------------------------------------
-mini_ai()
+-- mini_ai()
 mini_hi()
 -- if vim.bo.filetype == "html" then
 -- 	mini_indent()

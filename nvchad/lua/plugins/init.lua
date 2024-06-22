@@ -24,35 +24,6 @@ local default_plugins = {
 	},
 
 	{
-		"NvChad/nvterm",
-		enabled = false,
-		init = function()
-			require("core.utils").load_mappings("nvterm")
-		end,
-		config = function(_, opts)
-			require("base46.term")
-			require("nvterm").setup(opts)
-		end,
-	},
-
-	{
-		"NvChad/nvim-colorizer.lua",
-		enabled = false,
-		cmd = "ColorizerToggle",
-		-- init = function()
-		-- 	require("core.utils").lazy_load("nvim-colorizer.lua")
-		-- end,
-		config = function(_, opts)
-			require("colorizer").setup(opts)
-
-			-- execute colorizer as soon as possible
-			vim.defer_fn(function()
-				require("colorizer").attach_to_buffer(0)
-			end, 0)
-		end,
-	},
-
-	{
 		"lukas-reineke/indent-blankline.nvim",
 		-- enabled = false,
 		event = "VeryLazy",
@@ -80,6 +51,7 @@ local default_plugins = {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
+		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 		-- event = "BufReadPre",
 		event = "BufEnter",
 		-- event = "InsertEnter",
@@ -101,7 +73,7 @@ local default_plugins = {
 	-- git stuff
 	{
 		"lewis6991/gitsigns.nvim",
-		enabled = false,
+		-- enabled = false,
 		event = "VeryLazy",
 		cmd = "Gitsigns",
 		-- ft = { "gitcommit", "diff" },
@@ -221,29 +193,11 @@ local default_plugins = {
 		end,
 	},
 
-	-- file managing , picker etc
-	{
-		"nvim-tree/nvim-tree.lua",
-		enabled = false,
-		cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-		init = function()
-			require("core.utils").load_mappings("nvimtree")
-		end,
-		opts = function()
-			return require("plugins.configs.nvimtree")
-		end,
-		config = function(_, opts)
-			dofile(vim.g.base46_cache .. "nvimtree")
-			require("nvim-tree").setup(opts)
-		end,
-	},
-
 	{
 		"nvim-telescope/telescope.nvim",
-		enabled = false,
+		-- enabled = false,
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
-			"ahmedkhalf/project.nvim",
 		},
 		cmd = "Telescope themes",
 		init = function()
@@ -261,22 +215,6 @@ local default_plugins = {
 			for _, ext in ipairs(opts.extensions_list) do
 				telescope.load_extension(ext)
 			end
-		end,
-	},
-
-	-- Only load whichkey after all the gui
-	{
-		"folke/which-key.nvim",
-		enabled = false,
-		keys = { "<leader>" },
-		-- keys = { "<leader>", "<c-r>", '"', "'", "`", "c", "v", "g" },
-		init = function()
-			require("core.utils").load_mappings("whichkey")
-		end,
-		cmd = "WhichKey",
-		config = function(_, opts)
-			dofile(vim.g.base46_cache .. "whichkey")
-			require("which-key").setup(opts)
 		end,
 	},
 }

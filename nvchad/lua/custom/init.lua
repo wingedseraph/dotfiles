@@ -158,7 +158,7 @@ vim.keymap.set(
 vim.o.foldmethod = "indent" -- Set 'indent' folding method
 -- vim.o.foldmethod = "expr"
 -- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldlevel = 0 -- Display all folds except top ones
+vim.o.foldlevel = 1 -- Display all folds except top ones
 vim.o.foldnestmax = 10 -- Create folds only for some number of nested levels
 vim.g.markdown_folding = 1 -- Use folding by heading in markdown files
 -- vim.o.foldtext = "" -- Use underlying text with its highlighting
@@ -167,7 +167,8 @@ function _G.foldtext()
 	local first_line = vim.trim(vim.fn.getline(vim.v.foldstart))
 	local indent_level = vim.v.foldlevel - 1
 	local indent = string.rep(" ", indent_level * 2)
-	return indent .. "  " .. first_line .. " [" .. line_count .. " lines] "
+	-- return indent .. "  " .. first_line .. " [" .. line_count .. " lines] "
+	return indent .. "  " .. first_line
 end
 
 vim.opt.foldtext = "v:lua.foldtext()"
@@ -288,12 +289,15 @@ vim.keymap.set("i", "<C-f>", "<C-x><C-f>", { silent = true }) -- Filepath comple
 vim.api.nvim_set_keymap("n", "sj", "<C-w>w", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>i", "<cmd>Inspect<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>s", "<cmd>so%<cr>", { noremap = true, silent = true })
+
 -- Map Ctrl+n to exit terminal insert mode
 vim.api.nvim_set_keymap("t", "<C-n>", [[<C-\><C-n>]], { noremap = true, silent = true })
 -- try lint
 vim.api.nvim_set_keymap("n", "<leader>ty", ":lua require('lint').try_lint()<CR>", { noremap = true, silent = true })
 
 require("misc.prevent_exit") -- do not let leave neovim
+require("misc.find_in_tag")
+
 -- vim.cmd("set listchars=tab:»\\ →,leadmultispace:†\\ ·\\ ‡\\ ·\\ ,trail:▫,precedes:←,extends:◊")
 -- vim.cmd("set listchars=tab:┆\\ ,leadmultispace:†\\ ·\\ ‡\\ ·\\ ,trail:◣,precedes:←,extends:※")
 vim.opt.listchars = { leadmultispace = "│ ", multispace = "│ ", tab = "│ " }

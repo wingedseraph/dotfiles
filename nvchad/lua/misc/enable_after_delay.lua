@@ -30,6 +30,7 @@ if vim.bo.filetype == "norg" then
 	require("neorg")
 end
 if vim.bo.filetype == "html" then
+	-- require("misc.status.fold")
 	vim.cmd([[
 			 set foldmethod=expr
 			 set foldexpr=nvim_treesitter#foldexpr()
@@ -53,7 +54,6 @@ require("vim-be-good")
 require("yazi").setup()
 -- require("nvim-navbuddy")
 require("plugins.configs.lspconfig")
-
 -- @opt
 vim.opt.clipboard = "unnamedplus"
 
@@ -81,4 +81,5 @@ local ok = pcall(require, "indent_blankline")
 if ok then
 	vim.cmd.hi("clear IndentBlanklineContextStart")
 	vim.cmd.hi("link IndentBlanklineContextStart Visual")
+	-- vim.cmd.hi("IndentBlanklineContextStart gui=italic,bold")
 end
