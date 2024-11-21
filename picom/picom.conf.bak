@@ -1,0 +1,16 @@
+# backend = "glx";
+# vsync = true;
+# glx-use-copysubbuffer-mesa = true;
+#
+# glx-copy-from-front = true;
+# glx-swap-method = 2;
+# xrender-sync = true;
+# xrender-sync-fence = true;
+
+backend = "glx";
+vsync = true;
+use-damage = true;
+unredir-if-possible = true;
+shadow = false;
+fading = false;
+blur = false;
